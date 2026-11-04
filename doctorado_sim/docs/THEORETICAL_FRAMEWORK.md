@@ -64,11 +64,11 @@ puede utilizarse como aproximación empírica cuando la señal observada es una 
 
 ### 3.3 Observación preliminar de la respuesta del TFM
 
-En los datos del TFM se ha observado un balanceo angular rápido cuya amplitud crece y decrece periódicamente, formando una envolvente de menor frecuencia. Este patrón es compatible con un batido entre componentes de frecuencia cercana o con modos dinámicos acoplados, pero la observación visual por sí sola no determina el mecanismo ni el orden del sistema.
+En una inspección preliminar de los 25 archivos CSV del TFM (muestreo nominal de 100 Hz) se observa un balanceo angular rápido; en la mayoría de los registros, el pico espectral dominante está alrededor de 1,9 Hz. La amplitud global suele decaer, aunque algunos ensayos muestran rebotes o modulaciones más lentas, por ejemplo `imu_20260628_130351.csv`, `imu_20260628_132705.csv` e `imu_20260628_132857.csv`. Este patrón es compatible con un batido entre componentes de frecuencia cercana o con modos dinámicos acoplados, pero estos registros preliminares no bastan para establecer una envolvente lenta periódica y estable ni su mecanismo.
 
-Un modelo lineal subamortiguado de segundo orden con un único modo produce una oscilación cuya envolvente decae; no explica por sí solo una envolvente que vuelve a crecer periódicamente. Por ello, la dinámica angular de segundo orden es una base física razonable por la presencia de inercia, pero no debe asumirse que un modelo 1DoF de segundo orden describa completamente la señal observada.
+La oscilación observada es consistente con al menos un modo subamortiguado y no con una relajación monótona de primer orden durante esos transitorios. Un modelo lineal subamortiguado de segundo orden con un único modo produce una envolvente que decae; no explica por sí solo rebotes repetidos. Por ello, la dinámica angular de segundo orden es una base física razonable por la presencia de inercia, pero no debe asumirse que un modelo 1DoF de segundo orden describa completamente la señal observada.
 
-La hipótesis deberá contrastarse con los datos mediante el análisis espectral y temporal de las frecuencias dominantes y la envolvente, y comparando ajustes de primer orden, de segundo orden subamortiguado y de dos componentes o modos. Hasta realizar esa comparación, el batido se registra como una observación experimental y las explicaciones propuestas como hipótesis.
+La hipótesis deberá contrastarse con los datos mediante análisis espectral y temporal de las frecuencias dominantes y la envolvente, prestando atención a los rebotes observados, y comparando ajustes de primer orden, de segundo orden subamortiguado y de dos componentes o modos. Hasta realizar esa comparación, la modulación se registra como una observación experimental preliminar y el batido o acoplamiento como explicaciones posibles, no confirmadas.
 
 ## 4. Interacción fluido-estructura
 

@@ -213,10 +213,10 @@ Objetivo: caracterizar y reproducir la respuesta angular de la cápsula, partien
 - ecuación de movimiento angular
 - viscosidad efectiva
 - IMU sintética con ruido y bias
-- análisis de las oscilaciones y de la envolvente periódica observadas en los datos del TFM
-- estimación de frecuencias dominantes y comparación entre modelos de primer orden, segundo orden subamortiguado y dos componentes o modos
+- análisis de las oscilaciones y de los rebotes/modulaciones lentas de amplitud observados en los 25 CSV del TFM (pico dominante cercano a 1,9 Hz en la mayoría de los registros)
+- determinar si la modulación lenta es periódica y reproducible; comparar modelos de primer orden, segundo orden subamortiguado y dos componentes o modos
 - ajuste de theta_eq y de parámetros temporales solo con el modelo que resulte adecuado para el tramo analizado
-- registro del batido como observación preliminar; confirmar su mecanismo antes de incorporarlo como supuesto físico
+- registro de los rebotes de amplitud como observación preliminar; confirmar el batido o el acoplamiento de modos antes de incorporarlo como supuesto físico
 
 ### Fase 2: modelado extendido del fluido
 
