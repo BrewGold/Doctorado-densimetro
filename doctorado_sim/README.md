@@ -3,6 +3,10 @@
 Este módulo extiende el TFM sin alterar su estructura original.
 Objetivo: simular cápsula desbalanceada + IMU + ruido + efectos de viscosidad/tensión superficial.
 
+## Base de investigación
+
+Las [conclusiones de trabajo y preliminares](../docs/PRELIMINARES_INVESTIGACION.md) recogen las decisiones metodológicas, sus supuestos y las hipótesis pendientes para continuar la identificación experimental.
+
 ## Ejecución rápida
 1. Abrir MATLAB en la raíz del repo.
 2. Ejecutar:
