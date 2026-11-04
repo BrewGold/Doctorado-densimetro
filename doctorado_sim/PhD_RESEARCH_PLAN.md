@@ -208,13 +208,15 @@ La validación se realiza comparando:
 
 ### Fase 1: modelo base 1DoF
 
-Objetivo: reproducir la dinámica principal de la cápsula con una sola variable angular.
+Objetivo: caracterizar y reproducir la respuesta angular de la cápsula, partiendo de un modelo 1DoF de segundo orden y contrastándolo con la señal experimental del TFM.
 
 - ecuación de movimiento angular
 - viscosidad efectiva
 - IMU sintética con ruido y bias
-- comparación con TFM
-- ajuste de theta_eq y tau
+- análisis de las oscilaciones y de la envolvente periódica observadas en los datos del TFM
+- estimación de frecuencias dominantes y comparación entre modelos de primer orden, segundo orden subamortiguado y dos componentes o modos
+- ajuste de theta_eq y de parámetros temporales solo con el modelo que resulte adecuado para el tramo analizado
+- registro del batido como observación preliminar; confirmar su mecanismo antes de incorporarlo como supuesto físico
 
 ### Fase 2: modelado extendido del fluido
 
