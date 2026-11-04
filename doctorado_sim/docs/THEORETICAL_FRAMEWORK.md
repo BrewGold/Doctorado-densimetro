@@ -54,13 +54,21 @@ donde:
 - theta_eq es el ángulo de equilibrio
 - tau_noise representa una perturbación externa o un término de ruido del proceso
 
-### 3.2 Modelo de primer orden alrededor del equilibrio
+### 3.2 Aproximación de primer orden
 
-En muchos ensayos experimentales el sistema responde con una evolución temporal que puede aproximarse por un modelo de primer orden:
+La respuesta
 
-- theta(t) = theta_eq (1 - exp(-t/tau))
+- theta(t) = theta_eq + (theta(0) - theta_eq) exp(-t/tau)
 
-donde tau es una constante temporal que caracteriza la velocidad de respuesta. Este modelo resulta útil para identificar la orientación de equilibrio y el tiempo de relajación del sistema a partir de señales observadas.
+puede utilizarse como aproximación empírica cuando la señal observada es una relajación monótona y no resuelta en sus transitorios. En ese caso, tau es un tiempo de relajación efectivo; este ajuste no demuestra que la dinámica física sea de primer orden. Si la señal presenta oscilaciones, debe contrastarse con modelos que incluyan inercia antes de interpretar tau o theta_eq.
+
+### 3.3 Observación preliminar de la respuesta del TFM
+
+En los datos del TFM se ha observado un balanceo angular rápido cuya amplitud crece y decrece periódicamente, formando una envolvente de menor frecuencia. Este patrón es compatible con un batido entre componentes de frecuencia cercana o con modos dinámicos acoplados, pero la observación visual por sí sola no determina el mecanismo ni el orden del sistema.
+
+Un modelo lineal subamortiguado de segundo orden con un único modo produce una oscilación cuya envolvente decae; no explica por sí solo una envolvente que vuelve a crecer periódicamente. Por ello, la dinámica angular de segundo orden es una base física razonable por la presencia de inercia, pero no debe asumirse que un modelo 1DoF de segundo orden describa completamente la señal observada.
+
+La hipótesis deberá contrastarse con los datos mediante el análisis espectral y temporal de las frecuencias dominantes y la envolvente, y comparando ajustes de primer orden, de segundo orden subamortiguado y de dos componentes o modos. Hasta realizar esa comparación, el batido se registra como una observación experimental y las explicaciones propuestas como hipótesis.
 
 ## 4. Interacción fluido-estructura
 
@@ -227,4 +235,4 @@ El trabajo del TFM puede entenderse como la primera capa experimental y empíric
 
 El sistema de cápsula desbalanceada instrumentada con IMU puede tratarse como un proceso dinámico de interés científico en el campo del modelado, la simulación y el control de procesos. La base teórica del proyecto se apoya en la dinámica del cuerpo rígido, la interacción con un fluido, el modelo de medición inercial y la formulación de un problema de identificación y control.
 
-Desde este marco, el repositorio adquiere un sentido claro: hacer evolucionar un conjunto de experimentos iniciales hacia un modelo formal, reproducible y extensible que pueda sostener una línea de investigación doctoral.
+Desde este marco, el repositorio adquiere un sentido claro: hacer evolucionar un conjunto de experimentos iniciales hacia un modelo formal, reproducible y extensible que pueda sostener una línea de investigación doctoral. La respuesta modulada observada en el TFM deberá orientar la selección del modelo dinámico, sin dar por validado todavía un mecanismo de batido o acoplamiento.
