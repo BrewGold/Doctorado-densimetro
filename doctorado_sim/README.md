@@ -44,3 +44,28 @@ El [modelo y sus limites](docs/WAVE_REBOUND_MODEL.md) explican por que puede
 recuperarse la amplitud de la capsula mientras disminuye la energia total.
 Los parametros son ilustrativos: no se ha ajustado el modelo a los registros
 ni demostrado que sus modulaciones procedan de ondas reflejadas.
+
+## Ondas en el recipiente circular de 22 cm
+
+Extension espacial con pared reflectante y fondo a 8 cm, capsula de 15 cm y
+liberacion a **30 grados respecto al equilibrio**, no un equilibrio a 30 grados:
+
+```matlab
+addpath('doctorado_sim/sim/scenarios');
+run_circular_walls();
+addpath('doctorado_sim/tests');
+test_circular_walls();
+```
+
+Los [supuestos y ecuaciones](docs/CIRCULAR_WALL_WAVES.md) distinguen la referencia
+angular del TFM de la postura fisica. Los 5 cm son elevacion aproximada del
+extremo, no altura inicial de ola. El escenario genera en
+`results/circular_walls/` comparaciones angulares, campo de elevacion, esquema
+geometrico, modos y balance energetico. Los CSV grandes se regeneran y se
+excluyen de Git; las figuras, modos y resumen se incluyen como referencia.
+Los nombres son fijos y se sobrescriben; puede indicarse otro directorio.
+Las dependencias graficas de Octave son las mismas del escenario anterior.
+
+El primer modo del recipiente ideal sin capsula resulta proximo a 1.906 Hz.
+Su cercania al pico experimental de 1.9 Hz justifica investigar el recipiente,
+pero no identifica causalmente ese pico ni valida el acoplamiento utilizado.

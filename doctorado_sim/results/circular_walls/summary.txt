@@ -1,0 +1,12 @@
+SIMULACION EXPLORATORIA, NO AJUSTADA A LOS REGISTROS
+Diametro interior: 0.220 m; profundidad: 0.080 m; longitud capsula: 0.150 m
+Referencia angular TFM (no postura geometrica calibrada): -0.959728 rad
+Perturbacion angular inicial aportada: 30.00 deg; elevacion aproximada: 5.0 cm
+Postura horizontal inferida con extremo lastrado fijo: 34.91 deg; elevada: 64.91 deg
+Primer modo del agua, sin capsula: 1.9058 Hz
+Velocidad de grupo a 1.90 Hz: 0.4931 m/s
+Ida-vuelta desde el centro: 0.446 s; desde borde proyectado de capsula: 0.197 s
+Estos tiempos son escalas de propagacion, no retardos impuestos ni batidos.
+Maxima elevacion simulada: 4.781 mm; eta/h: 0.0598; pendiente superficial maxima: 0.0958
+Error relativo maximo del balance energetico: 2.13e-08
+Acoplamiento, inercia, rigidez y perdidas no estan medidos.
