@@ -14,6 +14,8 @@ La prioridad es que la cápsula pueda ensayarse en una configuración documentad
 | Balanceo | Lastre | Crear o ajustar el desbalance | Mencionado; pieza y ubicación exactas por documentar | Material, masa, forma, posición respecto a ejes y método de fijación |
 | Medida | IMU | Registrar movimiento y estimar orientación | Sensor disponible según el planteamiento experimental | Modelo, rango, frecuencia de muestreo, orientación de ejes, configuración y calibración |
 | Alimentación | Batería/pila | Alimentar la instrumentación | Mencionada; especificación por confirmar | Tipo, masa, tensión, capacidad, posición y sujeción |
+| Alimentación | Receptor/cargador inalámbrico con bobina circular | Carga de la batería dentro de la cápsula | Pedido; sustituye al cargador anterior | Bobina de 25 mm, placa aprox. 15 × 18 mm; confirmar polaridad, corriente, protección, temperatura y compatibilidad |
+| Alimentación | MT3608 | Elevador de tensión para la electrónica | Usado en el TFM; candidato sujeto a validación | Verificar tensión y corriente de `BOUT`, salida necesaria y compatibilidad con el ESP32 |
 | Eléctrico | Cableado y conectores | Alimentación y adquisición | Mencionados; recorrido por documentar | Masa, longitud, conectores, sujeción y efecto sobre sellado o movimiento |
 | Ensayo | Recipiente | Contener el fluido y permitir el movimiento | Existe contexto de ensayos y simulaciones; dimensiones físicas por verificar | Forma, dimensiones interiores, nivel de llenado y material |
 | Ensayo | Fluidos | Medio de prueba | Agua de referencia; se proponen agua-sal y agua-glicerina | Composición, densidad, viscosidad, temperatura y método/procedencia de medida |
@@ -37,6 +39,8 @@ Las dimensiones usadas en un escenario de simulación no se consideran medidas d
 3. Sujetar batería y cableado, registrar sus posiciones y comprobar que no puedan moverse ni interferir con el balanceo.
 4. Registrar la configuración de adquisición: frecuencia, rangos, filtros y formato de datos.
 5. Si los componentes quedan dentro de la carcasa, verificar la protección frente al fluido antes de sumergirlos. El tipo de sellado se debe documentar y validar para el montaje real; no se presupone aquí un grado de estanqueidad.
+
+La propuesta sitúa la batería cerca del extremo lastrado, bajo la PCB, y la bobina receptora junto a la tapa opuesta. Deben verificarse dimensiones, sujeción, estanqueidad, temperatura y compatibilidad de carga antes del montaje definitivo. Se prevé una interfaz de cuatro pines entre la PCB principal y el receptor/cargador, con pinout pendiente; `BOUT` se considera una posible entrada al elevador, no una conexión validada.
 
 ### C. Preparación del ensayo
 
