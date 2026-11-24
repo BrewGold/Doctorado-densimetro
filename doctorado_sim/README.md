@@ -73,3 +73,16 @@ Las dependencias graficas de Octave son las mismas del escenario anterior.
 El primer modo del recipiente ideal sin capsula resulta proximo a 1.906 Hz.
 Su cercania al pico experimental de 1.9 Hz justifica investigar el recipiente,
 pero no identifica causalmente ese pico ni valida el acoplamiento utilizado.
+
+## Excitacion mediante masa interna
+
+El escenario [impulso de masa movil](docs/INTERNAL_MASS_IMPULSE.md) compara
+movimientos longitudinal y vertical en reposo con reaccion sobre la capsula.
+Usa una postura inferida y parametros ilustrativos, no identificados.
+
+```matlab
+addpath('doctorado_sim/sim/scenarios');
+run_internal_mass();
+addpath('doctorado_sim/tests');
+test_internal_mass();
+```
