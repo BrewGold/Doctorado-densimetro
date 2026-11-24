@@ -168,3 +168,7 @@ La geometría de la cápsula debe elegirse en función de tres propiedades clave
 3. facilidad de modelado y fabricación.
 
 La opción cilíndrica con dos semiesferas es la más apropiada para una primera implementación realista y reproducible. Su parametricidad permite reproducción en simulación y comparación con prototipos experimentales, manteniendo una complejidad razonable y un camino claro hacia validación y doctorado.
+
+## 15. Relación con el montaje físico
+
+La geometría descrita aquí es una parametrización de referencia y no sustituye las dimensiones medidas del prototipo real. Para documentar carcasa, lastre, IMU, alimentación, cableado, recipiente y procedimiento de montaje, consultar el [inventario de materiales y guía de ensamblaje](../../docs/MATERIALES_Y_ENSAMBLAJES.md).

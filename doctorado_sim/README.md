@@ -7,6 +7,8 @@ Objetivo: simular cápsula desbalanceada + IMU + ruido + efectos de viscosidad/t
 
 Las [conclusiones de trabajo y preliminares](../docs/PRELIMINARES_INVESTIGACION.md) recogen las decisiones metodológicas, sus supuestos y las hipótesis pendientes para continuar la identificación experimental.
 
+El [inventario de materiales y guía preliminar de ensamblaje](../docs/MATERIALES_Y_ENSAMBLAJES.md) documenta los componentes, las configuraciones y los datos que deben registrarse para repetir los ensayos.
+
 ## Ejecución rápida
 1. Abrir MATLAB en la raíz del repo.
 2. Ejecutar:
