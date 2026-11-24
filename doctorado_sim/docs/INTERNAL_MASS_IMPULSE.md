@@ -62,3 +62,27 @@ En esta seleccion de parametros el recorrido longitudinal excita algo mas el gir
 La liberacion manual del TFM a unos 30° es una desviacion inicial, no un impulso calibrado. En este ejemplo las oscilaciones son mucho menores; escalar linealmente estos resultados a 30° no estaria justificado con un modelo local. Una prueba practica requiere conocer masa, carrera, tiempo de ida y retorno, posicion y alimentacion del actuador, y comparar con registros reales en el mismo fluido. Puede ser suficiente una perturbacion menor si permite identificar el modo con buena relacion señal/ruido.
 
 El ensayo conserva el momento lineal y angular en el caso aislado sin gravedad ni fuerzas externas; tambien verifica reposo, retorno de la masa y reaccion traslacional sin giro para una trayectoria que atraviesa el centro de masas.
+
+## Comparacion de energia cinetica
+
+La comparacion usa la misma masa movil de 5 g, carrera de 4 mm y 0,25 s para la ida y vuelta en ambas direcciones. Se calcula en el marco del laboratorio la energia cinetica de la carcasa y la masa movil, no la del fluido. Se descompone en traslacion del centro de masas del conjunto y movimiento relativo a este. Una vez que la masa retorna y queda fija, la energia relativa es la energia de rotacion del conjunto alrededor de su centro de masas.
+
+**Criterio principal: balanceo angular.** En esta configuracion, durante los dos segundos posteriores al retorno, el maximo absoluto de angulo es 0,558° longitudinal y 0,477° vertical en reposo; el maximo de energia cinetica de giro es 0,933 µJ y 0,671 µJ, respectivamente. Ambos criterios favorecen la direccion longitudinal en este ejemplo, pero no constituyen una prediccion validada ni demuestran mayor eficiencia del actuador.
+
+| Magnitud | Longitudinal | Vertical en reposo |
+|---|---:|---:|
+| Maximo total mientras se mueve la masa | 6,161 µJ | 5,761 µJ |
+| Maximo total en los 2 s despues del retorno | 1,206 µJ | 1,325 µJ |
+| Maximo de giro en esos 2 s | 0,933 µJ | 0,671 µJ |
+| Maximo de traslacion del centro de masas en esos 2 s | 0,273 µJ | 0,674 µJ |
+
+Cada maximo se calcula por separado: los maximos de giro y traslacion no necesariamente ocurren al mismo tiempo y **no deben sumarse**. Aunque se incluye la energia total como referencia, la traslacion no es el objetivo de la comparacion. El pico durante el impulso incluye el movimiento de la masa interna y no es una medida de energia de balanceo util.
+
+La energia cinetica no es la energia mecanica total: durante la oscilacion se intercambia con energia potencial, y el modelo no calcula la energia del fluido. Mantener el mismo recorrido y tiempo tampoco garantiza igual trabajo o consumo electrico del actuador. La comparacion depende de parametros ilustrativos, del perfil impuesto y de la aproximacion del fluido, por lo que no demuestra que una direccion sea mas eficiente ni permite seleccionar el actuador real.
+
+Para regenerar la grafica `kinetic_energy.png` y el CSV:
+
+```matlab
+addpath('doctorado_sim/sim/scenarios');
+run_internal_mass_energy();
+```
