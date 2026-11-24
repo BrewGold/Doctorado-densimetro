@@ -15,12 +15,23 @@ window = axial.t_s >= cfg.stroke_duration_s & ...
     axial.t_s <= cfg.stroke_duration_s + 2;
 assert(abs(comparison(1,2)-max(abs(axial.angle_rad(window)))*180/pi) < 1e-5);
 assert(abs(comparison(1,3)-max(abs(vertical.angle_rad(window)))*180/pi) < 1e-5);
+energy = internal_mass_kinetic_energy(cfg, axial);
+assert(all(energy.total_j >= 0));
+assert(all(energy.relative_j >= 0));
+assert(max(abs(energy.total_j-energy.com_translation_j-energy.relative_j)) < 1e-14);
+post_energy = axial.t_s >= cfg.stroke_duration_s;
+reduced_mass = cfg.shell_mass_kg*cfg.moving_mass_kg/(cfg.shell_mass_kg+cfg.moving_mass_kg);
+inertia_com = cfg.shell_inertia_kgm2 + reduced_mass*sum(cfg.mass_position_body_m.^2);
+assert(max(abs(energy.relative_j(post_energy) - ...
+    0.5*inertia_com*axial.omega_rads(post_energy).^2)) < 1e-14);
 
 rest_cfg = cfg;
 rest_cfg.stroke_m = 0;
 rest = dynamics_internal_mass(rest_cfg, [1; 0]);
 assert(max(abs(rest.angle_rad)) < 1e-12);
 assert(max(abs(rest.position_m(:))) < 1e-12);
+rest_energy = internal_mass_kinetic_energy(rest_cfg, rest);
+assert(max(abs(rest_energy.total_j)) < 1e-20);
 
 free_cfg = cfg;
 free_cfg.gravity_ms2 = 0;

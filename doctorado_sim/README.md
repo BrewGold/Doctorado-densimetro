@@ -83,6 +83,7 @@ Usa una postura inferida y parametros ilustrativos, no identificados.
 ```matlab
 addpath('doctorado_sim/sim/scenarios');
 run_internal_mass();
+run_internal_mass_energy();
 addpath('doctorado_sim/tests');
 test_internal_mass();
 ```
