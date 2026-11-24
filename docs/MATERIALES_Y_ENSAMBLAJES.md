@@ -40,7 +40,13 @@ Las dimensiones usadas en un escenario de simulación no se consideran medidas d
 4. Registrar la configuración de adquisición: frecuencia, rangos, filtros y formato de datos.
 5. Si los componentes quedan dentro de la carcasa, verificar la protección frente al fluido antes de sumergirlos. El tipo de sellado se debe documentar y validar para el montaje real; no se presupone aquí un grado de estanqueidad.
 
-La propuesta sitúa la batería cerca del extremo lastrado, bajo la PCB, y la bobina receptora junto a la tapa opuesta. Deben verificarse dimensiones, sujeción, estanqueidad, temperatura y compatibilidad de carga antes del montaje definitivo. Se prevé una interfaz de cuatro pines entre la PCB principal y el receptor/cargador, con pinout pendiente; `BOUT` se considera una posible entrada al elevador, no una conexión validada.
+La propuesta sitúa la batería cerca del extremo lastrado, bajo la PCB, y la bobina receptora junto a la tapa opuesta. En sentido longitudinal, desde la tapa hacia el extremo lastrado, se prevé el siguiente orden físico:
+
+```text
+Tapa / bobina → módulo receptor-cargador → elevador (boost) → IMU → ESP32 → extremo lastrado
+```
+
+La posición de la batería bajo la PCB y la distribución de los módulos deben ajustarse a las dimensiones reales. El orden describe su ubicación física, no conexiones eléctricas en serie. Deben verificarse espacio y sujeción, estanqueidad, temperatura, separación del convertidor respecto a la IMU y condiciones de antena del ESP32 antes de fijar la disposición definitiva. Se prevé una interfaz de cuatro pines entre la PCB principal y el receptor/cargador, con pinout pendiente; `BOUT` se considera una posible entrada al elevador, no una conexión validada.
 
 ### C. Preparación del ensayo
 

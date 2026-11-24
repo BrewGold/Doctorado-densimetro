@@ -30,6 +30,8 @@ La conexión de alimentación al ESP32 está condicionada a utilizar una placa d
 
 La conexión a `BOUT` es una intención de diseño, no un pinout confirmado: hay que verificar si es una salida de carga, sus dos polos, su tensión, corriente, protección y comportamiento durante la carga. Si `BOUT` no es adecuado, se modificará la arquitectura; no se conectará el elevador hasta comprobarlo. Para la PCB se prevé una interfaz de cuatro pines para el receptor/cargador, sin asignar todavía orden ni funciones definitivas.
 
+La disposición física prevista, desde la tapa de carga hacia el extremo lastrado, es **receptor/cargador → boost → IMU → ESP32**. No implica que los módulos estén conectados eléctricamente en serie: el ESP32 se comunica con la IMU por I²C. La distribución y las distancias se comprobarán con las dimensiones, la interferencia y las restricciones de antena reales; véase [Materiales y ensamblajes](MATERIALES_Y_ENSAMBLAJES.md).
+
 ## Redes previstas
 
 | Red | Conexiones funcionales | Estado |
