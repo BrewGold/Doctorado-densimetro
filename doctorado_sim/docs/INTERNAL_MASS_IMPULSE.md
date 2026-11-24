@@ -45,6 +45,20 @@ addpath('doctorado_sim/tests');
 test_internal_mass();
 ```
 
-Los resultados aparecen en `doctorado_sim/results/internal_mass/`: `internal_mass.csv`, `internal_mass.png`, `internal_mass.pdf` y `geometry.png`. El CSV se regenera y no se versiona; las figuras son referencia. Se puede pasar otro directorio a `run_internal_mass`. La figura angular compara desviaciones respecto al equilibrio, mientras que los desplazamientos corresponden al centro de masas de la carcasa.
+Los resultados aparecen en `doctorado_sim/results/internal_mass/`: `internal_mass.csv`, `pulse_comparison.csv`, `internal_mass.png`, `internal_mass.pdf` y `geometry.png`. Los CSV se regeneran y no se versionan; las figuras son referencia. Se puede pasar otro directorio a `run_internal_mass`. La figura angular compara desviaciones respecto al equilibrio, mientras que los desplazamientos corresponden al centro de masas de la carcasa.
 
-Con los valores ilustrativos actuales, los maximos absolutos son aproximadamente **0,56° axial** y **0,48° vertical en reposo**. Estos numeros dependen de las hipotesis y no demuestran que un montaje sea superior. El ensayo conserva el momento lineal y angular en el caso aislado sin gravedad ni fuerzas externas; tambien verifica reposo, retorno de la masa y reaccion traslacional sin giro para una trayectoria que atraviesa el centro de masas.
+## Comparacion despues del impulso
+
+Para aproximar la pregunta de sustituir la liberacion manual, se mide el maximo absoluto de la desviacion angular en los **dos segundos posteriores al retorno de la masa**. Con los parametros de la tabla anterior, salvo la duracion indicada:
+
+| Duracion ida y vuelta | Longitudinal | Vertical en reposo |
+|---|---:|---:|
+| 0,10 s | 0,254° | 0,215° |
+| 0,25 s | 0,558° | 0,477° |
+| 0,50 s | 0,651° | 0,584° |
+
+En esta seleccion de parametros el recorrido longitudinal excita algo mas el giro, pero **no se puede concluir que sea mejor para la capsula real**. La comparacion depende especialmente de la accion de la gravedad sobre la masa desplazada y del acoplamiento con la traslacion. Por ejemplo, con la misma configuracion de 0,25 s y sin gravedad, el modelo da aproximadamente 0,127° longitudinal frente a 0,476° vertical. Las fuerzas y rigideces no estan identificadas; el perfil impuesto de ida y vuelta no demuestra que un actuador electromagnetico pueda reproducirlo.
+
+La liberacion manual del TFM a unos 30° es una desviacion inicial, no un impulso calibrado. En este ejemplo las oscilaciones son mucho menores; escalar linealmente estos resultados a 30° no estaria justificado con un modelo local. Una prueba practica requiere conocer masa, carrera, tiempo de ida y retorno, posicion y alimentacion del actuador, y comparar con registros reales en el mismo fluido. Puede ser suficiente una perturbacion menor si permite identificar el modo con buena relacion señal/ruido.
+
+El ensayo conserva el momento lineal y angular en el caso aislado sin gravedad ni fuerzas externas; tambien verifica reposo, retorno de la masa y reaccion traslacional sin giro para una trayectoria que atraviesa el centro de masas.

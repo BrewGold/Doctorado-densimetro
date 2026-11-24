@@ -10,6 +10,11 @@ assert(all(isfinite(vertical.angle_rad)));
 assert(max(abs(vertical.angle_rad-axial.angle_rad)) > 1e-4);
 assert(max(abs(axial.mass_displacement_m-vertical.mass_displacement_m)) < 1e-12);
 assert(max(abs(axial.mass_displacement_m(axial.t_s >= cfg.stroke_duration_s))) == 0);
+comparison = compare_internal_mass(cfg, cfg.stroke_duration_s, 2);
+window = axial.t_s >= cfg.stroke_duration_s & ...
+    axial.t_s <= cfg.stroke_duration_s + 2;
+assert(abs(comparison(1,2)-max(abs(axial.angle_rad(window)))*180/pi) < 1e-5);
+assert(abs(comparison(1,3)-max(abs(vertical.angle_rad(window)))*180/pi) < 1e-5);
 
 rest_cfg = cfg;
 rest_cfg.stroke_m = 0;

@@ -70,7 +70,19 @@ title('Geometria esquematica: 34.91 grados sobre horizontal (hipotesis)');
 legend('Capsula esquematica', 'Masa movil en reposo', ...
     'Recorrido longitudinal', 'Recorrido vertical en reposo', 'Location', 'southoutside');
 print(geometry, fullfile(output_dir, 'geometry.png'), '-dpng', '-r130');
+comparison = compare_internal_mass(cfg, [0.10, 0.25, 0.50], 2);
+comparison_path = fullfile(output_dir, 'pulse_comparison.csv');
+fid = fopen(comparison_path, 'w');
+if fid < 0
+    error('internal_mass:OutputError', 'No se puede escribir %s', comparison_path);
+end
+cleanup_comparison = onCleanup(@() fclose(fid));
+fprintf(fid, 'duration_s,axial_post_deg,vertical_post_deg\n');
+fprintf(fid, '%.12g,%.12g,%.12g\n', comparison');
+clear cleanup_comparison;
 fprintf('Maximo angular axial: %.4f grados\n', max(abs(axial.angle_rad))*180/pi);
 fprintf('Maximo angular vertical: %.4f grados\n', max(abs(vertical.angle_rad))*180/pi);
+fprintf('Maximos en los 2 s posteriores al retorno (duracion, axial, vertical):\n');
+fprintf('  %.2f s: %.4f grados, %.4f grados\n', comparison');
 fprintf('Resultados ilustrativos no ajustados: %s\n', output_dir);
 end
