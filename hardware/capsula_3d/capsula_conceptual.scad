@@ -11,6 +11,9 @@ largo_ojiva = 32;
 largo_encaje = 8;
 radio_encaje = 20.6;
 radio_paso_extremos = 21;
+espesor_fondo = 3;
+radio_cuello_exterior = 20.2;
+radio_alojamiento_ojiva = 20.6;
 radio_junta = 22;
 seccion_junta = 2;
 placa_largo = 164;
@@ -24,6 +27,7 @@ holgura_bobina_diametral = 0.8;
 holgura_actuador_diametral = 0.8;
 actuador_x = 181;
 actuador_largo_referencia = 13.5;
+carrera_referencia = 3;
 soporte_actuador_x = 185;
 soporte_actuador_largo = 4;
 fin_guias_pcb = 179;
@@ -34,6 +38,8 @@ assert(diametro_exterior > 2 * pared, "Pared incompatible con diámetro");
 assert(largo_ojiva >= radio, "La ojiva tangente requiere longitud >= radio");
 assert(radio_encaje < radio_paso_extremos &&
        radio_paso_extremos < radio_interior, "Encajes incompatibles");
+assert(radio_cuello_exterior < radio_alojamiento_ojiva &&
+       radio_alojamiento_ojiva < radio, "Alojamiento incompatible");
 assert(largo_encaje < placa_x && placa_x + placa_largo < largo_cuerpo - largo_encaje,
        "La PCB interfiere con las zonas de encaje");
 assert(largo_cuerpo >= placa_x + placa_largo, "La PCB excede el cuerpo");
@@ -43,7 +49,8 @@ assert(fin_guias_pcb > placa_x + placa_largo &&
 assert(actuador_x > placa_x + placa_largo &&
        soporte_actuador_x >= actuador_x &&
        soporte_actuador_x + soporte_actuador_largo <= actuador_x + actuador_largo_referencia &&
-       actuador_x + actuador_largo_referencia < largo_cuerpo - largo_encaje,
+       actuador_x + actuador_largo_referencia + carrera_referencia < largo_cuerpo - espesor_fondo &&
+       espesor_fondo > 0 && espesor_fondo < largo_encaje,
        "Envolvente del actuador fuera de su reserva");
 assert(modo == "corte" || modo == "conjunto" || modo == "cuerpo" ||
        modo == "tapa" || modo == "punta" || modo == "prueba_pcb" ||
@@ -61,6 +68,11 @@ module cuerpo() {
             translate([largo_encaje, 0, 0])
                 cilindro_x(radio_interior, largo_cuerpo - 2 * largo_encaje);
         }
+        // Fondo cerrado y cuello exterior liso, reserva para rosca.
+        translate([largo_cuerpo - espesor_fondo, 0, 0])
+            cilindro_x(radio_paso_extremos + 0.1, espesor_fondo + 0.1);
+        translate([largo_cuerpo - 0.1, 0, 0])
+            cilindro_x(radio_cuello_exterior, largo_encaje + 0.1);
         guias_pcb();
         soporte_actuador();
     }
@@ -134,27 +146,23 @@ module volumen_ojiva(reduccion = 0) {
 module punta() {
     translate([largo_cuerpo, 0, 0]) {
         union() {
+            // Casquillo externo separado: el hueco no comunica con el cilindro cerrado.
+            difference() {
+                cilindro_x(radio, largo_encaje + 0.5);
+                translate([-0.1, 0, 0])
+                    cilindro_x(radio_alojamiento_ojiva, largo_encaje + 0.7);
+            }
+            translate([largo_encaje, 0, 0])
             difference() {
                 volumen_ojiva();
                 volumen_ojiva(pared);
-            }
-            difference() {
-                translate([-largo_encaje, 0, 0])
-                    cilindro_x(radio_encaje, largo_encaje + 0.5);
-                translate([-largo_encaje - 0.1, 0, 0])
-                    cilindro_x(radio_encaje - 1.8, largo_encaje + 0.7);
-            }
-            difference() {
-                cilindro_x(radio_interior + 0.1, 1);
-                translate([-0.1, 0, 0])
-                    cilindro_x(radio_encaje - 1.8, 1.2);
             }
         }
     }
 }
 
 module soporte_actuador() {
-    // Reserva central para carcasa fija: fijación y movimiento sin validar.
+    // Reserva central para bobina fija: fijación y movimiento sin validar.
     translate([soporte_actuador_x, 0, 0])
     difference() {
         union() {
@@ -172,7 +180,7 @@ module carcasa_en_corte() {
     difference() {
         children();
         translate([-espesor_tapa - 1, -radio - 1, -radio - 1])
-            cube([largo_cuerpo + largo_ojiva + espesor_tapa + 2,
+            cube([largo_cuerpo + largo_encaje + largo_ojiva + espesor_tapa + 2,
                   radio + 1, 2 * radio + 2]);
     }
 }
