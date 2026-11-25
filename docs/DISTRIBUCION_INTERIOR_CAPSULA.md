@@ -47,7 +47,7 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 |---|---|---|
 | Cápsula del TFM | Aproximadamente 125 × 40 mm exteriores; referencia, no límite del nuevo diseño | Dimensionar longitud y diámetro a partir del conjunto, perfil de extremos, espesor, cierre y montaje |
 | Bobina receptora | Diámetro 25 mm | Espesor, salida de cables, orientación y distancia efectiva al transmisor con la tapa y soportes |
-| Placa del receptor | Aproximadamente 15 × 18 mm | Espesor, conectores, posición de cables y fijación |
+| Placa del receptor | La imagen indica 15 × 18 mm; cuatro contactos en un extremo y dos cables a la bobina | Confirmar identificación y polaridad de los contactos, separación y diámetro, espesor, posición de cables y fijación |
 | Actuador completo | Diámetro 20 mm, cuerpo de 13,5 mm de altura y masa total 25 g | Orientación real y envolvente completa, fijación, masa móvil y espacio de la guía |
 | Parte móvil | Altura medida 12,2 mm; ficha de variante 20VC001: carrera de 3 mm | Carrera útil y posiciones extremas reales; no confundir altura con carrera |
 | Batería | Recargable de litio 14500, 3,7 V nominales y 800 mAh indicados; aproximadamente 14 mm de diámetro y 50 mm de largo nominales | Medidas reales con terminales y protección, masa, referencia, límites de carga y descarga, protección y fijación |
