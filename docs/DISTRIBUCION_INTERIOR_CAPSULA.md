@@ -55,11 +55,14 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 | IMU | Diseño Adafruit LSM6DSOX 4438 visualmente similar al TFM: PCB 25,40 × 17,78 mm, fila principal de nueve contactos a 2,54 mm | Confirmar modelo y revisión de la unidad, altura, masa, conectores y orientación; incluir pines y soldaduras |
 | Boost MT3608 | El usuario indica **17 × 36 mm**; la imagen muestra cuatro agujeros VIN+, VIN−, VOUT+ y VOUT− y es visualmente similar al módulo del TFM | Confirmar unidad y polaridad; medir altura, diámetro y distancias entre centros de los agujeros, masa y orientación |
 | Condensador de salida del boost | Reservado en la PCB; 470 µF y 16 V confirmados por el usuario | Confirmar tipo, polaridad, diámetro, altura y paso de terminales |
-| Etapa de accionamiento y lastre | Sin diseño o dimensiones definidos | Envolvente, masa, fijación, alimentación y margen térmico |
+| Etapa de accionamiento | DRV8833 Adafruit 3297 seleccionado para prototipo: contorno aproximado 25,40 × 17,78 mm | Altura con conectores, masa, alimentación, limitación de corriente y margen térmico |
+| Lastre | Sin diseño o dimensiones definidos | Envolvente, masa y fijación |
 
 La batería 14500 se propone bajo la PCB, con su eje paralelo al de la cápsula; su portabatería o sujeción y conexiones aumentarán la envolvente. Las cotas nominales no sustituyen la medida de la unidad: algunas protecciones o terminales modifican su tamaño.
 
 Todavía no se puede determinar la longitud ni el diámetro necesarios: faltan envolventes y orientaciones, así como la forma en que los componentes se solapan. El diámetro exterior de referencia del TFM no es un diámetro interior disponible ni una restricción de diseño.
+
+La [maqueta mecánica de la PCB portadora](../hardware/pcb_portadora/README.md) propone una primera distribución en KiCad; es provisional y no apta para fabricación.
 
 ## Dimensionado y preparación del montaje
 
