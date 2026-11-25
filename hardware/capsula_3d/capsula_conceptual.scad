@@ -1,6 +1,6 @@
 // Primer prototipo de guías: encajes lisos, sin roscas funcionales.
 // Eje X: tapa de carga (izquierda) hacia punta lastrada (derecha).
-modo = "corte"; // [corte, conjunto, cuerpo, tapa, punta, prueba_pcb, prueba_bobina, prueba_actuador]
+modo = "corte"; // [corte, conjunto, bandeja, cuerpo, tapa, punta, prueba_pcb, prueba_bobina, prueba_actuador]
 $fn = 128;
 
 diametro_exterior = 48;
@@ -30,7 +30,7 @@ actuador_largo_referencia = 13.5;
 carrera_referencia = 3;
 soporte_actuador_x = 185;
 soporte_actuador_largo = 4;
-fin_guias_pcb = 179;
+fin_guias_pcb = 200;
 
 radio = diametro_exterior / 2;
 radio_interior = radio - pared;
@@ -44,15 +44,15 @@ assert(largo_encaje < placa_x && placa_x + placa_largo < largo_cuerpo - largo_en
        "La PCB interfiere con las zonas de encaje");
 assert(largo_cuerpo >= placa_x + placa_largo, "La PCB excede el cuerpo");
 assert(placa_ancho < 2 * radio_interior, "La PCB excede el diámetro interior");
-assert(fin_guias_pcb > placa_x + placa_largo &&
-       fin_guias_pcb < soporte_actuador_x, "Separación de guías insuficiente");
+assert(fin_guias_pcb > soporte_actuador_x + soporte_actuador_largo &&
+       fin_guias_pcb < largo_cuerpo - espesor_fondo, "Longitud de guías incompatible");
 assert(actuador_x > placa_x + placa_largo &&
        soporte_actuador_x >= actuador_x &&
        soporte_actuador_x + soporte_actuador_largo <= actuador_x + actuador_largo_referencia &&
        actuador_x + actuador_largo_referencia + carrera_referencia < largo_cuerpo - espesor_fondo &&
        espesor_fondo > 0 && espesor_fondo < largo_encaje,
        "Envolvente del actuador fuera de su reserva");
-assert(modo == "corte" || modo == "conjunto" || modo == "cuerpo" ||
+assert(modo == "corte" || modo == "conjunto" || modo == "bandeja" || modo == "cuerpo" ||
        modo == "tapa" || modo == "punta" || modo == "prueba_pcb" ||
        modo == "prueba_bobina" || modo == "prueba_actuador", "Modo desconocido");
 
@@ -74,24 +74,20 @@ module cuerpo() {
         translate([largo_cuerpo - 0.1, 0, 0])
             cilindro_x(radio_cuello_exterior, largo_encaje + 0.1);
         guias_pcb();
-        soporte_actuador();
     }
 }
 
 module guias_pcb() {
-    // Rieles longitudinales con ranuras abiertas hacia el centro.
+    // Las ranuras reciben los largueros de la bandeja, no los bordes de la PCB.
     for (lado = [-1, 1])
         difference() {
-            translate([largo_encaje, lado > 0 ? 11.6 : -22.1, -3])
-                cube([fin_guias_pcb - largo_encaje, 10.5, 6]);
-            translate([largo_encaje - 0.1, lado > 0 ? 11.6 : -14,
-                       -(placa_espesor + holgura_guia_pcb) / 2])
-                cube([fin_guias_pcb - largo_encaje + 0.2, 2.4,
-                      placa_espesor + holgura_guia_pcb]);
-            // Evita que el riel sobresalga de la superficie exterior.
+            translate([largo_encaje, lado > 0 ? 15 : -22, -12])
+                cube([fin_guias_pcb - largo_encaje, 7, 5]);
+            translate([largo_encaje - 0.1, lado > 0 ? 14.9 : -15.7, -10.7])
+                cube([fin_guias_pcb - largo_encaje + 0.2, 0.8, 2.4]);
             difference() {
-                translate([largo_encaje - 0.1, -25, -5])
-                    cube([fin_guias_pcb - largo_encaje + 0.2, 50, 10]);
+                translate([largo_encaje - 0.1, -25, -13])
+                    cube([fin_guias_pcb - largo_encaje + 0.2, 50, 7]);
                 translate([largo_encaje - 0.2, 0, 0])
                     cilindro_x(radio, fin_guias_pcb - largo_encaje + 0.4);
             }
@@ -107,12 +103,6 @@ module tapa() {
                 cilindro_x(radio_encaje, largo_encaje);
                 translate([-0.1, 0, 0])
                     cilindro_x(radio_encaje - 1.8, largo_encaje + 0.2);
-              }
-              // Corona de centrado de la bobina; retención y cables por definir.
-              difference() {
-                  translate([-0.1, 0, 0]) cilindro_x(14.8, 2.6);
-                  translate([-0.2, 0, 0])
-                      cilindro_x((25 + holgura_bobina_diametral) / 2, 2.8);
               }
             }
         }
@@ -162,17 +152,36 @@ module punta() {
 }
 
 module soporte_actuador() {
-    // Reserva central para bobina fija: fijación y movimiento sin validar.
+    // Aro de posición, no sujeción validada de la bobina fija.
     translate([soporte_actuador_x, 0, 0])
     difference() {
-        union() {
-            cilindro_x(12.5, soporte_actuador_largo);
-            translate([0, -22.1, -2]) cube([soporte_actuador_largo, 44.2, 4]);
-            translate([0, -2, -22.1]) cube([soporte_actuador_largo, 4, 44.2]);
-        }
+        cilindro_x(12.5, soporte_actuador_largo);
         translate([-0.1, 0, 0])
             cilindro_x((20 + holgura_actuador_diametral) / 2,
                        soporte_actuador_largo + 0.2);
+    }
+}
+
+module bandeja() {
+    union() {
+        for (lado = [-1, 1]) {
+            translate([4, lado > 0 ? 14.2 : -15.3, -10.4])
+                cube([185, 1.1, 1.8]);
+            for (x = [20, 72, 112, 166])
+                translate([x, lado > 0 ? 11.5 : -14.4, -9])
+                    cube([3, 2.9, 8.2]);
+            translate([4, lado > 0 ? 10.5 : -14.4, -10])
+                cube([3, 3.9, 1.2]);
+            translate([soporte_actuador_x, lado > 0 ? 6.5 : -14.4, -10])
+                cube([3, 7.9, 1.2]);
+        }
+        translate([4, 0, 0])
+            difference() {
+                cilindro_x(14.8, 3);
+                translate([-0.1, 0, 0])
+                    cilindro_x((25 + holgura_bobina_diametral) / 2, 3.2);
+            }
+        soporte_actuador();
     }
 }
 
@@ -230,7 +239,7 @@ module componentes() {
 
     // Bobina de carga de 25 mm: plano transversal, espesor ilustrativo.
     color([0.79, 0.45, 0.18])
-        translate([1, 0, 0]) cilindro_x(12.5, 1);
+        translate([5, 0, 0]) cilindro_x(12.5, 1);
 
     // Envolvente indicativa del cuerpo del actuador; no es la guía ni la carrera.
     color([0.65, 0.68, 0.70])
@@ -240,6 +249,7 @@ module componentes() {
 if (modo == "cuerpo") cuerpo();
 if (modo == "tapa") tapa();
 if (modo == "punta") punta();
+if (modo == "bandeja") bandeja();
 if (modo == "prueba_pcb")
     intersection() {
         cuerpo();
@@ -262,6 +272,7 @@ if (modo == "conjunto") {
     color([0.83, 0.86, 0.88, 0.5]) tapa();
     color([0.54, 0.58, 0.61, 0.5]) punta();
     color([0.1, 0.1, 0.1]) junta();
+    color([0.85, 0.65, 0.12]) bandeja();
     componentes();
 }
 if (modo == "corte") {
@@ -269,5 +280,6 @@ if (modo == "corte") {
     color([0.83, 0.86, 0.88]) carcasa_en_corte() tapa();
     color([0.54, 0.58, 0.61]) carcasa_en_corte() punta();
     color([0.1, 0.1, 0.1]) carcasa_en_corte() junta();
+    color([0.85, 0.65, 0.12]) bandeja();
     componentes();
 }

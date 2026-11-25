@@ -2,13 +2,13 @@
 
 Interpretación del croquis y de la aclaración del usuario: **cuerpo cilíndrico recto cerrado por el extremo de la ojiva**, tapa roscada con junta tórica en el extremo de carga y ojiva circular independiente que se atornillará al exterior del fondo cerrado y alojará el lastre. La ojiva podría ser de otro material, incluso metálica. La PCB va longitudinalmente con la batería debajo. Abrir `capsula_conceptual.scad` con OpenSCAD. El modo `corte` muestra el interior; `conjunto`, `cuerpo`, `tapa` y `punta` permiten examinar el conjunto y sus piezas.
 
-La [vista en corte](capsula_corte.png) muestra la geometría y los bloques de referencia; la bobina naranja se representa junto a la tapa, la batería azul bajo la PCB y el actuador **dentro del cilindro**, antes de la ojiva.
+La [vista en corte](capsula_corte.png) muestra la bandeja extraíble en amarillo, la bobina de carga naranja junto a la tapa, la batería azul bajo la PCB y el actuador **dentro del cilindro**, antes de la ojiva. En OpenSCAD, `modo="bandeja"` permite aislar la bandeja.
 
 ## Modelo para SolidWorks
 
-El [conjunto STEP](capsula_conceptual.step) se puede importar desde SolidWorks con **Archivo → Abrir**, seleccionando el formato STEP. Es un intercambio de geometría, **no un archivo nativo `.SLDASM` ni conserva un árbol de operaciones paramétricas de SolidWorks**. La importación y la apariencia pueden depender de la versión y sus opciones. También están disponibles las piezas [cuerpo](cuerpo_conceptual.step), [tapa](tapa_conceptual.step) y [ojiva](ojiva_conceptual.step).
+El [conjunto STEP](capsula_conceptual.step) se puede importar desde SolidWorks con **Archivo → Abrir**, seleccionando el formato STEP. Es un intercambio de geometría, **no un archivo nativo `.SLDASM` ni conserva un árbol de operaciones paramétricas de SolidWorks**. La importación y la apariencia pueden depender de la versión y sus opciones. También están disponibles las piezas [bandeja](bandeja_conceptual.step), [cuerpo](cuerpo_conceptual.step), [tapa](tapa_conceptual.step) y [ojiva](ojiva_conceptual.step). Para ver el interior, ocultar `Cuerpo_PETG` o activar una vista de sección longitudinal.
 
-El conjunto contiene piezas y bloques simplificados en milímetros: cuerpo, tapa, ojiva, PCB de **1,6 mm**, batería, actuador, bobina de carga y envolventes de módulos. La junta tórica, los clips y sus aberturas en la PCB son ilustrativos; no incluye contactos ni cableado. El perfil de la ojiva se aproxima mediante segmentos, con una pequeña diferencia en el extremo interior respecto a OpenSCAD. El STEP es una representación de estudio, no un plano ni una comprobación de montaje.
+El conjunto contiene piezas y bloques simplificados en milímetros: cuerpo, bandeja, tapa, ojiva, PCB de **1,6 mm**, batería, actuador, bobina de carga y envolventes de módulos. La junta tórica, los clips y sus aberturas en la PCB son ilustrativos; no incluye contactos ni cableado. El perfil de la ojiva se aproxima mediante segmentos, con una pequeña diferencia en el extremo interior respecto a OpenSCAD. El STEP es una representación de estudio, no un plano ni una comprobación de montaje.
 
 La tapa **deberá ser roscada con junta tórica**, pero los STEP conservan el encaje liso y la ranura ilustrativa del modelo anterior: ni la rosca ni la compresión de la junta están diseñadas. Una opción a desarrollar es una junta facial comprimida entre superficies de la tapa y el cuerpo, con la rosca proporcionando el apriete y un tope controlando la compresión; exige definir la sección y el alojamiento de la junta, el tipo de rosca, las tolerancias, la accesibilidad de la bobina y los ensayos de estanqueidad. No se debe fabricar o sumergir como cierre terminado.
 
@@ -18,19 +18,23 @@ El ESP32 se ha trasladado al extremo de la tapa para orientar su USB-C hacia ell
 
 La ojiva hueca reserva espacio para el **lastre**, pero no modela su forma, masa ni fijación. El cilindro gris es una envolvente ilustrativa del actuador, situado fuera de la ojiva y dentro del cuerpo principal; no representa su parte móvil. Su ubicación exacta respecto al lastre y al centro de masas sigue pendiente; los bloques de componentes no son modelos reales.
 
-## Primer prototipo de guías en PETG translúcido
+## Propuesta de bandeja extraíble en PETG translúcido
 
 El material previsto es **PETG translúcido**. Las holguras son valores de partida, no tolerancias verificadas; dependen de la impresora, orientación, material y piezas reales.
 
-- **PCB:** dos rieles longitudinales integrados en el cuerpo, con ranuras de 2,0 mm de alto para una placa nominal de 1,6 mm. La profundidad de cada ranura debe revisarse con el contorno final y las tolerancias. La retención axial, la entrada del montaje y la compatibilidad con pines, soldaduras, cables y clips aún no están resueltas.
-- **Bobina:** corona de centrado junto a la tapa, diámetro interior nominal 25,8 mm para la bobina anunciada de 25 mm. No tiene retención, alojamiento del ferrito, salida de cables ni solución para el USB-C; puede obstruir el conector. No forzar ni dañar los hilos finos de la bobina.
-- **Actuador:** aro de centrado en el interior del cilindro, diámetro interior nominal 20,8 mm, con nervios a la pared del cuerpo; no forma parte de la ojiva. Según ha aclarado el usuario, **se sujeta la bobina** y se deja libre la parte móvil. Se reserva espacio para **3 mm de desplazamiento longitudinal**. La ficha de la variante seleccionada 20VC001 aportada por el usuario muestra Ø20 mm, longitud de cuerpo aproximada 13 mm y una parte móvil de 12,2 mm; el usuario midió 13,5 mm de cuerpo. La imagen indica agujeros roscados en las caras, pero no define con suficiente claridad sus superficies de fijación. El aro es solo una envolvente de estudio: verificar cómo sujetar la bobina **sin apretar ni pegar la parte móvil**, dañar sus hilos ni obstaculizar la carrera. La trayectoria de 3 mm indicada por la ficha y las posiciones inicial y extremas deben verificarse; el aro no es una guía de la parte móvil, no aporta topes ni detecta posición.
+- **Bandeja y PCB:** dos largueros de la bandeja deslizan en guías internas del cuerpo; la PCB nominal de 1,6 mm descansa sobre apoyos simbólicos en la bandeja. La abertura está en el extremo de la tapa. La unión de la PCB a sus apoyos, la retención axial de la bandeja, tolerancias y compatibilidad con pines, soldaduras, cables y clips aún no están resueltas.
+- **Bobina de carga:** corona de centrado en el extremo de la bandeja, diámetro interior nominal 25,8 mm para la bobina anunciada de 25 mm. Viaja con la PCB y no gira al roscar la tapa. No tiene retención, alojamiento del ferrito, salida de cables ni solución para el USB-C; puede obstruir el conector. No forzar ni dañar los hilos finos de la bobina.
+- **Actuador:** aro de posición unido al extremo opuesto de la bandeja, diámetro interior nominal 20,8 mm; se introduce con la PCB y sus cables ya conectados. No forma parte de la ojiva. Según ha aclarado el usuario, **se sujeta la bobina** y se deja libre la parte móvil. Se reserva espacio para **3 mm de desplazamiento longitudinal**. La ficha de la variante seleccionada 20VC001 aportada por el usuario muestra Ø20 mm, longitud de cuerpo aproximada 13 mm y una parte móvil de 12,2 mm; el usuario midió 13,5 mm de cuerpo. La imagen indica agujeros roscados en las caras, pero no define con suficiente claridad sus superficies de fijación. El aro es solo una envolvente de estudio: verificar cómo sujetar la bobina **sin apretar ni pegar la parte móvil**, dañar sus hilos ni obstaculizar la carrera. La trayectoria de 3 mm indicada por la ficha y las posiciones inicial y extremas deben verificarse; el aro no es una guía de la parte móvil, no aporta topes ni detecta posición.
 
-El usuario puede imprimir en seco las piezas de prueba independientes para comprobar dimensiones **sin electrónica ni batería**:
+Montaje propuesto: ensamblar y conectar los componentes fuera del tubo; introducir primero el extremo del actuador, encauzando los largueros en las guías; fijar axialmente la bandeja mediante un mecanismo aún por diseñar y cerrar la tapa sin hacer girar la bandeja. Las guías comienzan tras la zona de encaje de la tapa; faltan una entrada que facilite su alineación y una forma segura de extraer la bandeja. No se han representado cables ni conectores, de modo que no se ha demostrado el montaje completo.
+
+Como comprobación geométrica preliminar se han ensayado siete posiciones axiales discretas del modelo simplificado, sin intersecciones entre el cuerpo y las envolventes de bandeja, PCB, batería, actuador y bobina. No es una simulación continua ni incluye clips, módulos reales, conexiones, tolerancias de impresión o flexión. Los largueros son deliberadamente esquemáticos: su rigidez y la escasa zona de contacto con las guías no están dimensionadas para uso real.
+
+Los cupones siguientes corresponden a la **versión anterior**, con PCB deslizante directamente en el cuerpo; no validan la bandeja ni las guías nuevas. Solo sirven para estudiar ajustes aproximados **en seco y sin electrónica ni batería**:
 
 | Pieza | Comprobación | Archivo |
 |---|---|---|
-| Anillo de 20 mm de cuerpo | Deslizamiento de una muestra inerte de PCB de 24 × 1,6 mm | [prueba_pcb.stl](prueba_pcb.stl) |
+| Anillo anterior de 20 mm de cuerpo | Antigua guía directa de PCB, ya no aplicable a la bandeja | [prueba_pcb.stl](prueba_pcb.stl) |
 | Aro de bobina | Centrado a Ø25,8 mm | [prueba_bobina.stl](prueba_bobina.stl) |
 | Aro de actuador | Centrado a Ø20,8 mm | [prueba_actuador.stl](prueba_actuador.stl) |
 
@@ -51,7 +55,7 @@ Estos STL son **cupones de ajuste**, no componentes funcionales ni un cierre. No
 | Bobina | Ø25 × 1 | Espesor ilustrativo, no medido |
 | Actuador | Ø20 × 13,5 | Solo envolvente aproximada del cuerpo; no incluye fijación ni carrera |
 
-Tomando `x = 0` en el inicio del cuerpo, la PCB ocupa `x = 10–174 mm`; la batería nominal ocupa `x = 124–174 mm` bajo ella, con su eje 9,5 mm por debajo de su plano medio. Las guías terminan en `x = 179 mm`. La envolvente indicativa del actuador ocupa `x = 181–194,5 mm` y el aro de centrado `x = 185–189 mm`. Solo quedan 7 mm entre el extremo nominal de la batería y el comienzo de la envolvente del actuador; no incluye contactos, protección, cables ni tolerancias y no garantiza que quepan. El fondo cerrado ocupa `x = 211–214 mm`; el cuello exterior ocupa `x = 214–222 mm` y no comunica con el interior. El casquillo de la ojiva independiente rodea ese cuello. La reserva axial no está validada para la parte móvil, montaje, cables ni recorrido. Las alturas de los bloques electrónicos son **suposiciones**; la holgura, el aislamiento de la batería, los conectores, los radios de cable, la antena y el acceso al USB no están verificados. El condensador está representado por un bloque de 12 mm reservado, no por una medida confirmada.
+Tomando `x = 0` en el inicio del cuerpo, la PCB ocupa `x = 10–174 mm`; la batería nominal ocupa `x = 124–174 mm` bajo ella, con su eje 9,5 mm por debajo de su plano medio. Las guías de la bandeja ocupan `x = 8–200 mm`; la bandeja dibujada ocupa `x = 4–189 mm`. La envolvente indicativa del actuador ocupa `x = 181–194,5 mm` y el aro de centrado `x = 185–189 mm`. Solo quedan 7 mm entre el extremo nominal de la batería y el comienzo de la envolvente del actuador; no incluye contactos, protección, cables ni tolerancias y no garantiza que quepan. El fondo cerrado ocupa `x = 211–214 mm`; el cuello exterior ocupa `x = 214–222 mm` y no comunica con el interior. El casquillo de la ojiva independiente rodea ese cuello. La reserva axial no está validada para la parte móvil, montaje, cables ni recorrido. Las alturas de los bloques electrónicos son **suposiciones**; la holgura, el aislamiento de la batería, los conectores, los radios de cable, la antena y el acceso al USB no están verificados. El condensador está representado por un bloque de 12 mm reservado, no por una medida confirmada.
 
 Como comprobación inicial de espacio, al añadir 3 mm hacia el fondo a la envolvente ilustrativa se llega a `x = 197,5 mm`, a 13,5 mm del fondo. **No se ha identificado la geometría ni el sentido real de la pieza móvil**: esta suma no constituye una comprobación de colisiones ni permite asegurar que el recinto tenga una carrera útil de 3 mm. El soporte de la bobina, la guía, el espacio para cables, los topes y la parada segura se dimensionarán al conocer esa geometría; no usar la estructura actual como tope.
 
@@ -71,12 +75,6 @@ python3 hardware/capsula_3d/exportar_step.py
 openscad -D 'modo="corte"' -o vista.csg hardware/capsula_3d/capsula_conceptual.scad
 ```
 
-Para regenerar los cupones:
-
-```bash
-for parte in prueba_pcb prueba_bobina prueba_actuador; do
-  openscad -D "modo=\"$parte\"" -o "hardware/capsula_3d/$parte.stl" hardware/capsula_3d/capsula_conceptual.scad
-done
-```
+Los STL históricos no se regeneran automáticamente: el modo `prueba_pcb` ahora recorta las nuevas guías de bandeja y no reproduce el cupón anterior.
 
 La exportación de las piezas completas no implica que sean aptas para cerrar la cápsula o para uso en líquido. La [PCB de referencia](../pcb_portadora/README.md) continúa sin conexiones ni huellas terminadas.
