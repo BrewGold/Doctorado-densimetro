@@ -40,6 +40,14 @@ La disposición física prevista, desde la tapa de carga hacia el extremo lastra
 
 En una futura ampliación se prevé situar el actuador y su amplificador o etapa de accionamiento en la punta lastrada. Su tipo, alimentación y señales de control están por definir; no forman parte del circuito inicial ni se ha asignado aún una conexión eléctrica.
 
+### Candidato de puente H para el actuador
+
+Se propone estudiar el [Adafruit DRV8833, producto 3297](https://github.com/adafruit/Adafruit-DRV8833-Motor-Driver-Breakout-PCB), sin darlo todavía por seleccionado. El fabricante indica alimentación de motor de 2,7–10,8 V, compatibilidad con lógica de 3,3 V, dos puentes H y limitación de corriente ajustable; su placa se suministra ajustada a 1 A por canal. En su diseño Eagle (revisión `dda79a86d6518d05a35091cb8b03b9c0d57d04e2`) el contorno mide aproximadamente 17,78 × 25,40 mm, sin contar la altura ni conectores. Un solo canal podría invertir la corriente por la bobina; los GPIO de control y la alimentación permanecen sin asignar.
+
+El límite de 1 A de fábrica **no protege por sí solo** un actuador especificado a 0,41 A, ni garantiza control de fuerza o temperatura. Con la resistencia nominal anunciada de 9 Ω, 3,7 V darían aproximadamente 0,41 A en régimen ideal; con 4,2 V y 9 Ω serían 0,47 A, antes de considerar la caída del puente y variaciones. La tensión real de la celda y la resistencia varían; confirmar límites de corriente, duración y temperatura del actuador y de la batería. Definir control y medida o limitación apropiada de corriente, alimentación y protección, cableado y desacoplo tras verificar los componentes.
+
+El puente H no detecta por sí mismo los extremos de carrera: el retorno sin muelle requiere control y una forma validada de evitar golpes y sobrecarrera. Antes de diseñar la conexión, verificar posición inicial, guiado, topes, estrategia de detección y parada segura. Validar por separado compatibilidad del receptor/cargador, la protección de batería y el funcionamiento simultáneo de carga y consumo.
+
 ## Redes previstas
 
 | Red | Conexiones funcionales | Estado |
