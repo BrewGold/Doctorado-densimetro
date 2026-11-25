@@ -68,6 +68,8 @@ La imagen facilitada muestra una placa con conector USB y dos filas de ocho cont
 
 Es una referencia **provisional** para el esquemático: hay que confirmar que la placa física coincide, su modelo y la vista de montaje antes de numerar pines o asignar una huella. La imagen no permite medir paso, separación entre filas, contorno, altura ni zona de antena. El rótulo `5V` no demuestra por sí solo si admite alimentación externa ni cómo interactúa con USB.
 
+Una segunda imagen de dimensiones muestra una placa de **18,00 × 23,50 mm**, con paso entre contactos de **2,54 mm** y conector USB. Sin embargo, parece mostrar **nueve contactos por fila**, frente a los ocho por fila de la primera imagen. No se debe combinar su contorno ni su paso con el pinout anterior como si fueran la misma placa hasta comprobar la unidad real. La altura, la separación entre filas, la posición y altura de la antena y el espacio necesario alrededor del USB también requieren comprobación.
+
 La imagen propone GPIO8 y GPIO9 para I²C, pero no se fija todavía esa elección. Son pines de configuración de arranque del ESP32-C3: comprobar el circuito de la placa, las resistencias del breakout y los niveles durante el arranque antes de usarlos; alternativamente seleccionar otros GPIO compatibles. No se ha verificado aquí qué pines configura el firmware del TFM; ajustarlo o comprobarlo antes de conectar la IMU. El pin `3V3` solo se usará para alimentar el breakout si se confirma que su salida, tensión y corriente son compatibles.
 
 ## Componentes y referencias provisionales
