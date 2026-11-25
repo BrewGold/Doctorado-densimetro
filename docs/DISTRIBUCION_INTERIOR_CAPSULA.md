@@ -54,7 +54,7 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 | ESP32-C3 | Imagen identificada por el usuario: 17,8 × 22,5 mm y ocho contactos por fila; paso entre pines 2,54 mm. Separación entre filas igual a la placa de nueve según el usuario: estimación 15,24 mm si sus márgenes son simétricos | Medir separación entre filas y demás dimensiones en la unidad física; verificar modelo, pinout, altura, masa y zona de antena |
 | IMU | Diseño Adafruit LSM6DSOX 4438 visualmente similar al TFM: PCB 25,40 × 17,78 mm, fila principal de nueve contactos a 2,54 mm | Confirmar modelo y revisión de la unidad, altura, masa, conectores y orientación; incluir pines y soldaduras |
 | Boost MT3608 | El usuario indica **17 × 36 mm**; la imagen muestra cuatro agujeros VIN+, VIN−, VOUT+ y VOUT− y es visualmente similar al módulo del TFM | Confirmar unidad y polaridad; medir altura, diámetro y distancias entre centros de los agujeros, masa y orientación |
-| Condensador de salida del boost | Reservado en la PCB; fotografía del TFM aparentemente marcada 470 µF, 16 V | Confirmar valor, polaridad, tensión nominal, diámetro, altura y paso de terminales |
+| Condensador de salida del boost | Reservado en la PCB; 470 µF y 16 V confirmados por el usuario | Confirmar tipo, polaridad, diámetro, altura y paso de terminales |
 | Etapa de accionamiento y lastre | Sin diseño o dimensiones definidos | Envolvente, masa, fijación, alimentación y margen térmico |
 
 La batería 14500 se propone bajo la PCB, con su eje paralelo al de la cápsula; su portabatería o sujeción y conexiones aumentarán la envolvente. Las cotas nominales no sustituyen la medida de la unidad: algunas protecciones o terminales modifican su tamaño.
