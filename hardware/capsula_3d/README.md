@@ -6,9 +6,27 @@ La [vista en corte](capsula_corte.png) muestra la geometría y los bloques de re
 
 El ESP32 se ha trasladado al extremo de la tapa para orientar su USB-C hacia ella; el bloque no modela el conector. La bobina puede bloquear el acceso: falta comprobar el espacio del cable y definir si se aparta la bobina o se extrae el conjunto. Dos abrazaderas naranjas con pestañas y aberturas simbólicas representan la idea del croquis para sujetar la batería bajo la PCB. Sus pestañas están en los espacios entre boost y condensador y entre IMU y DRV8833, no bajo las envolventes mostradas. No hay un mecanismo de clic validado ni garantía de elasticidad, retención axial o aislamiento; faltan contactos, dimensionado de ranuras y comprobación de pines y cobre.
 
-**No es un diseño imprimible ni estanco.** Se representan encajes lisos simbólicos en ambas uniones y una junta tórica con ranura ilustrativa en la tapa: **todavía no hay roscas helicoidales** ni dimensiones de sellado verificadas. La sección transversal de la junta se superpone intencionadamente a la superficie del cuerpo en la vista ensamblada: no es una simulación validada de compresión. El diámetro, sección, alojamiento, compresión y material de la junta, el tipo de rosca, sentido, paso, holguras y sellado deben diseñarse para las piezas y el proceso de impresión. La unión de la ojiva también requiere una solución de estanqueidad. No existen fijaciones, guías, soporte de PCB ni paso de cables.
+**No es una cápsula terminada ni estanca.** Se representan encajes lisos simbólicos en ambas uniones y una junta tórica con ranura ilustrativa en la tapa: **todavía no hay roscas helicoidales** ni dimensiones de sellado verificadas. La sección transversal de la junta se superpone intencionadamente a la superficie del cuerpo en la vista ensamblada: no es una simulación validada de compresión. El diámetro, sección, alojamiento, compresión y material de la junta, el tipo de rosca, sentido, paso, holguras y sellado deben diseñarse para las piezas y el proceso de impresión. La unión de la ojiva también requiere una solución de estanqueidad.
 
-La ojiva hueca reserva espacio para el **lastre**, pero no modela su forma, masa ni fijación. El cilindro gris es una envolvente ilustrativa del actuador, no el lastre ni el mecanismo de guiado. Su ubicación exacta respecto al lastre y al centro de masas sigue pendiente; los bloques de componentes no son modelos reales.
+La ojiva hueca reserva espacio para el **lastre**, pero no modela su forma, masa ni fijación. El cilindro gris es una envolvente ilustrativa del actuador, no el lastre ni la parte móvil. Su ubicación exacta respecto al lastre y al centro de masas sigue pendiente; los bloques de componentes no son modelos reales.
+
+## Primer prototipo de guías en PETG translúcido
+
+El material previsto es **PETG translúcido**. Las holguras son valores de partida, no tolerancias verificadas; dependen de la impresora, orientación, material y piezas reales.
+
+- **PCB:** dos rieles longitudinales integrados en el cuerpo, con ranuras de 2,0 mm de alto para una placa nominal de 1,6 mm. La profundidad de cada ranura debe revisarse con el contorno final y las tolerancias. La retención axial, la entrada del montaje y la compatibilidad con pines, soldaduras, cables y clips aún no están resueltas.
+- **Bobina:** corona de centrado junto a la tapa, diámetro interior nominal 25,8 mm para la bobina anunciada de 25 mm. No tiene retención, alojamiento del ferrito, salida de cables ni solución para el USB-C; puede obstruir el conector. No forzar ni dañar los hilos finos de la bobina.
+- **Actuador:** aro de centrado en la base de la ojiva, diámetro interior nominal 20,8 mm, con nervios a la carcasa. Solo representa una posible sujeción de la **parte fija**: no se conocen todavía sus superficies de montaje, cables ni holguras reales. No es una guía de la parte móvil, no aporta topes ni detecta posición, y no evita que choque con el lastre o la ojiva.
+
+El usuario puede imprimir en seco las piezas de prueba independientes para comprobar dimensiones **sin electrónica ni batería**:
+
+| Pieza | Comprobación | Archivo |
+|---|---|---|
+| Anillo de 20 mm de cuerpo | Deslizamiento de una muestra inerte de PCB de 24 × 1,6 mm | [prueba_pcb.stl](prueba_pcb.stl) |
+| Aro de bobina | Centrado a Ø25,8 mm | [prueba_bobina.stl](prueba_bobina.stl) |
+| Aro de actuador | Centrado a Ø20,8 mm | [prueba_actuador.stl](prueba_actuador.stl) |
+
+Estos STL son **cupones de ajuste**, no componentes funcionales ni un cierre. No fuerzan ni fijan la batería o el actuador. La sujeción definitiva de la bobina, la parte fija del actuador, la guía y parada de su parte móvil y el lastre requieren diseño posterior. La dirección del movimiento es longitudinal; compruébese también la posición de su línea de acción respecto al centro de masas para obtener excitación angular.
 
 ## Dimensiones de partida, en mm
 
@@ -36,4 +54,12 @@ La geometría no demuestra flotación, estabilidad ni resistencia. Es necesario 
 openscad -D 'modo="corte"' -o vista.csg hardware/capsula_3d/capsula_conceptual.scad
 ```
 
-La exportación de piezas geométricas puede servir para estudiar el modelo, pero **no implica que sean aptas para impresión o para uso en líquido**. La [PCB de referencia](../pcb_portadora/README.md) continúa sin conexiones ni huellas terminadas.
+Para regenerar los cupones:
+
+```bash
+for parte in prueba_pcb prueba_bobina prueba_actuador; do
+  openscad -D "modo=\"$parte\"" -o "hardware/capsula_3d/$parte.stl" hardware/capsula_3d/capsula_conceptual.scad
+done
+```
+
+La exportación de las piezas completas no implica que sean aptas para cerrar la cápsula o para uso en líquido. La [PCB de referencia](../pcb_portadora/README.md) continúa sin conexiones ni huellas terminadas.

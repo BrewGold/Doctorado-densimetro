@@ -1,6 +1,6 @@
-// Maqueta geométrica: encajes lisos simbólicos, sin roscas funcionales.
+// Primer prototipo de guías: encajes lisos, sin roscas funcionales.
 // Eje X: tapa de carga (izquierda) hacia punta lastrada (derecha).
-modo = "corte"; // [corte, conjunto, cuerpo, tapa, punta]
+modo = "corte"; // [corte, conjunto, cuerpo, tapa, punta, prueba_pcb, prueba_bobina, prueba_actuador]
 $fn = 128;
 
 diametro_exterior = 48;
@@ -19,6 +19,9 @@ placa_espesor = 1.6;
 placa_x = 10;
 pos_clips = [86.15, 130.3];
 ancho_clip = 2.7;
+holgura_guia_pcb = 0.4;
+holgura_bobina_diametral = 0.8;
+holgura_actuador_diametral = 0.8;
 
 radio = diametro_exterior / 2;
 radio_interior = radio - pared;
@@ -31,29 +34,61 @@ assert(largo_encaje < placa_x && placa_x + placa_largo < largo_cuerpo - largo_en
 assert(largo_cuerpo >= placa_x + placa_largo, "La PCB excede el cuerpo");
 assert(placa_ancho < 2 * radio_interior, "La PCB excede el diámetro interior");
 assert(modo == "corte" || modo == "conjunto" || modo == "cuerpo" ||
-       modo == "tapa" || modo == "punta", "Modo desconocido");
+       modo == "tapa" || modo == "punta" || modo == "prueba_pcb" ||
+       modo == "prueba_bobina" || modo == "prueba_actuador", "Modo desconocido");
 
 module cilindro_x(r, h) {
     rotate([0, 90, 0]) cylinder(r = r, h = h);
 }
 
 module cuerpo() {
-    difference() {
-        cilindro_x(radio, largo_cuerpo);
-        translate([-0.1, 0, 0]) cilindro_x(radio_paso_extremos, largo_cuerpo + 0.2);
-        translate([largo_encaje, 0, 0])
-            cilindro_x(radio_interior, largo_cuerpo - 2 * largo_encaje);
+    union() {
+        difference() {
+            cilindro_x(radio, largo_cuerpo);
+            translate([-0.1, 0, 0]) cilindro_x(radio_paso_extremos, largo_cuerpo + 0.2);
+            translate([largo_encaje, 0, 0])
+                cilindro_x(radio_interior, largo_cuerpo - 2 * largo_encaje);
+        }
+        guias_pcb();
     }
 }
 
+module guias_pcb() {
+    // Rieles longitudinales con ranuras abiertas hacia el centro.
+    for (lado = [-1, 1])
+        difference() {
+            translate([largo_encaje, lado > 0 ? 11.6 : -22.1, -3])
+                cube([largo_cuerpo - 2 * largo_encaje, 10.5, 6]);
+            translate([largo_encaje - 0.1, lado > 0 ? 11.6 : -14,
+                       -(placa_espesor + holgura_guia_pcb) / 2])
+                cube([largo_cuerpo - 2 * largo_encaje + 0.2, 2.4,
+                      placa_espesor + holgura_guia_pcb]);
+            // Evita que el riel sobresalga de la superficie exterior.
+            difference() {
+                translate([largo_encaje - 0.1, -25, -5])
+                    cube([largo_cuerpo - 2 * largo_encaje + 0.2, 50, 10]);
+                translate([largo_encaje - 0.2, 0, 0])
+                    cilindro_x(radio, largo_cuerpo - 2 * largo_encaje + 0.4);
+            }
+        }
+}
+
 module tapa() {
-    difference() {
+    union() {
+      difference() {
         union() {
             translate([-espesor_tapa, 0, 0]) cilindro_x(radio, espesor_tapa + 0.05);
             difference() {
                 cilindro_x(radio_encaje, largo_encaje);
                 translate([-0.1, 0, 0])
                     cilindro_x(radio_encaje - 1.8, largo_encaje + 0.2);
+              }
+              // Corona de centrado de la bobina; retención y cables por definir.
+              difference() {
+                  translate([-0.1, 0, 0]) cilindro_x(14.8, 2.6);
+                  translate([-0.2, 0, 0])
+                      cilindro_x((25 + holgura_bobina_diametral) / 2, 2.8);
+              }
             }
         }
         // Ranura orientativa; no está dimensionada para estanqueidad.
@@ -101,6 +136,25 @@ module punta() {
                 translate([-0.1, 0, 0])
                     cilindro_x(radio_encaje - 1.8, 1.2);
             }
+            soporte_actuador();
+        }
+    }
+}
+
+module soporte_actuador() {
+    // Aro y nervios de prueba solo para centrar la carcasa fija.
+    difference() {
+        union() {
+            translate([1, 0, 0]) cilindro_x(12.5, 4);
+            translate([1, -22.1, -2]) cube([4, 44.2, 4]);
+            translate([1, -2, -22.1]) cube([4, 4, 44.2]);
+        }
+        translate([0.9, 0, 0])
+            cilindro_x((20 + holgura_actuador_diametral) / 2, 4.2);
+        // Recorta los nervios en el exterior de la ojiva.
+        difference() {
+            translate([0.9, -25, -25]) cube([4.2, 50, 50]);
+            volumen_ojiva(pared - 0.3);
         }
     }
 }
@@ -169,6 +223,23 @@ module componentes() {
 if (modo == "cuerpo") cuerpo();
 if (modo == "tapa") tapa();
 if (modo == "punta") punta();
+if (modo == "prueba_pcb")
+    intersection() {
+        cuerpo();
+        translate([40, -radio, -radio]) cube([20, 2 * radio, 2 * radio]);
+    }
+if (modo == "prueba_bobina")
+    difference() {
+        cilindro_x(14.8, 2.5);
+        translate([-0.1, 0, 0])
+            cilindro_x((25 + holgura_bobina_diametral) / 2, 2.7);
+    }
+if (modo == "prueba_actuador")
+    difference() {
+        cilindro_x(12.5, 4);
+        translate([-0.1, 0, 0])
+            cilindro_x((20 + holgura_actuador_diametral) / 2, 4.2);
+    }
 if (modo == "conjunto") {
     color([0.78, 0.83, 0.84, 0.35]) cuerpo();
     color([0.83, 0.86, 0.88, 0.5]) tapa();
