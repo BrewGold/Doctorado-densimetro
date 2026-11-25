@@ -66,9 +66,11 @@ La imagen facilitada muestra una placa con conector USB y dos filas de ocho cont
 | GPIO1 | GPIO20 |
 | GPIO0 | GPIO21 |
 
-Es una referencia **provisional** para el esquemático: hay que confirmar que la placa física coincide, su modelo y la vista de montaje antes de numerar pines o asignar una huella. La imagen no permite medir paso, separación entre filas, contorno, altura ni zona de antena. El rótulo `5V` no demuestra por sí solo si admite alimentación externa ni cómo interactúa con USB.
+Es una referencia **provisional** para el esquemático: hay que confirmar que la placa física coincide, su modelo y la vista de montaje antes de numerar pines o asignar una huella. La primera imagen no permite medir paso, separación entre filas, contorno, altura ni zona de antena. El rótulo `5V` no demuestra por sí solo si admite alimentación externa ni cómo interactúa con USB.
 
 Una segunda imagen de dimensiones muestra una placa de **18,00 × 23,50 mm**, con paso entre contactos de **2,54 mm** y conector USB. Sin embargo, parece mostrar **nueve contactos por fila**, frente a los ocho por fila de la primera imagen. No se debe combinar su contorno ni su paso con el pinout anterior como si fueran la misma placa hasta comprobar la unidad real. La altura, la separación entre filas, la posición y altura de la antena y el espacio necesario alrededor del USB también requieren comprobación.
+
+El usuario identifica una tercera imagen como la placa elegida: muestra **17,8 × 22,5 mm** y ocho contactos por fila, con un aspecto compatible con la fotografía de la placa del TFM. Se toman esas dimensiones como referencia inicial, pendientes de medir en la unidad física. Esta vista es de la cara de componentes y la primera muestra la cara opuesta: al contrastar sus filas hay que tener en cuenta el cambio de vista, no trasladar izquierda y derecha directamente. La imagen no acota el paso ni la distancia entre centros de filas; no extrapolar los 2,54 mm de la otra placa.
 
 La fotografía `imagenes/ESP32-c3.jpg` del TFM muestra ocho contactos por fila y una placa con USB y antena de chip, compatible visualmente con la primera imagen. La fotografía del montaje `imagenes/frente.JPG` muestra una placa de aspecto similar, aunque no permite leer con seguridad todos sus contactos. La imagen acotada de nueve contactos aparentes no permite asegurar que corresponda a esa misma variante. El texto del TFM la denomina ESP32-C3-MINI-1, pero esto no confirma la referencia exacta de la placa ni sus dimensiones. Fuentes: `references/tfm/TFM-densimetro.zip`.
 
