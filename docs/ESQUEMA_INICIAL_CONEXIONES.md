@@ -4,6 +4,8 @@
 
 Este es el esquema funcional inicial para reconstruir en KiCad la electrónica descrita en el TFM. Define las conexiones entre módulos, no todavía el esquemático de fabricación a nivel de pines y footprints. Los modelos exactos de las placas deben confirmarse antes de fijar pines, tensiones y huellas.
 
+Se diseñará una **PCB portadora para soldar los módulos**, no una integración desde cero de todos sus componentes. En los módulos que no traigan pines se colocarán pines soldados adecuados a sus pads; habrá que comprobar su paso, número, orientación y altura, así como las necesidades de acceso y montaje, antes de elegir las huellas. La posición de cada módulo y el tipo de unión a la PCB se definirán con las piezas reales. Esto no sustituye la identificación de sus conexiones eléctricas ni implica que se vaya a soldar directamente sobre la batería.
+
 La arquitectura del TFM utilizaba batería → convertidor elevador MT3608 → placa ESP32-C3; IMU LSM6DSOX por I²C; transmisión inalámbrica por Wi-Fi al PC. Para el nuevo diseño se ha pedido un receptor/cargador inalámbrico que sustituirá al cargador de batería anterior, cuya referencia no está identificada aquí. El MT3608 es un elevador de tensión, no un cargador: se conserva como candidato para la etapa de alimentación, sujeto a verificación. La frecuencia de adquisición documentada es 100 Hz y el protocolo de datos es UDP.
 
 ## Diagrama funcional
@@ -30,9 +32,21 @@ La conexión de alimentación al ESP32 está condicionada a utilizar una placa d
 
 La conexión a `BOUT` es una intención de diseño, no un pinout confirmado: hay que verificar si es una salida de carga, sus dos polos, su tensión, corriente, protección y comportamiento durante la carga. Si `BOUT` no es adecuado, se modificará la arquitectura; no se conectará el elevador hasta comprobarlo. Para la PCB se prevé una interfaz de cuatro pines para el receptor/cargador, sin asignar todavía orden ni funciones definitivas.
 
-La disposición física prevista, desde la tapa de carga hacia el extremo lastrado, es **receptor/cargador → boost → IMU → ESP32**. No implica que los módulos estén conectados eléctricamente en serie: el ESP32 se comunica con la IMU por I²C. La distribución y las distancias se comprobarán con las dimensiones, la interferencia y las restricciones de antena reales; véase [Materiales y ensamblajes](MATERIALES_Y_ENSAMBLAJES.md).
+Las imágenes facilitadas muestran una placa de **15 × 18 mm** y una bobina de **25 mm de diámetro** conectada por dos cables. En la vista de componentes, con la bobina hacia abajo, se distinguen cuatro contactos en el borde superior: dos asociados a `BAT` a la derecha y otros dos a la izquierda; los símbolos `+` visibles están junto a los contactos interiores. La lectura de la etiqueta del otro par y de todos los signos no es suficientemente clara para fijar su pinout. La cara posterior muestra una referencia y revisión impresas, pero no especifica las características eléctricas.
 
-En una futura ampliación se prevé situar el actuador y su amplificador o etapa de accionamiento en la punta lastrada. Su tipo, alimentación y señales de control están por definir; no forman parte del circuito inicial ni se ha asignado aún una conexión eléctrica.
+Esta imagen sirve para planificar la posición del módulo, no para validar sus conexiones: confirmar los cuatro rótulos y polaridades en la placa física y en la documentación de su modelo, así como la separación y diámetro de los contactos. Confirmar tensión y corriente de carga para la batería de litio, protecciones, función de la otra pareja y posibilidad de alimentar el circuito durante la carga. No asumir que las dos salidas negativas son comunes ni conectarlas entre sí o al boost hasta verificar la arquitectura de protección.
+
+La disposición física prevista, desde la tapa hacia el extremo lastrado, es **ESP32 → receptor/cargador → boost → IMU → DRV8833**. El USB-C apunta hacia la tapa; comprobar su acceso y la posible interferencia con la bobina. No implica que los módulos estén conectados eléctricamente en serie: el ESP32 se comunica con la IMU por I²C. La distribución y las distancias se comprobarán con las dimensiones, la interferencia y las restricciones de antena reales; véase [Materiales y ensamblajes](MATERIALES_Y_ENSAMBLAJES.md).
+
+El actuador se prevé dentro del cuerpo cilíndrico, próximo a la ojiva que aloja el lastre. Su etapa de accionamiento se reserva en la PCB; la alimentación y señales de control están por definir y no se ha asignado aún una conexión eléctrica.
+
+### Candidato de puente H para el actuador
+
+El usuario ha seleccionado el [Adafruit DRV8833, producto 3297](https://github.com/adafruit/Adafruit-DRV8833-Motor-Driver-Breakout-PCB), para continuar el prototipo. El fabricante indica alimentación de motor de 2,7–10,8 V, compatibilidad con lógica de 3,3 V, dos puentes H y limitación de corriente ajustable; su placa se suministra ajustada a 1 A por canal. En su diseño Eagle (revisión `dda79a86d6518d05a35091cb8b03b9c0d57d04e2`) el contorno mide aproximadamente 17,78 × 25,40 mm, sin contar la altura ni conectores. Un solo canal podría invertir la corriente por la bobina; los GPIO de control y la alimentación permanecen sin asignar. Su selección como referencia no valida todavía la etapa completa ni autoriza a accionar la bobina.
+
+El límite de 1 A de fábrica **no protege por sí solo** un actuador especificado a 0,41 A, ni garantiza control de fuerza o temperatura. Con la resistencia nominal anunciada de 9 Ω, 3,7 V darían aproximadamente 0,41 A en régimen ideal; con 4,2 V y 9 Ω serían 0,47 A, antes de considerar la caída del puente y variaciones. La tensión real de la celda y la resistencia varían; confirmar límites de corriente, duración y temperatura del actuador y de la batería. Definir control y medida o limitación apropiada de corriente, alimentación y protección, cableado y desacoplo tras verificar los componentes.
+
+El puente H no detecta por sí mismo los extremos de carrera: el retorno sin muelle requiere control y una forma validada de evitar golpes y sobrecarrera. Antes de diseñar la conexión, verificar posición inicial, guiado, topes, estrategia de detección y parada segura. Validar por separado compatibilidad del receptor/cargador, la protección de batería y el funcionamiento simultáneo de carga y consumo.
 
 ## Redes previstas
 
@@ -43,13 +57,72 @@ En una futura ampliación se prevé situar el actuador y su amplificador o etapa
 | `GND` | Retorno del elevador, GND de ESP32 e IMU | Referencia común de la electrónica; relación con batería y receptor por confirmar, especialmente si hay protección |
 | `SYS_5V` | `VOUT+` MT3608 → entrada `5V`/`VBUS` de la placa ESP32-C3 | Solo tras confirmar que la placa acepta 5 V en esa entrada; ajustar y medir el convertidor antes de conectar |
 | `SYS_3V3` | Salida 3,3 V regulada de la placa ESP32 → alimentación del breakout IMU | Confirmar en la ficha del breakout si se conecta a `VIN` o `3V3` |
-| `I2C_SDA` | GPIO SDA de ESP32 → SDA del LSM6DSOX | Elegir GPIO al confirmar la variante exacta de la placa |
-| `I2C_SCL` | GPIO SCL de ESP32 → SCL del LSM6DSOX | Elegir GPIO al confirmar la variante exacta de la placa |
+| `I2C_SDA` | GPIO5 → SDA del LSM6DSOX | Usado por el firmware del TFM; confirmar conexiones y placa real |
+| `I2C_SCL` | GPIO6 → SCL del LSM6DSOX | Usado por el firmware del TFM; confirmar conexiones y placa real |
 | `IMU_INT1`, `IMU_INT2` | Salidas de interrupción de IMU | No necesarias para la adquisición inicial por sondeo; dejar sin conectar o reservar pads |
 
 El bus I²C y todas sus señales deben permanecer a nivel lógico de 3,3 V. No añadir pull-ups externos hasta comprobar si el breakout ya los incorpora. El firmware incluido en el TFM usa la dirección I²C `0x6A`; confirmar el strap de dirección del breakout para que coincida. La selección de interfaz I²C/SPI y el estado de pines `CS`/`SDO` dependen de la placa breakout concreta y se fijarán a partir de su documentación.
 
+## IMU Adafruit LSM6DSOX: referencia para la portadora
+
+El diseño oficial [Adafruit LSM6DSOX, producto 4438](https://github.com/adafruit/Adafruit-LSM6DSOX-PCB) se parece al breakout de la fotografía del montaje del TFM, pero falta confirmar referencia y revisión en la unidad física. Los datos siguientes proceden de su esquema y placa Eagle, revisión Git `c05abef4675b0380fbf3d23171615a2f1ac0b130`:
+
+- Contorno de PCB **25,40 × 17,78 mm**; fila principal de nueve agujeros con paso **2,54 mm** y taladro de **1,00 mm** en el diseño. Hay otra fila de cinco contactos y dos conectores STEMMA QT: dejar espacio para los que se utilicen y su altura.
+- Orden eléctrico de la fila principal, del pad 1 al 9: **VIN, 3Vo, GND, SCL, SDA, SDO, CS, INT1, INT2**. Antes de crear la huella, comprobar desde qué cara y extremo se mira y contrastar con la serigrafía de la placa real.
+- Para conservar el firmware del TFM: **GPIO5 → SDA**, **GPIO6 → SCL**, y masa común. La alimentación del breakout se decidirá tras verificar la fuente y el módulo real: `VIN` es entrada del regulador de la placa y `3Vo` está conectado a su salida de 3,3 V; no son pines intercambiables por defecto.
+- El diseño incorpora resistencias de pull-up y adaptación de nivel en I²C. No añadir pull-ups a la portadora sin revisar las ya presentes, su tensión y el resto del bus. Confirmar configuración de `CS` y `SDO`, dirección `0x6A` y arranque con el breakout real.
+
+Las dimensiones son del contorno de la placa, no de la envolvente completa de conectores, pines y soldaduras. Verificar el montaje, la altura y separación antes de fabricar; no fijar una huella definitiva basándose solo en la fotografía.
+
+## Placa ESP32-C3 mostrada
+
+La imagen facilitada muestra una placa con conector USB y dos filas de ocho contactos. Con el conector USB arriba y en la misma vista de la imagen, las etiquetas de arriba abajo son:
+
+| Fila izquierda | Fila derecha |
+|---|---|
+| 5V | GPIO5 |
+| GND | GPIO6 |
+| 3V3 | GPIO7 |
+| GPIO4 | GPIO8 (SDA en la imagen) |
+| GPIO3 | GPIO9 (SCL en la imagen) |
+| GPIO2 | GPIO10 |
+| GPIO1 | GPIO20 |
+| GPIO0 | GPIO21 |
+
+Es una referencia **provisional** para el esquemático: hay que confirmar que la placa física coincide, su modelo y la vista de montaje antes de numerar pines o asignar una huella. La primera imagen no permite medir paso, separación entre filas, contorno, altura ni zona de antena. El rótulo `5V` no demuestra por sí solo si admite alimentación externa ni cómo interactúa con USB.
+
+Una segunda imagen de dimensiones muestra una placa de **18,00 × 23,50 mm**, con paso entre contactos de **2,54 mm** y conector USB. Sin embargo, parece mostrar **nueve contactos por fila**, frente a los ocho por fila de la primera imagen. No se debe combinar su contorno ni su paso con el pinout anterior como si fueran la misma placa hasta comprobar la unidad real. La altura, la separación entre filas, la posición y altura de la antena y el espacio necesario alrededor del USB también requieren comprobación.
+
+El usuario identifica una tercera imagen como la placa elegida: muestra **17,8 × 22,5 mm** y ocho contactos por fila, con un aspecto compatible con la fotografía de la placa del TFM. Se toman esas dimensiones como referencia inicial, pendientes de medir en la unidad física. Esta vista es de la cara de componentes y la primera muestra la cara opuesta: al contrastar sus filas hay que tener en cuenta el cambio de vista, no trasladar izquierda y derecha directamente. La imagen no acota el paso ni la distancia entre centros de filas; no extrapolar los 2,54 mm de la otra placa.
+
+El usuario confirma que el paso entre pines consecutivos es **2,54 mm**. La separación transversal entre los centros de las dos filas es una cota distinta y permanece pendiente de medición antes de diseñar la huella.
+
+El usuario indica además que la separación entre filas es la misma que en la placa de nueve contactos. En el dibujo de esta última, 18 mm de ancho y 1,38 mm desde un borde al centro del contacto sugieren **15,24 mm entre centros** si el margen del lado opuesto es igual. Es una estimación por simetría, no una cota explícita ni una medida confirmada: comprobarla en la placa seleccionada antes de finalizar la huella o fabricar.
+
+Para el diseño se requiere que los centros de los pines sigan una **cuadrícula de 2,54 mm** en ambas direcciones. La separación propuesta de 15,24 mm equivale a seis pasos y cumple esa condición, pero no es la única separación posible en la cuadrícula: confirmar la medida real antes de fijarla.
+
+La fotografía `imagenes/ESP32-c3.jpg` del TFM muestra ocho contactos por fila y una placa con USB y antena de chip, compatible visualmente con la primera imagen. La fotografía del montaje `imagenes/frente.JPG` muestra una placa de aspecto similar, aunque no permite leer con seguridad todos sus contactos. La imagen acotada de nueve contactos aparentes no permite asegurar que corresponda a esa misma variante. El texto del TFM la denomina ESP32-C3-MINI-1, pero esto no confirma la referencia exacta de la placa ni sus dimensiones. Fuentes: `references/tfm/TFM-densimetro.zip`.
+
+El firmware del TFM (`apendice_ejemplo.tex` en ese archivo) declara `SDA_PIN = 5`, `SCL_PIN = 6` y usa `Wire.begin(SDA_PIN, SCL_PIN)` con dirección `0x6A`. Para conservarlo, se propone **GPIO5 → SDA y GPIO6 → SCL**, no los GPIO8 y GPIO9 sugeridos en la primera imagen. Confirmar la correspondencia física en la unidad, las conexiones y la dirección de la IMU; las etiquetas MISO/MOSI de GPIO5/6 en la imagen no impiden asignarles I²C mediante firmware, siempre que no se utilicen simultáneamente para SPI. GPIO8 y GPIO9 son pines de configuración de arranque y requieren especial cuidado. El pin `3V3` solo se usará para alimentar el breakout si se confirma que su salida, tensión y corriente son compatibles.
+
 ## Componentes y referencias provisionales
+
+El usuario indica unas dimensiones de **17 × 36 mm** para el módulo boost MT3608. En la fotografía del montaje del TFM se aprecian contactos rotulados `VIN+`, `VIN−`, `VOUT+` y `VOUT−`. Es necesario confirmar que el módulo a montar corresponde a la fotografía y medir la ubicación y paso de esos contactos y la altura de sus componentes antes de dibujar su huella. La medida del contorno no incluye necesariamente pines ni soldaduras.
+
+Se añadirá un **condensador de 470 µF y 16 V en la PCB portadora entre `VOUT+` y `VOUT−` del boost**, como filtrado de salida, siguiendo el montaje fotografiado en el TFM. El usuario confirma el valor y la tensión nominal; quedan por confirmar el tipo, la polaridad, la pieza exacta, sus dimensiones y el paso de terminales. Si es polarizado, su positivo irá a `VOUT+` y su negativo a `VOUT−`; verificar orientación y huella antes de soldarlo. No conectar el condensador ni el ESP32 hasta ajustar y medir la salida del boost y confirmar tensiones compatibles.
+
+La imagen facilitada después muestra un módulo visualmente similar al del TFM, con cuatro agujeros de conexión y un potenciómetro de ajuste; el usuario lo acepta como referencia de trabajo. Vista por la cara de componentes y en la orientación de la imagen: salida `VOUT+` y `VOUT−` a la izquierda; entrada `VIN+` y `VIN−` a la derecha, con los positivos arriba. Confirmar esta orientación y polaridad en la unidad física, así como las distancias entre centros y el diámetro de los agujeros: la imagen no los acota y no garantiza que estén sobre una cuadrícula de 2,54 mm. Los rangos impresos en la imagen son datos del anuncio, no una validación de la unidad o de la alimentación de la cápsula.
+
+Para una **plantilla mecánica preliminar**, se escala la imagen suponiendo que el contorno visible corresponde a 36 × 17 mm. Tomando el extremo de salida a la izquierda y el borde superior como origen, se estiman los centros siguientes:
+
+| Contacto | x desde la izquierda | y desde arriba |
+|---|---:|---:|
+| VOUT+ | 2,8 mm | 4,9 mm |
+| VOUT− | 2,8 mm | 12,0 mm |
+| VIN+ | 33,4 mm | 4,9 mm |
+| VIN− | 33,4 mm | 12,0 mm |
+
+Esto da aproximadamente **30,6 mm entre extremos** y **7,1 mm entre centros de cada pareja**. Se han escalado ancho y alto por separado porque las proporciones de la imagen no coinciden exactamente con 36:17; pueden existir distorsión y errores al localizar bordes y centros. No se ha medido el diámetro de los agujeros. Estas coordenadas no son cotas verificadas ni demuestran compatibilidad con la cuadrícula de 2,54 mm: medir la pieza real con calibre antes de fijar la huella o fabricar.
 
 | Ref. | Componente del TFM | Representación en el esquema inicial |
 |---|---|---|
@@ -80,7 +153,7 @@ No conectar ni cargar una batería de química desconocida. El receptor/cargador
 
 - Confirmar las referencias exactas de ESP32, breakout IMU, batería y módulo MT3608.
 - Confirmar los terminales y características del receptor/cargador recibido y la protección requerida para la batería.
-- Decidir si el primer diseño será una PCB portadora para módulos existentes o una integración de componentes soldados directamente.
+- Definir las uniones y pines de cada módulo a la PCB portadora y la sujeción y conexión segura de la batería.
 - Obtener dimensiones, pinout y footprints de fabricante.
 - Definir conector, interruptor, protección de entrada y puntos de prueba.
 - Verificar alimentación, restricciones de antena Wi-Fi, fijación mecánica y envolvente de la cápsula.
