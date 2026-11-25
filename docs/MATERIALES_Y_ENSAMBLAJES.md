@@ -19,7 +19,7 @@ La prioridad es que la cápsula pueda ensayarse en una configuración documentad
 | Eléctrico | Cableado y conectores | Alimentación y adquisición | Mencionados; recorrido por documentar | Masa, longitud, conectores, sujeción y efecto sobre sellado o movimiento |
 | Ensayo | Recipiente | Contener el fluido y permitir el movimiento | Existe contexto de ensayos y simulaciones; dimensiones físicas por verificar | Forma, dimensiones interiores, nivel de llenado y material |
 | Ensayo | Fluidos | Medio de prueba | Agua de referencia; se proponen agua-sal y agua-glicerina | Composición, densidad, viscosidad, temperatura y método/procedencia de medida |
-| Excitación | Actuador (opcional) | Aplicar una perturbación controlada | No seleccionado; solenoide y otras opciones en discusión | Modelo, masa, montaje, señal de mando, límites y repetibilidad |
+| Excitación | Actuador electromagnético (futuro) | Aplicar una perturbación controlada | Recibido; montaje y conexión pendientes | Diámetro 20 mm; cuerpo 13,5 mm de altura; parte móvil 12,2 mm de altura; masa total 25 g; inductancia 4,8 mH |
 | Excitación | Amplificador/etapa de accionamiento (futura) | Accionar el actuador | Pendiente de selección según el actuador | Dimensiones, alimentación, señales de control, potencia, temperatura y compatibilidad |
 
 Las dimensiones usadas en un escenario de simulación no se consideran medidas del prototipo físico hasta verificarlas. Completar el inventario con fabricante/modelo cuando exista, identificador de pieza, cantidad, masa medida, estado y enlace a ficha técnica o plano.
@@ -49,7 +49,7 @@ Tapa / bobina → módulo receptor-cargador → elevador (boost) → IMU → ESP
 
 La posición de la batería bajo la PCB y la distribución de los módulos deben ajustarse a las dimensiones reales. El orden describe su ubicación física, no conexiones eléctricas en serie. Deben verificarse espacio y sujeción, estanqueidad, temperatura, separación del convertidor respecto a la IMU y condiciones de antena del ESP32 antes de fijar la disposición definitiva. Se prevé una interfaz de cuatro pines entre la PCB principal y el receptor/cargador, con pinout pendiente; `BOUT` se considera una posible entrada al elevador, no una conexión validada.
 
-Para una ampliación futura se propone reservar espacio en la punta lastrada para el **actuador y su amplificador o etapa de accionamiento**. No se han definido todavía su tipo, dimensiones ni conexiones. Se comprobará la compatibilidad con el espacio de la batería y el lastre, la antena del ESP32, la disipación y posibles interferencias con el IMU. Al añadirlos habrá que volver a medir masa y equilibrio y reajustar el lastre si fuera necesario.
+Para una ampliación futura se propone reservar espacio en la punta lastrada para el **actuador y su amplificador o etapa de accionamiento**. Se ha recibido un actuador electromagnético con las dimensiones, masa total e inductancia indicadas en el inventario; su modelo y conexiones están pendientes de confirmar. La masa móvil no se conoce por separado y su altura de 12,2 mm no determina la carrera útil. Se comprobará la compatibilidad con el espacio de la batería y el lastre, la antena del ESP32, la disipación y posibles interferencias con el IMU. Al añadirlo habrá que volver a medir masa y equilibrio y reajustar el lastre si fuera necesario.
 
 ### C. Preparación del ensayo
 
@@ -83,7 +83,7 @@ Antes de comparar dos ensayos, verificar que la cápsula, el lastre, la posició
 - modelo y montaje del IMU, batería y cableado;
 - método de cierre y validación de estanqueidad;
 - recipiente y dimensiones físicas del montaje de ensayo;
-- selección de un actuador y de su etapa de accionamiento para la posible ampliación futura, y validación del espacio en la punta;
+- identificar y caracterizar el actuador recibido, seleccionar su etapa de accionamiento y validar el espacio en la punta;
 - formato de hoja de ensamblaje y responsables de su mantenimiento.
 
 Hasta cerrar estas decisiones, el documento sirve como inventario y protocolo inicial, no como una lista de compra ni como instrucciones de fabricación definitivas.
