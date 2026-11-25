@@ -10,7 +10,7 @@ La simulacion **no identifica ni predice el actuador real**. La trayectoria de l
 
 Se ha recibido un actuador que el anuncio identifica como bobina de voz 20VC001: diametro de 20 mm, cuerpo medido de 13,5 mm, parte movil de 12,2 mm de altura y masa total de 25 g. La ficha mostrada indica 3,7 V, 0,41 A, 9 Ω ±10 %, 1,8 mH ±10 % y carrera de 3 mm; la identidad de la unidad y estos valores deben verificarse. La inductancia de 1,8 mH contradice el dato preliminar de 4,8 mH; otra imagen indica 4 mm de carrera sin identificar claramente su variante. No se conoce por separado la masa movil; los 25 g no son masa movil y la altura de 12,2 mm no es recorrido. No se aprecia un muelle a primera vista y la parte movil se desplaza libremente sin alimentacion. Su retorno sin corriente no esta garantizado; un puente H podria controlar la fuerza en ambos sentidos si se confirma el funcionamiento de bobina de voz, pero requiere caracterizacion y limites de corriente y temperatura.
 
-Los parametros de la simulacion permanecen ilustrativos: la carrera simulada de 4 mm no es una carrera segura verificada para la unidad, cuya ficha 20VC001 indica 3 mm. La ida y vuelta prescrita tampoco describe un retorno mecanico comprobado del actuador. Se requiere caracterizar masa movil, carrera util, fuerza frente a corriente y desplazamiento, limites termicos y montaje antes de ajustar el modelo.
+La simulacion se ha actualizado de 4 mm a **3 mm de desplazamiento de ida**, como supuesto inspirado en la carrera indicada por la ficha 20VC001. Esto no confirma que la unidad pueda recorrer 3 mm desde la posicion inicial supuesta ni establece un limite seguro de funcionamiento. La ida y vuelta prescrita tampoco demuestra que el puente H pueda ejecutarla o devolver la masa a su posicion. Se requiere caracterizar masa movil, carrera util, fuerza frente a corriente y desplazamiento, limites termicos y montaje antes de ajustar el modelo.
 
 ## Hipotesis numericas
 
@@ -21,7 +21,7 @@ Los parametros de la simulacion permanecen ilustrativos: la carrera simulada de 
 | Masa movil | 5 g | Ilustrativa |
 | Inercia de la carcasa respecto a su centro de masas | 1,2 × 10⁻⁴ kg m² | Ilustrativa |
 | Posicion inicial de masa movil | −60 mm sobre eje de capsula | Ilustrativa |
-| Recorrido de ida | 4 mm | Ilustrativo |
+| Recorrido de ida | 3 mm | Ilustrativo; ficha indica 3 mm de carrera, sin verificar condiciones ni posicion inicial |
 | Tiempo de ida y vuelta | 0,25 s | Ilustrativo |
 | Frecuencia angular de referencia de la rigidez | 1,9 Hz | Inspirada por pico observado; no es una identificacion del modelo acoplado |
 | Amortiguamiento angular | 0,15 s⁻¹ | Ilustrativo |
@@ -57,11 +57,11 @@ Para aproximar la pregunta de sustituir la liberacion manual, se mide el maximo 
 
 | Duracion ida y vuelta | Longitudinal | Vertical en reposo |
 |---|---:|---:|
-| 0,10 s | 0,254° | 0,215° |
-| 0,25 s | 0,558° | 0,477° |
-| 0,50 s | 0,651° | 0,584° |
+| 0,10 s | 0,190° | 0,161° |
+| 0,25 s | 0,418° | 0,357° |
+| 0,50 s | 0,488° | 0,438° |
 
-En esta seleccion de parametros el recorrido longitudinal excita algo mas el giro, pero **no se puede concluir que sea mejor para la capsula real**. La comparacion depende especialmente de la accion de la gravedad sobre la masa desplazada y del acoplamiento con la traslacion. Por ejemplo, con la misma configuracion de 0,25 s y sin gravedad, el modelo da aproximadamente 0,127° longitudinal frente a 0,476° vertical. Las fuerzas y rigideces no estan identificadas; el perfil impuesto de ida y vuelta no demuestra que un actuador electromagnetico pueda reproducirlo.
+En esta seleccion de parametros el recorrido longitudinal excita algo mas el giro, pero **no se puede concluir que sea mejor para la capsula real**. La comparacion depende especialmente de la accion de la gravedad sobre la masa desplazada y del acoplamiento con la traslacion. Por ejemplo, con la misma configuracion de 0,25 s y sin gravedad, el modelo da aproximadamente 0,095° longitudinal frente a 0,357° vertical. Es una prueba de sensibilidad, no un ensayo fisico sin gravedad. Las fuerzas y rigideces no estan identificadas; el perfil impuesto de ida y vuelta no demuestra que un actuador electromagnetico pueda reproducirlo.
 
 La liberacion manual del TFM a unos 30° es una desviacion inicial, no un impulso calibrado. En este ejemplo las oscilaciones son mucho menores; escalar linealmente estos resultados a 30° no estaria justificado con un modelo local. Una prueba practica requiere conocer masa, carrera, tiempo de ida y retorno, posicion y alimentacion del actuador, y comparar con registros reales en el mismo fluido. Puede ser suficiente una perturbacion menor si permite identificar el modo con buena relacion señal/ruido.
 
@@ -69,16 +69,16 @@ El ensayo conserva el momento lineal y angular en el caso aislado sin gravedad n
 
 ## Comparacion de energia cinetica
 
-La comparacion usa la misma masa movil de 5 g, carrera de 4 mm y 0,25 s para la ida y vuelta en ambas direcciones. Se calcula en el marco del laboratorio la energia cinetica de la carcasa y la masa movil, no la del fluido. Se descompone en traslacion del centro de masas del conjunto y movimiento relativo a este. Una vez que la masa retorna y queda fija, la energia relativa es la energia de rotacion del conjunto alrededor de su centro de masas.
+La comparacion usa la misma masa movil hipotetica de 5 g, carrera de ida de 3 mm y 0,25 s para la ida y vuelta en ambas direcciones. Se calcula en el marco del laboratorio la energia cinetica de la carcasa y la masa movil, no la del fluido. Se descompone en traslacion del centro de masas del conjunto y movimiento relativo a este. Una vez que la masa retorna y queda fija, la energia relativa es la energia de rotacion del conjunto alrededor de su centro de masas.
 
-**Criterio principal: balanceo angular.** En esta configuracion, durante los dos segundos posteriores al retorno, el maximo absoluto de angulo es 0,558° longitudinal y 0,477° vertical en reposo; el maximo de energia cinetica de giro es 0,933 µJ y 0,671 µJ, respectivamente. Ambos criterios favorecen la direccion longitudinal en este ejemplo, pero no constituyen una prediccion validada ni demuestran mayor eficiencia del actuador.
+**Criterio principal: balanceo angular.** En esta configuracion, durante los dos segundos posteriores al retorno, el maximo absoluto de angulo es 0,418° longitudinal y 0,357° vertical en reposo; el maximo de energia cinetica de giro es 0,524 µJ y 0,377 µJ, respectivamente. Ambos criterios favorecen la direccion longitudinal en este ejemplo, pero no constituyen una prediccion validada ni demuestran mayor eficiencia del actuador.
 
 | Magnitud | Longitudinal | Vertical en reposo |
 |---|---:|---:|
-| Maximo total mientras se mueve la masa | 6,161 µJ | 5,761 µJ |
-| Maximo total en los 2 s despues del retorno | 1,206 µJ | 1,325 µJ |
-| Maximo de giro en esos 2 s | 0,933 µJ | 0,671 µJ |
-| Maximo de traslacion del centro de masas en esos 2 s | 0,273 µJ | 0,674 µJ |
+| Maximo total mientras se mueve la masa | 3,466 µJ | 3,241 µJ |
+| Maximo total en los 2 s despues del retorno | 0,677 µJ | 0,745 µJ |
+| Maximo de giro en esos 2 s | 0,524 µJ | 0,377 µJ |
+| Maximo de traslacion del centro de masas en esos 2 s | 0,154 µJ | 0,379 µJ |
 
 Cada maximo se calcula por separado: los maximos de giro y traslacion no necesariamente ocurren al mismo tiempo y **no deben sumarse**. Aunque se incluye la energia total como referencia, la traslacion no es el objetivo de la comparacion. El pico durante el impulso incluye el movimiento de la masa interna y no es una medida de energia de balanceo util.
 

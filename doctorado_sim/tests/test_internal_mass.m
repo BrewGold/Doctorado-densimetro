@@ -3,12 +3,14 @@ sim_root = fileparts(fileparts(mfilename('fullpath')));
 addpath(fullfile(sim_root, 'sim', 'core'));
 addpath(fullfile(sim_root, 'sim', 'scenarios'));
 cfg = internal_mass_config();
+assert(abs(cfg.stroke_m-0.003) < 1e-12);
 axial = dynamics_internal_mass(cfg, [1; 0]);
 vertical = dynamics_internal_mass(cfg, [sin(cfg.beta_eq_rad); cos(cfg.beta_eq_rad)]);
 assert(all(isfinite(axial.angle_rad)));
 assert(all(isfinite(vertical.angle_rad)));
 assert(max(abs(vertical.angle_rad-axial.angle_rad)) > 1e-4);
 assert(max(abs(axial.mass_displacement_m-vertical.mass_displacement_m)) < 1e-12);
+assert(abs(max(axial.mass_displacement_m)-cfg.stroke_m) < 1e-12);
 assert(max(abs(axial.mass_displacement_m(axial.t_s >= cfg.stroke_duration_s))) == 0);
 comparison = compare_internal_mass(cfg, cfg.stroke_duration_s, 2);
 window = axial.t_s >= cfg.stroke_duration_s & ...
