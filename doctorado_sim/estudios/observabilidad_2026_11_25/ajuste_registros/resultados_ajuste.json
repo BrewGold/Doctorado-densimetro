@@ -1,0 +1,63 @@
+{
+  "files_input": 25,
+  "files_accepted": 19,
+  "excluded": [
+    {
+      "file": "imu_20260628_125550.csv",
+      "reason": "hueco >100 ms antes de 25 s"
+    },
+    {
+      "file": "imu_20260628_125724.csv",
+      "reason": "hueco >100 ms antes de 25 s"
+    },
+    {
+      "file": "imu_20260628_125910.csv",
+      "reason": "hueco >100 ms antes de 25 s"
+    },
+    {
+      "file": "imu_20260628_130623.csv",
+      "reason": "hueco >100 ms antes de 25 s"
+    },
+    {
+      "file": "imu_20260628_131456.csv",
+      "reason": "hueco >100 ms antes de 25 s"
+    },
+    {
+      "file": "imu_20260628_131724.csv",
+      "reason": "hueco >100 ms antes de 25 s"
+    }
+  ],
+  "files_training": 12,
+  "files_validation": 7,
+  "preprocess": "ang_deg, datos reinterpolados a 100 Hz, filtro causal Butterworth orden 4 banda 1-3 Hz; inicio 5s, ajuste 5-15s, validacion 15-25s",
+  "common_fit": {
+    "damped_frequency_hz_median": 1.899909397134297,
+    "damped_frequency_hz_ci95_bootstrap": [
+      1.8682236189203933,
+      1.9102594010416407
+    ],
+    "decay_per_s_median": 0.06446978705660096,
+    "decay_per_s_ci95_bootstrap": [
+      0.014606993695102696,
+      0.1121367524382928
+    ],
+    "natural_frequency_hz": 1.8999371039541892,
+    "damping_ratio": 0.005400539454061496,
+    "a1_per_s": 0.12893957411320192,
+    "a0_per_s2": 142.5076521697272
+  },
+  "training_single_mode_r2_median": 0.7840480809521282,
+  "validation_common_model_r2_median": 0.7019899176252662,
+  "validation_common_model_r2": [
+    0.8319155975209344,
+    0.9433546387174768,
+    0.7748401028005937,
+    0.6178731022113813,
+    -1.0806223849753196,
+    0.7019899176252662,
+    0.3410156872637462
+  ],
+  "validation_common_model_beats_zero": 6,
+  "validation_per_record_r2_median": 0.3057542521764516,
+  "validation_note": "Frecuencia y decaimiento compartidos, aprendidos de los primeros 12 registros; para cada registro de validaci\u00f3n solo se ajustan amplitud y fase en 5\u201315 s; la ventana 15\u201325 s no se usa en ning\u00fan ajuste."
+}

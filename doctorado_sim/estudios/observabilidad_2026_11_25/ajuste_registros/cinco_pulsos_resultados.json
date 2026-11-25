@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "f_d_hz": 1.89991,
+    "decay_per_s": 0.06447,
+    "rho_kg_m3_assumed": 1000.0,
+    "mu_pa_s_assumed": 0.02,
+    "pulses": 5,
+    "pulse_width_s": 0.2,
+    "pulse_interval_s": 20.0,
+    "total_duration_s": 100.0,
+    "free_fit_window_s_after_each_pulse": [
+      0.3,
+      15.0
+    ],
+    "gyro_filter_cutoff_hz_assumed": 20.0,
+    "sensor_hz": 104,
+    "host_hz": 100,
+    "noise_trials": 100,
+    "gyro_bias_sd_deg_s": 0.05,
+    "noise_density_deg_s_sqrt_hz": 0.0038,
+    "gyro_adc_step_deg_s": 0.00875,
+    "actuator_input": 0.03,
+    "actuator_gain_assumed": 0.02,
+    "inertia_assumed": 0.00013000000000000002
+  },
+  "summary": {
+    "1": {
+      "frequency_mean_hz": 1.8997258624906794,
+      "frequency_sd_hz": 1.4341314718067217e-06,
+      "decay_mean_per_s": 0.06453279279031034,
+      "decay_sd_per_s": 9.14917470637257e-06,
+      "mu_mean_pa_s": 0.020038978757637223,
+      "mu_sd_pa_s": 5.682068324182707e-06,
+      "mu_mape_percent": 0.19489378818612635,
+      "mu_absolute_error_p95_percent": 0.23939077730130598
+    },
+    "5": {
+      "frequency_mean_hz": 1.89973092196182,
+      "frequency_sd_hz": 5.181535467777925e-07,
+      "decay_mean_per_s": 0.06452912668608142,
+      "decay_sd_per_s": 3.6200712882140913e-06,
+      "mu_mean_pa_s": 0.020036701659572213,
+      "mu_sd_pa_s": 2.2481244587611604e-06,
+      "mu_mape_percent": 0.18350829786106998,
+      "mu_absolute_error_p95_percent": 0.20142993084150573
+    }
+  },
+  "limitations": [
+    "The 1.9 Hz mode comes from filtered accelerometer data, not a validated actuator-to-gyro transfer function.",
+    "The viscosity inversion is hypothetical and assumes density and damping-viscosity calibration are exactly known.",
+    "The 20 Hz single-pole filter, actuator torque and constant bias are assumptions; no drift or model mismatch is included.",
+    "100 noise trials repeat the same fluid and same five-pulse protocol; they are not 100 independent fluids or physical experiments.",
+    "Output is noise-filtered before quantization; digital sensor architecture is simplified."
+  ]
+}

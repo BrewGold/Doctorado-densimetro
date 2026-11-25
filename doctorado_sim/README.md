@@ -11,6 +11,8 @@ El [inventario de materiales y guía preliminar de ensamblaje](../docs/MATERIALE
 
 El [esquema inicial de conexiones](../docs/ESQUEMA_INICIAL_CONEXIONES.md) resume la arquitectura ESP32-C3, IMU, MT3608 y batería documentada en el TFM, con verificaciones pendientes antes de trasladarla a KiCad.
 
+El [seguimiento de observabilidad, pulsos y control](estudios/observabilidad_2026_11_25/README.md) conserva los modelos, resultados y límites de las simulaciones exploratorias del 25 de noviembre de 2026.
+
 ## Ejecución rápida
 1. Abrir MATLAB en la raíz del repo.
 2. Ejecutar:

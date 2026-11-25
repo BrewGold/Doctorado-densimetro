@@ -1,0 +1,141 @@
+{
+  "parameters": {
+    "rho_range_kg_m3": [
+      997.3,
+      1017.1
+    ],
+    "mu_range_pa_s": [
+      0.005,
+      0.05
+    ],
+    "train_distinct_pairs": 80,
+    "test_distinct_pairs": 100,
+    "noise_repetitions_per_pair": 3,
+    "pulse_width_s": 0.2,
+    "observation_s": 15,
+    "temperature": "constant"
+  },
+  "methods": {
+    "envolvente_primer_orden": "Fit an exponential to peaks of absolute angular response, with density inferred from first-order equilibrium.",
+    "segundo_orden": "Fit a damped sinusoid and equilibrium, then invert the assumed damping-viscosity relation.",
+    "transicion": "Fit full pulse response, simultaneously estimating density and viscosity while profiling out a constant angular offset.",
+    "combinado": "Combine bias-corrected estimates using relative-error covariance learned on independent training pairs."
+  },
+  "combination_weights": [
+    0.1747220219340346,
+    0.7538856157314354,
+    0.07139236233452995
+  ],
+  "summary": {
+    "envolvente_primer_orden": {
+      "mape_percent": 1.4856158020835561,
+      "mape_ci95_percent": [
+        1.3583823403431552,
+        1.616572414867822
+      ],
+      "mae_pa_s": 0.00027572548332355283,
+      "bias_pa_s": -0.0002491972382869569,
+      "relative_bias_percent": -1.193192681505097,
+      "error_sd_pa_s": 0.00030202138910763216,
+      "p95_absolute_relative_percent": 3.492992452478781
+    },
+    "segundo_orden": {
+      "mape_percent": 0.9401754229986026,
+      "mape_ci95_percent": [
+        0.8509886251807911,
+        1.0299188331965097
+      ],
+      "mae_pa_s": 0.00014829107572790877,
+      "bias_pa_s": -0.00014167628928545803,
+      "relative_bias_percent": -0.8911315128126577,
+      "error_sd_pa_s": 0.00011744423550974741,
+      "p95_absolute_relative_percent": 2.0997650357003717
+    },
+    "transicion": {
+      "mape_percent": 1.7875063418678871,
+      "mape_ci95_percent": [
+        1.609669145029731,
+        1.96828370192915
+      ],
+      "mae_pa_s": 0.0002733845961585698,
+      "bias_pa_s": -2.064903708285828e-05,
+      "relative_bias_percent": -0.18388156541173592,
+      "error_sd_pa_s": 0.0003595795592305266,
+      "p95_absolute_relative_percent": 4.456811144993645
+    },
+    "combinado": {
+      "mape_percent": 0.49590558609305546,
+      "mape_ci95_percent": [
+        0.4444359430258274,
+        0.5515366016971115
+      ],
+      "mae_pa_s": 7.664807553515458e-05,
+      "bias_pa_s": 1.1511007759571748e-05,
+      "relative_bias_percent": 0.018075359255792223,
+      "error_sd_pa_s": 0.00010124388969867726,
+      "p95_absolute_relative_percent": 1.2895619407959398
+    }
+  },
+  "damping_mismatch": {
+    "actual_damping_coefficient_factor": 1.05,
+    "assumed_damping_coefficient_factor": 1,
+    "summary": {
+      "envolvente_primer_orden": {
+        "mape_percent": 8.877967223909831,
+        "mape_ci95_percent": [
+          8.714940677138085,
+          9.048279940827616
+        ],
+        "mae_pa_s": 0.0015380771209642936,
+        "bias_pa_s": 0.0015380771209642936,
+        "relative_bias_percent": 8.877967223909831,
+        "error_sd_pa_s": 0.0008593075932451226,
+        "p95_absolute_relative_percent": 11.438264265849025
+      },
+      "segundo_orden": {
+        "mape_percent": 9.25685389494391,
+        "mape_ci95_percent": [
+          9.149908186806599,
+          9.364144344869453
+        ],
+        "mae_pa_s": 0.0016828348679850747,
+        "bias_pa_s": 0.0016828348679850747,
+        "relative_bias_percent": 9.256853894943912,
+        "error_sd_pa_s": 0.0010417471194874063,
+        "p95_absolute_relative_percent": 10.295692337435206
+      },
+      "transicion": {
+        "mape_percent": 10.227405146529573,
+        "mape_ci95_percent": [
+          9.963234573790015,
+          10.493826878039119
+        ],
+        "mae_pa_s": 0.0018052679538489102,
+        "bias_pa_s": 0.0018052679538489102,
+        "relative_bias_percent": 10.227405146529573,
+        "error_sd_pa_s": 0.001125558745951685,
+        "p95_absolute_relative_percent": 14.507391042590902
+      },
+      "combinado": {
+        "mape_percent": 10.264638304978813,
+        "mape_ci95_percent": [
+          10.184245512790682,
+          10.345977038877484
+        ],
+        "mae_pa_s": 0.00184632595607594,
+        "bias_pa_s": 0.00184632595607594,
+        "relative_bias_percent": 10.264638304978813,
+        "error_sd_pa_s": 0.001114159149147207,
+        "p95_absolute_relative_percent": 11.297836841144695
+      }
+    }
+  },
+  "limitations": [
+    "This is the same synthetic 1.9 Hz oscillator as the density comparison; the real relationship between density, viscosity and damping has not been identified.",
+    "The forward and inverse models match in the nominal experiment; reported errors are optimistic and are not laboratory performance.",
+    "The first- and second-order methods fit the held samples without explicitly modeling the 104-to-100 Hz sampling and filter, unlike the transition model.",
+    "Angular accelerometer data are simulated without real translation, time-varying drift or verified hardware filter response.",
+    "Methods share the same signal and their errors are correlated.",
+    "Confidence intervals resample independent parameter pairs and exclude structural uncertainty."
+  ]
+}

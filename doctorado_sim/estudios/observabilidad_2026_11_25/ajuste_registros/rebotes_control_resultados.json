@@ -1,0 +1,217 @@
+{
+  "design": {
+    "parameter_pairs": 40,
+    "noise_repetitions_per_pair": 3,
+    "temperature": "constant",
+    "rho_range_kg_m3": [
+      997.3,
+      1017.1
+    ],
+    "mu_range_pa_s": [
+      0.005,
+      0.05
+    ],
+    "duration_s": 15,
+    "actuator_peak_input": 0.003,
+    "pulse_width_s": 0.2,
+    "fixed_frequency_hz": 1.9,
+    "adaptive_initial_frequency_hz": 1.7,
+    "adaptive_frequency_limits_hz": [
+      1.4,
+      2.4
+    ],
+    "feedback": "Gyroscope quadrature phase tracking, 0.8 s smoothing; frequency updated at 100 Hz with phase gain 0.015 Hz/s per radian.",
+    "disturbance": "Six random signed 0.12 s torque-equivalent impulses between 1 and 13.8 s, with peak 0%, 10% or 50% of peak actuator input. Same disturbances and sensor-noise draws across methods.",
+    "fitting": "Fit density and viscosity jointly to the accelerometer angle using the recorded actuator command; profile a constant angle offset. The estimator does not model or observe the disturbance.",
+    "limitations": [
+      "Rebounds are hypothetical external torque impulses, not a measured liquid-noise model.",
+      "The same synthetic dynamics generate and fit the signal, except for unmodeled disturbances and sensor bias.",
+      "All methods have the same maximum actuator amplitude and duration, but continuous drive uses more integrated command energy.",
+      "The controller uses gyro feedback but the inverse estimate uses angle only; closed-loop input correlates with sensor noise.",
+      "Temperature drift, real translational acceleration and actual actuator and IMU response are not modeled.",
+      "Confidence intervals resample parameter pairs only; they do not include structural uncertainty."
+    ]
+  },
+  "results": [
+    {
+      "rebound_peak_fraction": 0.0,
+      "method": "pulso",
+      "rho_mae_kg_m3": 0.16715816047315285,
+      "rho_mae_ci95": [
+        0.14404405630791917,
+        0.1896445873081705
+      ],
+      "mu_mape_percent": 2.634217769724493,
+      "mu_mape_ci95": [
+        2.234545028716225,
+        3.0506015372115667
+      ],
+      "mu_p95_absolute_error_percent": 6.21955402870774,
+      "sensor_clipping_events": 0,
+      "estimates_at_bounds": 0,
+      "mean_last_frequency_hz": null,
+      "mean_command_squared_integral": 1.8e-06,
+      "max_gyro_deg_per_s": 4.182500000000001
+    },
+    {
+      "rebound_peak_fraction": 0.0,
+      "method": "frecuencia_fija",
+      "rho_mae_kg_m3": 0.017383266436251193,
+      "rho_mae_ci95": [
+        0.013939462805627679,
+        0.021160116073004782
+      ],
+      "mu_mape_percent": 3.044269641979253,
+      "mu_mape_ci95": [
+        2.6612703878106014,
+        3.4336743570560655
+      ],
+      "mu_p95_absolute_error_percent": 6.828031840176741,
+      "sensor_clipping_events": 0,
+      "estimates_at_bounds": 0,
+      "mean_last_frequency_hz": 1.8999999999999995,
+      "mean_command_squared_integral": 6.749999999999961e-05,
+      "max_gyro_deg_per_s": 151.07750000000001
+    },
+    {
+      "rebound_peak_fraction": 0.0,
+      "method": "retroalimentacion",
+      "rho_mae_kg_m3": 0.15413680307766525,
+      "rho_mae_ci95": [
+        0.13474110430626146,
+        0.1751751864739422
+      ],
+      "mu_mape_percent": 4.340223041835411,
+      "mu_mape_ci95": [
+        3.788108817393759,
+        4.907360974627893
+      ],
+      "mu_p95_absolute_error_percent": 9.685953741465957,
+      "sensor_clipping_events": 0,
+      "estimates_at_bounds": 0,
+      "mean_last_frequency_hz": 1.9069979540472544,
+      "mean_command_squared_integral": 6.744539389221778e-05,
+      "max_gyro_deg_per_s": 81.19125000000001
+    },
+    {
+      "rebound_peak_fraction": 0.1,
+      "method": "pulso",
+      "rho_mae_kg_m3": 2.9484264730471095,
+      "rho_mae_ci95": [
+        2.56652724509387,
+        3.362138035907101
+      ],
+      "mu_mape_percent": 31.619414275940862,
+      "mu_mape_ci95": [
+        26.433027825220105,
+        37.648816450495715
+      ],
+      "mu_p95_absolute_error_percent": 74.78497013547779,
+      "sensor_clipping_events": 0,
+      "estimates_at_bounds": 1,
+      "mean_last_frequency_hz": null,
+      "mean_command_squared_integral": 1.8e-06,
+      "max_gyro_deg_per_s": 4.26125
+    },
+    {
+      "rebound_peak_fraction": 0.1,
+      "method": "frecuencia_fija",
+      "rho_mae_kg_m3": 0.1184745942231075,
+      "rho_mae_ci95": [
+        0.10243655928332829,
+        0.13516824129781516
+      ],
+      "mu_mape_percent": 3.28809451975813,
+      "mu_mape_ci95": [
+        2.8900252415560925,
+        3.700767151682887
+      ],
+      "mu_p95_absolute_error_percent": 7.903274454879034,
+      "sensor_clipping_events": 0,
+      "estimates_at_bounds": 0,
+      "mean_last_frequency_hz": 1.8999999999999995,
+      "mean_command_squared_integral": 6.749999999999961e-05,
+      "max_gyro_deg_per_s": 151.08625000000004
+    },
+    {
+      "rebound_peak_fraction": 0.1,
+      "method": "retroalimentacion",
+      "rho_mae_kg_m3": 0.40327811843283057,
+      "rho_mae_ci95": [
+        0.35291360995909815,
+        0.4556590756462291
+      ],
+      "mu_mape_percent": 6.428333048000788,
+      "mu_mape_ci95": [
+        5.323040209289978,
+        7.579858701624779
+      ],
+      "mu_p95_absolute_error_percent": 17.763817295809645,
+      "sensor_clipping_events": 0,
+      "estimates_at_bounds": 0,
+      "mean_last_frequency_hz": 1.9070280120062857,
+      "mean_command_squared_integral": 6.744647053360751e-05,
+      "max_gyro_deg_per_s": 81.4975
+    },
+    {
+      "rebound_peak_fraction": 0.5,
+      "method": "pulso",
+      "rho_mae_kg_m3": 14.700050460029427,
+      "rho_mae_ci95": [
+        12.769506131028239,
+        16.75589030729914
+      ],
+      "mu_mape_percent": 104.59084123542748,
+      "mu_mape_ci95": [
+        82.90354855145429,
+        134.87428427983087
+      ],
+      "mu_p95_absolute_error_percent": 260.52529823345833,
+      "sensor_clipping_events": 0,
+      "estimates_at_bounds": 45,
+      "mean_last_frequency_hz": null,
+      "mean_command_squared_integral": 1.8e-06,
+      "max_gyro_deg_per_s": 8.30375
+    },
+    {
+      "rebound_peak_fraction": 0.5,
+      "method": "frecuencia_fija",
+      "rho_mae_kg_m3": 0.5896525001061481,
+      "rho_mae_ci95": [
+        0.5098455845971712,
+        0.6707878514156767
+      ],
+      "mu_mape_percent": 7.894220548000712,
+      "mu_mape_ci95": [
+        6.7436523844598515,
+        9.15324703139913
+      ],
+      "mu_p95_absolute_error_percent": 18.970393340032118,
+      "sensor_clipping_events": 0,
+      "estimates_at_bounds": 0,
+      "mean_last_frequency_hz": 1.8999999999999995,
+      "mean_command_squared_integral": 6.749999999999961e-05,
+      "max_gyro_deg_per_s": 153.97375
+    },
+    {
+      "rebound_peak_fraction": 0.5,
+      "method": "retroalimentacion",
+      "rho_mae_kg_m3": 1.7142149745293267,
+      "rho_mae_ci95": [
+        1.4486485619613179,
+        1.9903563241173348
+      ],
+      "mu_mape_percent": 26.609554432684128,
+      "mu_mape_ci95": [
+        21.848090200213353,
+        31.691958797880485
+      ],
+      "mu_p95_absolute_error_percent": 74.7219993460787,
+      "sensor_clipping_events": 0,
+      "estimates_at_bounds": 0,
+      "mean_last_frequency_hz": 1.9071426063568435,
+      "mean_command_squared_integral": 6.745126668181815e-05,
+      "max_gyro_deg_per_s": 82.64375000000001
+    }
+  ]
+}

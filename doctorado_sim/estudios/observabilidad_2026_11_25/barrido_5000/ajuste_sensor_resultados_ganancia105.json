@@ -1,0 +1,66 @@
+{
+  "distinct_test_pairs": 500,
+  "repetitions": 5,
+  "true_sensor_lowpass_hz": 20,
+  "assumed_sensor_lowpass_hz": 20,
+  "true_actuator_factor": 1.05,
+  "assumed_actuator_factor": 1,
+  "description": "bootstrap emparejado por par de parametros; modelo fijo",
+  "rho_fit_second_order": {
+    "mape_percent": 0.838143438268667,
+    "mape_ci95_percent": [
+      0.7966127499605306,
+      0.8822185338579062
+    ],
+    "mae": 9.354181434243394,
+    "error_sd": 13.352474828686839,
+    "bias": 0.08177459357897142,
+    "p95_relative_percent": 2.455217359365537,
+    "under_threshold_percent": 99.76
+  },
+  "mu_previous_coupling": {
+    "mape_percent": 53.25769007519942,
+    "mape_ci95_percent": [
+      52.20060715635669,
+      54.31200419460178
+    ],
+    "mae": 0.02978475160907675,
+    "error_sd": 0.019980029619525642,
+    "bias": -0.02978475160907675,
+    "p95_relative_percent": 66.77555590704586,
+    "under_threshold_percent": 0.0
+  },
+  "mu_previous_gain_ratio": {
+    "mape_percent": 10.831002231508263,
+    "mape_ci95_percent": [
+      10.761746479651503,
+      10.900925557340042
+    ],
+    "mae": 0.005214387702987749,
+    "error_sd": 0.002911217590576698,
+    "bias": -0.005214387702987749,
+    "p95_relative_percent": 12.826148179043084,
+    "under_threshold_percent": 0.0
+  },
+  "mu_forward_model": {
+    "mape_percent": 9.287581091951614,
+    "mape_ci95_percent": [
+      9.286250885191569,
+      9.288904224970011
+    ],
+    "mae": 0.004633326564658114,
+    "error_sd": 0.0026857084401097687,
+    "bias": -0.004633326564658114,
+    "p95_relative_percent": 9.325811715463148,
+    "under_threshold_percent": 100.0
+  },
+  "sensor_saturation_events": 0,
+  "optimizer_mean_nfev": 8.0192,
+  "paired_difference_new_minus_old_pp": {
+    "mean": -43.97010898324781,
+    "ci95": [
+      -45.02312647479907,
+      -42.91326094913828
+    ]
+  }
+}

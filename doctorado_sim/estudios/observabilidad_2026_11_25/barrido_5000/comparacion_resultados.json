@@ -1,0 +1,122 @@
+{
+  "cases": 5000,
+  "train": 4000,
+  "test": 1000,
+  "methods": {
+    "Fija 1 Hz": {
+      "metrics": {
+        "rho": {
+          "mae": 0.14683386498820333,
+          "rmse": 1.0908724701149428,
+          "r2": 0.9999599319649436,
+          "mape_percent": 0.012403157098834378,
+          "within_target_percent": 100.0
+        },
+        "mu": {
+          "mae": 1.9255367353955207e-07,
+          "rmse": 4.6306944752444334e-07,
+          "r2": 0.9999999997456319,
+          "mape_percent": 0.0028831840414038066,
+          "within_target_percent": 100.0
+        }
+      },
+      "correlations": {
+        "ThetaMax_rho": 0.0077046037272350395,
+        "Etheta_rho": -0.004591777611876804,
+        "Td_mu": null
+      }
+    },
+    "Chirp f\u00f3rmula anterior": {
+      "metrics": {
+        "rho": {
+          "mae": 0.05051058875335866,
+          "rmse": 0.27935439332315093,
+          "r2": 0.9999973723888684,
+          "mape_percent": 0.00461447122430713,
+          "within_target_percent": 100.0
+        },
+        "mu": {
+          "mae": 3.281882074493564e-07,
+          "rmse": 9.198760611236686e-07,
+          "r2": 0.9999999989962421,
+          "mape_percent": 0.00466636183666043,
+          "within_target_percent": 100.0
+        }
+      },
+      "correlations": {
+        "ThetaMax_rho": -0.019133290871656553,
+        "Etheta_rho": -0.14585901355660505,
+        "Td_mu": 0.8954504913190358
+      }
+    },
+    "Chirp lineal corregido": {
+      "metrics": {
+        "rho": {
+          "mae": 0.04303430554209353,
+          "rmse": 0.3446846872126041,
+          "r2": 0.9999959996861881,
+          "mape_percent": 0.003826509023403221,
+          "within_target_percent": 100.0
+        },
+        "mu": {
+          "mae": 3.34403163925392e-07,
+          "rmse": 1.04781995165547e-06,
+          "r2": 0.9999999986976023,
+          "mape_percent": 0.005891800700810792,
+          "within_target_percent": 100.0
+        }
+      },
+      "correlations": {
+        "ThetaMax_rho": -0.02849496301651733,
+        "Etheta_rho": -0.11360591012881213,
+        "Td_mu": 0.8310591926258838
+      }
+    },
+    "Multiseno RMS igualada": {
+      "metrics": {
+        "rho": {
+          "mae": 0.01744207662860356,
+          "rmse": 0.18078145226024683,
+          "r2": 0.9999988995816516,
+          "mape_percent": 0.001566991473601,
+          "within_target_percent": 100.0
+        },
+        "mu": {
+          "mae": 2.497788622803331e-07,
+          "rmse": 7.580988921726832e-07,
+          "r2": 0.9999999993182549,
+          "mape_percent": 0.0031253202607589943,
+          "within_target_percent": 100.0
+        }
+      },
+      "correlations": {
+        "ThetaMax_rho": -0.07841176271774798,
+        "Etheta_rho": -0.045341560448424155,
+        "Td_mu": null
+      }
+    },
+    "Multiseno pico igualado": {
+      "metrics": {
+        "rho": {
+          "mae": 0.013687949367933243,
+          "rmse": 0.11199457304611966,
+          "r2": 0.9999995776776764,
+          "mape_percent": 0.001253684296520886,
+          "within_target_percent": 100.0
+        },
+        "mu": {
+          "mae": 2.430867493473509e-07,
+          "rmse": 6.954040716397173e-07,
+          "r2": 0.999999999426353,
+          "mape_percent": 0.002759873498807102,
+          "within_target_percent": 100.0
+        }
+      },
+      "correlations": {
+        "ThetaMax_rho": -0.078853304844108,
+        "Etheta_rho": -0.04561945308920701,
+        "Td_mu": null
+      }
+    }
+  }
+}

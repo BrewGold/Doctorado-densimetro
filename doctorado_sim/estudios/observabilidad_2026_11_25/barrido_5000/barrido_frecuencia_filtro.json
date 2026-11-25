@@ -1,0 +1,745 @@
+{
+  "design": {
+    "excitation_frequencies_hz": [
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      1.0,
+      1.9,
+      3.0
+    ],
+    "filter_cutoffs_hz": [
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      20.0,
+      40.0
+    ],
+    "distinct_parameter_pairs": 60,
+    "noise_repetitions_per_pair": 3,
+    "actuator_gain": "fixed at nominal",
+    "temperature": "fixed; no temperature-dependent drift modeled",
+    "fit_assumptions": "True density supplied to isolate viscosity error. The inverse model knows the excitation frequency and the single-pole filter cutoff.",
+    "bootstrap_unit": "parameter pair; repetitions averaged within each pair",
+    "limitations": "Exploratory synthetic results under a matched model. The swept cutoffs are idealized single-pole filters, not verified LSM6DSOX register settings; actuator dynamics and gain uncertainty are excluded."
+  },
+  "best_synthetic_combination": {
+    "excitation_frequency_hz": 0.1,
+    "filter_cutoff_hz": 10.0,
+    "mape_percent": 0.01632809899767582,
+    "mape_ci95_percent": [
+      0.013910083797958777,
+      0.018773386136613418
+    ],
+    "signed_mean_error_percent": 0.0008568867629510985,
+    "p95_absolute_error_percent": 0.048049953666389165,
+    "sensor_saturation_events": 0,
+    "pairs": 60,
+    "repetitions_per_pair": 3
+  },
+  "reference_1p9hz_20hz": {
+    "excitation_frequency_hz": 1.9,
+    "filter_cutoff_hz": 20.0,
+    "mape_percent": 0.017603637917414434,
+    "mape_ci95_percent": [
+      0.015210790272182313,
+      0.020142492991529294
+    ],
+    "signed_mean_error_percent": -0.0015097063254624714,
+    "p95_absolute_error_percent": 0.04479555751471407,
+    "sensor_saturation_events": 0,
+    "pairs": 60,
+    "repetitions_per_pair": 3
+  },
+  "scenarios": [
+    {
+      "excitation_frequency_hz": 0.05,
+      "filter_cutoff_hz": 0.5,
+      "mape_percent": 1.5352474857090102,
+      "mape_ci95_percent": [
+        1.341429845143891,
+        1.7244613877326698
+      ],
+      "signed_mean_error_percent": 1.5352474857090102,
+      "p95_absolute_error_percent": 2.5002431260120983,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.05,
+      "filter_cutoff_hz": 1.0,
+      "mape_percent": 0.2491330129001201,
+      "mape_ci95_percent": [
+        0.21292138285477213,
+        0.2836203885026584
+      ],
+      "signed_mean_error_percent": 0.24773211961696012,
+      "p95_absolute_error_percent": 0.44710325962879494,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.05,
+      "filter_cutoff_hz": 2.0,
+      "mape_percent": 0.024894250083518886,
+      "mape_ci95_percent": [
+        0.021946706675887537,
+        0.027904069383235947
+      ],
+      "signed_mean_error_percent": 0.005513144599906015,
+      "p95_absolute_error_percent": 0.05507302275031653,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.05,
+      "filter_cutoff_hz": 5.0,
+      "mape_percent": 0.018019657789841406,
+      "mape_ci95_percent": [
+        0.015651609931942482,
+        0.020486362468915748
+      ],
+      "signed_mean_error_percent": 0.00026970688367119094,
+      "p95_absolute_error_percent": 0.0488989037355214,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.05,
+      "filter_cutoff_hz": 10.0,
+      "mape_percent": 0.017192548589175762,
+      "mape_ci95_percent": [
+        0.015195255184925063,
+        0.019165946023157632
+      ],
+      "signed_mean_error_percent": 0.0010616190213763588,
+      "p95_absolute_error_percent": 0.04472350131719199,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.05,
+      "filter_cutoff_hz": 20.0,
+      "mape_percent": 0.017878608964922563,
+      "mape_ci95_percent": [
+        0.015846042349020695,
+        0.01990285647142539
+      ],
+      "signed_mean_error_percent": 0.00043378939914863316,
+      "p95_absolute_error_percent": 0.04266412491475131,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.05,
+      "filter_cutoff_hz": 40.0,
+      "mape_percent": 0.01811883238929446,
+      "mape_ci95_percent": [
+        0.01589255512842881,
+        0.02030361004085173
+      ],
+      "signed_mean_error_percent": 0.00015242271391774983,
+      "p95_absolute_error_percent": 0.04569198804193427,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.1,
+      "filter_cutoff_hz": 0.5,
+      "mape_percent": 1.0603589509675382,
+      "mape_ci95_percent": [
+        0.9069841799425418,
+        1.222018316958792
+      ],
+      "signed_mean_error_percent": 1.059413777363632,
+      "p95_absolute_error_percent": 2.23673505904007,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.1,
+      "filter_cutoff_hz": 1.0,
+      "mape_percent": 0.2491055438649529,
+      "mape_ci95_percent": [
+        0.21555967613489188,
+        0.28370772114476767
+      ],
+      "signed_mean_error_percent": 0.2491055438649529,
+      "p95_absolute_error_percent": 0.5006732628995035,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.1,
+      "filter_cutoff_hz": 2.0,
+      "mape_percent": 0.021358307101923362,
+      "mape_ci95_percent": [
+        0.01821225377556234,
+        0.024624181672413904
+      ],
+      "signed_mean_error_percent": 0.00219152765531774,
+      "p95_absolute_error_percent": 0.05570204675866271,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.1,
+      "filter_cutoff_hz": 5.0,
+      "mape_percent": 0.01702644011498697,
+      "mape_ci95_percent": [
+        0.014520316671317361,
+        0.01956170179407203
+      ],
+      "signed_mean_error_percent": 0.0017126990325324238,
+      "p95_absolute_error_percent": 0.05380603225885405,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.1,
+      "filter_cutoff_hz": 10.0,
+      "mape_percent": 0.01632809899767582,
+      "mape_ci95_percent": [
+        0.013910083797958777,
+        0.018773386136613418
+      ],
+      "signed_mean_error_percent": 0.0008568867629510985,
+      "p95_absolute_error_percent": 0.048049953666389165,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.1,
+      "filter_cutoff_hz": 20.0,
+      "mape_percent": 0.016365196751770283,
+      "mape_ci95_percent": [
+        0.013942469209232963,
+        0.018875174370933893
+      ],
+      "signed_mean_error_percent": 0.0009535856812853405,
+      "p95_absolute_error_percent": 0.04621003545643597,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.1,
+      "filter_cutoff_hz": 40.0,
+      "mape_percent": 0.016617726618129682,
+      "mape_ci95_percent": [
+        0.014017864682850548,
+        0.01920513951680646
+      ],
+      "signed_mean_error_percent": 0.0009776735115339201,
+      "p95_absolute_error_percent": 0.04572946319895236,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.2,
+      "filter_cutoff_hz": 0.5,
+      "mape_percent": 0.37443477726961755,
+      "mape_ci95_percent": [
+        0.29305424904096816,
+        0.46415172728233683
+      ],
+      "signed_mean_error_percent": 0.36844012454759006,
+      "p95_absolute_error_percent": 1.087553692812819,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.2,
+      "filter_cutoff_hz": 1.0,
+      "mape_percent": 0.12081592746575928,
+      "mape_ci95_percent": [
+        0.10083867288684567,
+        0.14084912602899244
+      ],
+      "signed_mean_error_percent": 0.11993831026360782,
+      "p95_absolute_error_percent": 0.27582693717517853,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.2,
+      "filter_cutoff_hz": 2.0,
+      "mape_percent": 0.02249618749008019,
+      "mape_ci95_percent": [
+        0.019610969816610688,
+        0.02550759227014103
+      ],
+      "signed_mean_error_percent": 0.002896722469783206,
+      "p95_absolute_error_percent": 0.05473774669498214,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.2,
+      "filter_cutoff_hz": 5.0,
+      "mape_percent": 0.019522753245985056,
+      "mape_ci95_percent": [
+        0.017217340984398526,
+        0.02183147577053316
+      ],
+      "signed_mean_error_percent": 0.0008319219559593805,
+      "p95_absolute_error_percent": 0.049513325468537026,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.2,
+      "filter_cutoff_hz": 10.0,
+      "mape_percent": 0.018912917986928082,
+      "mape_ci95_percent": [
+        0.01656747174554843,
+        0.021389620470424222
+      ],
+      "signed_mean_error_percent": 0.0008109131657380031,
+      "p95_absolute_error_percent": 0.04515552653876875,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.2,
+      "filter_cutoff_hz": 20.0,
+      "mape_percent": 0.018405493677252947,
+      "mape_ci95_percent": [
+        0.016232588985354787,
+        0.020582784224307295
+      ],
+      "signed_mean_error_percent": 0.0005624938206491262,
+      "p95_absolute_error_percent": 0.04681655092998781,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.2,
+      "filter_cutoff_hz": 40.0,
+      "mape_percent": 0.018671659450514546,
+      "mape_ci95_percent": [
+        0.016394452604527106,
+        0.021064195545460615
+      ],
+      "signed_mean_error_percent": 0.00046331953248817607,
+      "p95_absolute_error_percent": 0.04787343705040133,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.5,
+      "filter_cutoff_hz": 0.5,
+      "mape_percent": 0.253352804858648,
+      "mape_ci95_percent": [
+        0.21139566440361393,
+        0.2956763290412251
+      ],
+      "signed_mean_error_percent": 0.05789903563855158,
+      "p95_absolute_error_percent": 0.5688062220501987,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.5,
+      "filter_cutoff_hz": 1.0,
+      "mape_percent": 0.05293166713470502,
+      "mape_ci95_percent": [
+        0.04525299564243722,
+        0.061221994494880784
+      ],
+      "signed_mean_error_percent": 0.00794635779439723,
+      "p95_absolute_error_percent": 0.12666983955956998,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.5,
+      "filter_cutoff_hz": 2.0,
+      "mape_percent": 0.023129788012961307,
+      "mape_ci95_percent": [
+        0.020249660442559235,
+        0.026053003210318556
+      ],
+      "signed_mean_error_percent": -0.00040847092680410907,
+      "p95_absolute_error_percent": 0.059789037483974905,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.5,
+      "filter_cutoff_hz": 5.0,
+      "mape_percent": 0.018535245892196992,
+      "mape_ci95_percent": [
+        0.015663364003666996,
+        0.02134559337071039
+      ],
+      "signed_mean_error_percent": 0.000590012424687024,
+      "p95_absolute_error_percent": 0.051294631575883876,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.5,
+      "filter_cutoff_hz": 10.0,
+      "mape_percent": 0.018512428185981214,
+      "mape_ci95_percent": [
+        0.015912702442128286,
+        0.021176270863338047
+      ],
+      "signed_mean_error_percent": -0.0006230727982937174,
+      "p95_absolute_error_percent": 0.045594425420103474,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.5,
+      "filter_cutoff_hz": 20.0,
+      "mape_percent": 0.018607827438229346,
+      "mape_ci95_percent": [
+        0.016025279823650772,
+        0.021158232856458178
+      ],
+      "signed_mean_error_percent": -0.0007689341118193181,
+      "p95_absolute_error_percent": 0.045407886993242774,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 0.5,
+      "filter_cutoff_hz": 40.0,
+      "mape_percent": 0.018568937087144036,
+      "mape_ci95_percent": [
+        0.015998091602600312,
+        0.02117013712573204
+      ],
+      "signed_mean_error_percent": -0.0006783019221748596,
+      "p95_absolute_error_percent": 0.04910669597385675,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.0,
+      "filter_cutoff_hz": 0.5,
+      "mape_percent": 0.31387841859698395,
+      "mape_ci95_percent": [
+        0.2581948790047931,
+        0.37094787470420487
+      ],
+      "signed_mean_error_percent": -0.02608844957030775,
+      "p95_absolute_error_percent": 0.7340403887966406,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.0,
+      "filter_cutoff_hz": 1.0,
+      "mape_percent": 0.11495589139239643,
+      "mape_ci95_percent": [
+        0.09359114890051322,
+        0.13859113793404487
+      ],
+      "signed_mean_error_percent": 0.013392090171766383,
+      "p95_absolute_error_percent": 0.3180308451989033,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.0,
+      "filter_cutoff_hz": 2.0,
+      "mape_percent": 0.02460111463839867,
+      "mape_ci95_percent": [
+        0.02125122396684886,
+        0.02803046319041718
+      ],
+      "signed_mean_error_percent": 0.0005930539706586499,
+      "p95_absolute_error_percent": 0.062358383651991395,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.0,
+      "filter_cutoff_hz": 5.0,
+      "mape_percent": 0.019749205142335913,
+      "mape_ci95_percent": [
+        0.017134370333793027,
+        0.022343822091254996
+      ],
+      "signed_mean_error_percent": -0.0005122395885232001,
+      "p95_absolute_error_percent": 0.053197819009217474,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.0,
+      "filter_cutoff_hz": 10.0,
+      "mape_percent": 0.01907989023668831,
+      "mape_ci95_percent": [
+        0.016651560121850813,
+        0.0215069549007212
+      ],
+      "signed_mean_error_percent": -0.0002063811970502242,
+      "p95_absolute_error_percent": 0.05218975460273222,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.0,
+      "filter_cutoff_hz": 20.0,
+      "mape_percent": 0.01865037009222951,
+      "mape_ci95_percent": [
+        0.016339767830094283,
+        0.021013769475415767
+      ],
+      "signed_mean_error_percent": -0.0003769474809154103,
+      "p95_absolute_error_percent": 0.049213103215494096,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.0,
+      "filter_cutoff_hz": 40.0,
+      "mape_percent": 0.018701156804920262,
+      "mape_ci95_percent": [
+        0.016303058264173425,
+        0.02104937599354351
+      ],
+      "signed_mean_error_percent": -0.00018957541882586644,
+      "p95_absolute_error_percent": 0.048958016234918446,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.9,
+      "filter_cutoff_hz": 0.5,
+      "mape_percent": 0.3687387873640268,
+      "mape_ci95_percent": [
+        0.3078974526828901,
+        0.43330472772902207
+      ],
+      "signed_mean_error_percent": 0.027845294729660658,
+      "p95_absolute_error_percent": 0.8481332877048191,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.9,
+      "filter_cutoff_hz": 1.0,
+      "mape_percent": 0.07428854060767147,
+      "mape_ci95_percent": [
+        0.06317932551971873,
+        0.08607279550000087
+      ],
+      "signed_mean_error_percent": 0.003649448943959799,
+      "p95_absolute_error_percent": 0.17960630269958477,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.9,
+      "filter_cutoff_hz": 2.0,
+      "mape_percent": 0.022498272276593918,
+      "mape_ci95_percent": [
+        0.019367609740984445,
+        0.02579259149160656
+      ],
+      "signed_mean_error_percent": -0.0012250369909857135,
+      "p95_absolute_error_percent": 0.0665245671081427,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.9,
+      "filter_cutoff_hz": 5.0,
+      "mape_percent": 0.01747968454143471,
+      "mape_ci95_percent": [
+        0.014916872334642617,
+        0.020167237287432853
+      ],
+      "signed_mean_error_percent": -0.001057153319829597,
+      "p95_absolute_error_percent": 0.044996684218500074,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.9,
+      "filter_cutoff_hz": 10.0,
+      "mape_percent": 0.018203889614426413,
+      "mape_ci95_percent": [
+        0.01567404951101009,
+        0.020920044971454662
+      ],
+      "signed_mean_error_percent": -0.002139829291372624,
+      "p95_absolute_error_percent": 0.0471235094936928,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.9,
+      "filter_cutoff_hz": 20.0,
+      "mape_percent": 0.017603637917414434,
+      "mape_ci95_percent": [
+        0.015210790272182313,
+        0.020142492991529294
+      ],
+      "signed_mean_error_percent": -0.0015097063254624714,
+      "p95_absolute_error_percent": 0.04479555751471407,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 1.9,
+      "filter_cutoff_hz": 40.0,
+      "mape_percent": 0.018101326571857146,
+      "mape_ci95_percent": [
+        0.015615711987551925,
+        0.020764717266347966
+      ],
+      "signed_mean_error_percent": -0.0012930305320415132,
+      "p95_absolute_error_percent": 0.04563294390694801,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 3.0,
+      "filter_cutoff_hz": 0.5,
+      "mape_percent": 0.48001054671171217,
+      "mape_ci95_percent": [
+        0.4034807304506637,
+        0.561017028817273
+      ],
+      "signed_mean_error_percent": 0.03986745259055093,
+      "p95_absolute_error_percent": 1.152818325655185,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 3.0,
+      "filter_cutoff_hz": 1.0,
+      "mape_percent": 0.14295838439013542,
+      "mape_ci95_percent": [
+        0.11581085466113648,
+        0.17191838237767604
+      ],
+      "signed_mean_error_percent": -0.049567195433434304,
+      "p95_absolute_error_percent": 0.33086972316528257,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 3.0,
+      "filter_cutoff_hz": 2.0,
+      "mape_percent": 0.027506260051860645,
+      "mape_ci95_percent": [
+        0.024078693572315263,
+        0.031007204268281248
+      ],
+      "signed_mean_error_percent": 0.002644279191279026,
+      "p95_absolute_error_percent": 0.06634429113371418,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 3.0,
+      "filter_cutoff_hz": 5.0,
+      "mape_percent": 0.019689839912525844,
+      "mape_ci95_percent": [
+        0.017258885852800582,
+        0.022229842456837404
+      ],
+      "signed_mean_error_percent": 0.0014431677878733327,
+      "p95_absolute_error_percent": 0.05307756069791389,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 3.0,
+      "filter_cutoff_hz": 10.0,
+      "mape_percent": 0.0189315986000193,
+      "mape_ci95_percent": [
+        0.016914922490251644,
+        0.02106006342991469
+      ],
+      "signed_mean_error_percent": 0.0011374044205426153,
+      "p95_absolute_error_percent": 0.04941546367250858,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 3.0,
+      "filter_cutoff_hz": 20.0,
+      "mape_percent": 0.0184949405893252,
+      "mape_ci95_percent": [
+        0.016315331745396473,
+        0.020813008462892843
+      ],
+      "signed_mean_error_percent": 0.0008230345762274796,
+      "p95_absolute_error_percent": 0.048730331742112276,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    },
+    {
+      "excitation_frequency_hz": 3.0,
+      "filter_cutoff_hz": 40.0,
+      "mape_percent": 0.01878263423921716,
+      "mape_ci95_percent": [
+        0.0165279120518963,
+        0.02115613882251475
+      ],
+      "signed_mean_error_percent": 0.0007252123235438088,
+      "p95_absolute_error_percent": 0.0507703884331695,
+      "sensor_saturation_events": 0,
+      "pairs": 60,
+      "repetitions_per_pair": 3
+    }
+  ]
+}

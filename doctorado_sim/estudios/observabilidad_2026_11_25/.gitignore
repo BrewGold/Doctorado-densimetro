@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+*.pyc
+*.so
+barrido_5000/comparar_excitaciones
+barrido_5000/imu_sim
+barrido_5000/dos_etapas

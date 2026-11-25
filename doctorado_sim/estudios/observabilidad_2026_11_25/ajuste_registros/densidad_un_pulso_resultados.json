@@ -1,0 +1,128 @@
+{
+  "parameters": {
+    "rho_range_kg_m3": [
+      997.3,
+      1017.1
+    ],
+    "mu_range_pa_s": [
+      0.005,
+      0.05
+    ],
+    "mode_at_rho1000_mu002_hz": 1.89991,
+    "decay_at_rho1000_mu002_per_s": 0.06447,
+    "pulse_width_s": 0.2,
+    "observation_s": 15,
+    "filter_cutoff_hz_assumed": 20,
+    "acceleration_bias_sd_g": 0.005,
+    "train_distinct_pairs": 80,
+    "test_distinct_pairs": 100,
+    "noise_repetitions_per_pair": 3
+  },
+  "combination": {
+    "method": "bias-corrected covariance weighting learned on independent training pairs",
+    "weights_order_first_second_transition": [
+      -0.060879837997100575,
+      0.061487861677418224,
+      0.9993919763196822
+    ],
+    "training_bias_kg_m3": [
+      -0.03945144038346626,
+      0.13375792655846888,
+      -0.0008532311685196229
+    ],
+    "note": "The three estimates share measurements; they are not independent."
+  },
+  "summary": {
+    "primer_orden": {
+      "mae_kg_m3": 1.8267872201163597,
+      "mae_ci95_kg_m3": [
+        1.6833682803336236,
+        1.9682941858089484
+      ],
+      "rmse_kg_m3": 2.258644071353112,
+      "bias_kg_m3": -0.05035137431985163,
+      "error_sd_kg_m3": 2.261855672622647,
+      "p95_absolute_error_kg_m3": 4.3381416066172624
+    },
+    "segundo_orden": {
+      "mae_kg_m3": 1.830656415752661,
+      "mae_ci95_kg_m3": [
+        1.6900725324278663,
+        1.9745982047186148
+      ],
+      "rmse_kg_m3": 2.263556183566636,
+      "bias_kg_m3": 0.12498583744650356,
+      "error_sd_kg_m3": 2.263879185488671,
+      "p95_absolute_error_kg_m3": 4.324150006490959
+    },
+    "transicion": {
+      "mae_kg_m3": 0.01506692935100318,
+      "mae_ci95_kg_m3": [
+        0.013637835047887528,
+        0.01655808042272096
+      ],
+      "rmse_kg_m3": 0.019285586846008833,
+      "bias_kg_m3": 0.0004518744088826073,
+      "error_sd_kg_m3": 0.019312506635737303,
+      "p95_absolute_error_kg_m3": 0.03829168804852543
+    },
+    "combinado": {
+      "mae_kg_m3": 0.014988962637049403,
+      "mae_ci95_kg_m3": [
+        0.013559110201568048,
+        0.01648006584669784
+      ],
+      "rmse_kg_m3": 0.01938765887029177,
+      "bias_kg_m3": 0.0014285212525108667,
+      "error_sd_kg_m3": 0.019367264821276462,
+      "p95_absolute_error_kg_m3": 0.03754363609617146
+    }
+  },
+  "stiffness_mismatch": {
+    "true_stiffness_factor": 1.005,
+    "assumed_stiffness_factor": 1,
+    "summary": {
+      "primer_orden": {
+        "mae_kg_m3": 2.0719111643445074,
+        "mae_ci95_kg_m3": [
+          1.8937371929290383,
+          2.247106400509802
+        ],
+        "bias_kg_m3": -0.12804508117747293
+      },
+      "segundo_orden": {
+        "mae_kg_m3": 2.0730832192979993,
+        "mae_ci95_kg_m3": [
+          1.8969157929831197,
+          2.251121566317026
+        ],
+        "bias_kg_m3": 0.06371533076777988
+      },
+      "transicion": {
+        "mae_kg_m3": 8.230391599804278,
+        "mae_ci95_kg_m3": [
+          8.216964016799178,
+          8.243641672132007
+        ],
+        "bias_kg_m3": 8.23039159980428
+      },
+      "combinado": {
+        "mae_kg_m3": 8.227326836254598,
+        "mae_ci95_kg_m3": [
+          8.213740806819553,
+          8.24066412793852
+        ],
+        "bias_kg_m3": 8.227326836254598
+      }
+    }
+  },
+  "limitations": [
+    "The equilibrium-density relation is hypothetical, extrapolated only over the small reference interval.",
+    "The assumed dynamic dependencies k proportional to rho, c proportional to sqrt(mu), and effective inertia are not experimentally calibrated.",
+    "The transition method profiles a constant angular bias; no time-varying drift or translational acceleration is modeled.",
+    "The sensor is a simulated accelerometer with assumed single-pole filter, not the verified hardware response.",
+    "Training and test cases use the same physical generator: this is an optimistic matched-model synthetic experiment.",
+    "Only the transition method uses the known pulse waveform; the other two estimate equilibrium from free response.",
+    "CI bootstrap resamples parameter pairs, not model uncertainty or experimental calibration."
+  ]
+}
