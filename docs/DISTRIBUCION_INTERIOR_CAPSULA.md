@@ -50,8 +50,11 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 | Placa del receptor | Aproximadamente 15 × 18 mm | Espesor, conectores, posición de cables y fijación |
 | Actuador completo | Diámetro 20 mm, cuerpo de 13,5 mm de altura y masa total 25 g | Orientación real y envolvente completa, fijación, masa móvil y espacio de la guía |
 | Parte móvil | Altura medida 12,2 mm; ficha de variante 20VC001: carrera de 3 mm | Carrera útil y posiciones extremas reales; no confundir altura con carrera |
-| Batería, boost, IMU y ESP32 | Sin dimensiones completas confirmadas | Modelo, largo × ancho × alto, masa, conectores y orientación |
+| Batería | Formato 14500: aproximadamente 14 mm de diámetro y 50 mm de largo nominales | Medidas reales con terminales y protección, masa, química, tensión, protección y fijación |
+| Boost, IMU y ESP32 | Sin dimensiones completas confirmadas | Modelo, largo × ancho × alto, masa, conectores y orientación |
 | Etapa de accionamiento y lastre | Sin diseño o dimensiones definidos | Envolvente, masa, fijación, alimentación y margen térmico |
+
+La batería 14500 se propone bajo la PCB, con su eje paralelo al de la cápsula; su portabatería o sujeción y conexiones aumentarán la envolvente. Las cotas nominales no sustituyen la medida de la unidad: algunas protecciones o terminales modifican su tamaño.
 
 Todavía no se puede determinar la longitud ni el diámetro necesarios: faltan envolventes y orientaciones, así como la forma en que los componentes se solapan. El diámetro exterior de referencia del TFM no es un diámetro interior disponible ni una restricción de diseño.
 
