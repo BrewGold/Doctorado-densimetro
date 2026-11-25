@@ -2,7 +2,7 @@
 
 ## Alcance
 
-Propuesta para organizar la cápsula impresa en 3D y preparar las medidas del montaje. Los dibujos son **esquemas sin escala**, no un plano ni una comprobación de encaje. Se mantiene el orden acordado desde la tapa y se reserva la punta para el actuador de recorrido longitudinal y su etapa de accionamiento.
+Propuesta para diseñar la cápsula impresa en 3D **a partir de los componentes**: primero se determina la envolvente del conjunto y después se dimensiona la carcasa, no al revés. Los dibujos son **esquemas sin escala**, no un plano ni una comprobación de encaje. Se mantiene el orden acordado desde la tapa y se reserva la punta para el actuador de recorrido longitudinal y su etapa de accionamiento. Las medidas del TFM sirven únicamente como referencia y no fijan las dimensiones de esta cápsula.
 
 ## Vista longitudinal
 
@@ -45,7 +45,7 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 
 | Elemento | Referencia disponible | Pendiente para comprobar el montaje |
 |---|---|---|
-| Cápsula del TFM | Aproximadamente 125 × 40 mm exteriores; referencia, no medida del nuevo diseño | Longitud y diámetro interiores útiles, perfil de los extremos, espesor, cierre y espacio de montaje |
+| Cápsula del TFM | Aproximadamente 125 × 40 mm exteriores; referencia, no límite del nuevo diseño | Dimensionar longitud y diámetro a partir del conjunto, perfil de extremos, espesor, cierre y montaje |
 | Bobina receptora | Diámetro 25 mm | Espesor, salida de cables, orientación y distancia efectiva al transmisor con la tapa y soportes |
 | Placa del receptor | Aproximadamente 15 × 18 mm | Espesor, conectores, posición de cables y fijación |
 | Actuador completo | Diámetro 20 mm, cuerpo de 13,5 mm de altura y masa total 25 g | Orientación real y envolvente completa, fijación, masa móvil y espacio de la guía |
@@ -53,15 +53,16 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 | Batería, boost, IMU y ESP32 | Sin dimensiones completas confirmadas | Modelo, largo × ancho × alto, masa, conectores y orientación |
 | Etapa de accionamiento y lastre | Sin diseño o dimensiones definidos | Envolvente, masa, fijación, alimentación y margen térmico |
 
-El diámetro de 20 mm del actuador es menor que los 40 mm exteriores de referencia, pero esto **no demuestra que quepa**: hay que medir el interior, en especial en la punta curva, y sumar guía, cableado y holguras. Del mismo modo, no se puede deducir la longitud total necesaria sumando las cotas disponibles: falta conocer cómo se orientan y solapan los componentes.
+Todavía no se puede determinar la longitud ni el diámetro necesarios: faltan envolventes y orientaciones, así como la forma en que los componentes se solapan. El diámetro exterior de referencia del TFM no es un diámetro interior disponible ni una restricción de diseño.
 
-## Preparación del montaje
+## Dimensionado y preparación del montaje
 
-1. Medir la cavidad interior a lo largo de la cápsula, incluyendo tapa, cierre y zonas curvas. Identificar dónde se puede introducir y fijar un soporte desmontable.
-2. Medir cada componente con conectores y cables, incluyendo la envolvente completa del actuador en sus posiciones extremas. Verificar mecánicamente su carrera antes de fijar topes o mandar desplazamientos.
-3. Dibujar o modelar cada envolvente en el mismo sistema de referencia: `x` desde la tapa hacia la punta y dos ejes transversales fijos a la cápsula. Registrar posición, orientación y masa de cada pieza, soportes y cables incluidos.
-4. Ajustar el soporte y las posiciones para evitar interferencias, proteger la batería de contactos y rozamientos, y permitir montaje, mantenimiento y sellado. Fijar rígidamente la IMU y registrar sus ejes respecto a los de la cápsula.
-5. Comprobar experimentalmente carga inalámbrica, temperatura, interferencia del boost y del actuador con la IMU y funcionamiento de la antena del ESP32 en su ubicación real. No fijar separaciones definitivas sin las fichas y pruebas correspondientes.
-6. Pesar el conjunto, comprobar flotación y ángulo de equilibrio, y ajustar el lastre. Añadir los 25 g del actuador completo cambia la masa y el centro de masas; no deben tratarse como masa móvil. Registrar la configuración antes de comparar ensayos.
+1. Medir cada componente con conectores y cables, incluyendo la envolvente completa del actuador en sus posiciones extremas. Verificar mecánicamente su carrera antes de fijar topes o mandar desplazamientos.
+2. Dibujar o modelar cada envolvente en el mismo sistema de referencia: `x` desde la tapa hacia la punta y dos ejes transversales fijos a la cápsula. Registrar posición, orientación y masa de cada pieza, soportes y cables incluidos.
+3. Definir la longitud interior a partir de las posiciones y envolventes, permitiendo solapamientos donde sean posibles. Dimensionar cada sección transversal para la combinación de PCB, batería y componentes que coincidan en ella, así como para el actuador y su guía. Añadir espacio para fijaciones, cables, tolerancias de impresión, cierre y montaje; comprobar también los extremos curvos.
+4. Diseñar la carcasa, el soporte desmontable y el cierre alrededor de esa envolvente. Sumar espesor de pared y cierre para obtener las dimensiones exteriores; evitar interferencias, proteger la batería de contactos y rozamientos, y permitir montaje, mantenimiento y sellado. Fijar rígidamente la IMU y registrar sus ejes respecto a los de la cápsula.
+5. Estimar la masa total y el volumen exterior para comprobar la flotación en los fluidos previstos. Revisar la distribución de masas y empuje y reservar lastre ajustable: que los componentes quepan no garantiza flotación ni el ángulo deseado. Iterar dimensiones y posiciones según sea necesario.
+6. Comprobar experimentalmente carga inalámbrica, temperatura, interferencia del boost y del actuador con la IMU y funcionamiento de la antena del ESP32 en su ubicación real. No fijar separaciones definitivas sin las fichas y pruebas correspondientes.
+7. Pesar el conjunto fabricado, comprobar flotación y ángulo de equilibrio, y ajustar el lastre. Añadir los 25 g del actuador completo cambia la masa y el centro de masas; no deben tratarse como masa móvil. Registrar la configuración antes de comparar ensayos.
 
 La función y polaridad del receptor, la protección de batería y el puente H siguen pendientes de verificación. La disposición mecánica no valida el circuito ni autoriza a conectar la bobina al GPIO; véase el [esquema funcional](ESQUEMA_INICIAL_CONEXIONES.md) y el [inventario](MATERIALES_Y_ENSAMBLAJES.md).
