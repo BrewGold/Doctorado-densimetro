@@ -95,6 +95,8 @@ El firmware del TFM (`apendice_ejemplo.tex` en ese archivo) declara `SDA_PIN = 5
 
 ## Componentes y referencias provisionales
 
+El usuario indica unas dimensiones de **17 × 36 mm** para el módulo boost MT3608. En la fotografía del montaje del TFM se aprecian contactos rotulados `VIN+`, `VIN−`, `VOUT+` y `VOUT−`. Es necesario confirmar que el módulo a montar corresponde a la fotografía y medir la ubicación y paso de esos contactos y la altura de sus componentes antes de dibujar su huella. La medida del contorno no incluye necesariamente pines ni soldaduras.
+
 | Ref. | Componente del TFM | Representación en el esquema inicial |
 |---|---|---|
 | `J1` | Batería, modelo no especificado | Conector de dos vías; asignación por verificar |
