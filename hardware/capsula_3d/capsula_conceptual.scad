@@ -20,7 +20,7 @@ placa_largo = 164;
 placa_ancho = 24;
 placa_espesor = 1.6;
 placa_x = 10;
-pos_clips = [86.15, 130.3];
+pos_clips = [130.3, 160.8];
 ancho_clip = 2.7;
 holgura_guia_pcb = 0.4;
 holgura_bobina_diametral = 0.8;
@@ -221,7 +221,7 @@ module componentes() {
 
     // 14500 nominal: 50 x 14; sin portapilas ni terminales.
     color([0.12, 0.39, 0.75])
-        translate([placa_x + 84, 0, -9.5]) cilindro_x(7, 50);
+        translate([placa_x + 114, 0, -9.5]) cilindro_x(7, 50);
 
     // Abrazaderas y ranuras simbólicas, no dimensiones de fabricación.
     color([0.9, 0.55, 0.16]) {
