@@ -99,6 +99,9 @@ e interpolación. Cambian el modelo, la frecuencia, el rango, la duración y el
 estimador: no se puede atribuir la diferencia solo al tipo de excitación ni
 considerar que la precisión nueva esté validada.
 
+En la tabla de rebotes, el 31,62 % es el error de **viscosidad** del pulso
+con rebotes del 10 %, no un error de densidad en kg/m³.
+
 ## Archivos y reproducción
 
 Los archivos CSV, JSON y PNG son instantáneas de las ejecuciones, no datos
