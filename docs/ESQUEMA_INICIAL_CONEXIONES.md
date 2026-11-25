@@ -45,8 +45,8 @@ En una futura ampliación se prevé situar el actuador y su amplificador o etapa
 | `GND` | Retorno del elevador, GND de ESP32 e IMU | Referencia común de la electrónica; relación con batería y receptor por confirmar, especialmente si hay protección |
 | `SYS_5V` | `VOUT+` MT3608 → entrada `5V`/`VBUS` de la placa ESP32-C3 | Solo tras confirmar que la placa acepta 5 V en esa entrada; ajustar y medir el convertidor antes de conectar |
 | `SYS_3V3` | Salida 3,3 V regulada de la placa ESP32 → alimentación del breakout IMU | Confirmar en la ficha del breakout si se conecta a `VIN` o `3V3` |
-| `I2C_SDA` | GPIO SDA de ESP32 → SDA del LSM6DSOX | Elegir GPIO al confirmar la variante exacta de la placa |
-| `I2C_SCL` | GPIO SCL de ESP32 → SCL del LSM6DSOX | Elegir GPIO al confirmar la variante exacta de la placa |
+| `I2C_SDA` | GPIO5 → SDA del LSM6DSOX | Usado por el firmware del TFM; confirmar conexiones y placa real |
+| `I2C_SCL` | GPIO6 → SCL del LSM6DSOX | Usado por el firmware del TFM; confirmar conexiones y placa real |
 | `IMU_INT1`, `IMU_INT2` | Salidas de interrupción de IMU | No necesarias para la adquisición inicial por sondeo; dejar sin conectar o reservar pads |
 
 El bus I²C y todas sus señales deben permanecer a nivel lógico de 3,3 V. No añadir pull-ups externos hasta comprobar si el breakout ya los incorpora. El firmware incluido en el TFM usa la dirección I²C `0x6A`; confirmar el strap de dirección del breakout para que coincida. La selección de interfaz I²C/SPI y el estado de pines `CS`/`SDO` dependen de la placa breakout concreta y se fijarán a partir de su documentación.
@@ -70,7 +70,9 @@ Es una referencia **provisional** para el esquemático: hay que confirmar que la
 
 Una segunda imagen de dimensiones muestra una placa de **18,00 × 23,50 mm**, con paso entre contactos de **2,54 mm** y conector USB. Sin embargo, parece mostrar **nueve contactos por fila**, frente a los ocho por fila de la primera imagen. No se debe combinar su contorno ni su paso con el pinout anterior como si fueran la misma placa hasta comprobar la unidad real. La altura, la separación entre filas, la posición y altura de la antena y el espacio necesario alrededor del USB también requieren comprobación.
 
-La imagen propone GPIO8 y GPIO9 para I²C, pero no se fija todavía esa elección. Son pines de configuración de arranque del ESP32-C3: comprobar el circuito de la placa, las resistencias del breakout y los niveles durante el arranque antes de usarlos; alternativamente seleccionar otros GPIO compatibles. No se ha verificado aquí qué pines configura el firmware del TFM; ajustarlo o comprobarlo antes de conectar la IMU. El pin `3V3` solo se usará para alimentar el breakout si se confirma que su salida, tensión y corriente son compatibles.
+La fotografía `imagenes/ESP32-c3.jpg` del TFM muestra ocho contactos por fila y una placa con USB y antena de chip, compatible visualmente con la primera imagen. La fotografía del montaje `imagenes/frente.JPG` muestra una placa de aspecto similar, aunque no permite leer con seguridad todos sus contactos. La imagen acotada de nueve contactos aparentes no permite asegurar que corresponda a esa misma variante. El texto del TFM la denomina ESP32-C3-MINI-1, pero esto no confirma la referencia exacta de la placa ni sus dimensiones. Fuentes: `references/tfm/TFM-densimetro.zip`.
+
+El firmware del TFM (`apendice_ejemplo.tex` en ese archivo) declara `SDA_PIN = 5`, `SCL_PIN = 6` y usa `Wire.begin(SDA_PIN, SCL_PIN)` con dirección `0x6A`. Para conservarlo, se propone **GPIO5 → SDA y GPIO6 → SCL**, no los GPIO8 y GPIO9 sugeridos en la primera imagen. Confirmar la correspondencia física en la unidad, las conexiones y la dirección de la IMU; las etiquetas MISO/MOSI de GPIO5/6 en la imagen no impiden asignarles I²C mediante firmware, siempre que no se utilicen simultáneamente para SPI. GPIO8 y GPIO9 son pines de configuración de arranque y requieren especial cuidado. El pin `3V3` solo se usará para alimentar el breakout si se confirma que su salida, tensión y corriente son compatibles.
 
 ## Componentes y referencias provisionales
 

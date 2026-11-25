@@ -51,7 +51,7 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 | Actuador completo | Diámetro 20 mm, cuerpo de 13,5 mm de altura y masa total 25 g | Orientación real y envolvente completa, fijación, masa móvil y espacio de la guía |
 | Parte móvil | Altura medida 12,2 mm; ficha de variante 20VC001: carrera de 3 mm | Carrera útil y posiciones extremas reales; no confundir altura con carrera |
 | Batería | Recargable de litio 14500, 3,7 V nominales y 800 mAh indicados; aproximadamente 14 mm de diámetro y 50 mm de largo nominales | Medidas reales con terminales y protección, masa, referencia, límites de carga y descarga, protección y fijación |
-| ESP32-C3 | Primera imagen: dos filas de ocho contactos. Segunda imagen: 18 × 23,5 mm, paso 2,54 mm y aparentemente nueve contactos por fila | Confirmar cuál corresponde a la unidad real, modelo, pinout, separación entre filas, altura, masa y zona de antena; no combinar imágenes sin verificarlas |
+| ESP32-C3 | La fotografía de la placa del TFM y la primera imagen muestran ocho contactos por fila. La imagen de 18 × 23,5 mm y paso 2,54 mm parece mostrar nueve | Confirmar cuál corresponde a la unidad real, modelo, pinout, dimensiones, paso, separación entre filas, altura, masa y zona de antena; no combinar imágenes sin verificarlas |
 | Boost e IMU | Sin dimensiones completas confirmadas | Modelo, largo × ancho × alto, masa, conectores y orientación |
 | Etapa de accionamiento y lastre | Sin diseño o dimensiones definidos | Envolvente, masa, fijación, alimentación y margen térmico |
 
