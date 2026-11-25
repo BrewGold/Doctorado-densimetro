@@ -26,7 +26,8 @@ text = BOARD.read_text(encoding="utf-8")
 outline = rectangles(text, "Edge.Cuts")
 front = rectangles(text, "F.Fab")
 back = rectangles(text, "B.Fab")
-if len(outline) != 1 or len(front) != 6 or len(back) != 1:
+clips = rectangles(text, "Dwgs.User")
+if len(outline) != 1 or len(front) != 6 or len(back) != 1 or len(clips) != 2:
     raise ValueError("Unexpected mechanical rectangles; review the rendering script")
 
 page_width, page_height = landscape(A4)
@@ -84,6 +85,8 @@ labels = [
 for rect, lines in zip(front, labels):
     draw_box(rect, top_y, colors.HexColor("#c5dfe6"))
     label(rect, top_y, lines)
+for rect in clips:
+    draw_box(rect, top_y, colors.HexColor("#f8a737"), colors.HexColor("#a45605"))
 
 pdf.setFont("Helvetica", 10)
 pdf.setFillColor(colors.HexColor("#172b35"))
@@ -96,6 +99,8 @@ bottom_y = top_y - 24 * scale - 65
 draw_box(outline[0], bottom_y, colors.HexColor("#eef4f1"))
 draw_box(back[0], bottom_y, colors.HexColor("#f8d7a7"), colors.HexColor("#ae7130"))
 label(back[0], bottom_y, ["14500 · 50 x 14 nominal", "bajo la PCB"])
+for rect in clips:
+    draw_box(rect, bottom_y, colors.HexColor("#f8a737"), colors.HexColor("#a45605"))
 
 pdf.setFillColor(colors.HexColor("#172b35"))
 pdf.setFont("Helvetica", 10)
@@ -104,7 +109,7 @@ for note in [
     "Contorno provisional: 164 x 24 mm. C1: reserva arbitraria de 12 x 12 mm.",
     "Bobina y actuador fuera de la placa. Dimensiones en mm; dibujo no apto para fabricar.",
     "Faltan huellas, conectores, pines, pistas, corriente del actuador y protecciones.",
-    "USB y bobina pueden interferir; clips de batería y distancias sin validar.",
+    "Naranja: reservas para clips, no ranuras finales. Verificar pines y cobre.",
 ]:
     pdf.drawString(55, notes_y, note)
     notes_y -= 15

@@ -10,7 +10,9 @@ El contorno rectangular de **164 × 24 mm** es una primera hipótesis de empaque
 
 El acceso USB **no está resuelto**: la bobina de carga ocupa el eje junto a la tapa y podría impedir introducir el conector. Habrá que comprobar el recorrido del cable y decidir si la bobina se aparta, si se extrae el conjunto u otra solución, sin comprometer el cierre. No conectar simultáneamente USB y otra alimentación hasta verificar el circuito de la placa.
 
-El croquis del usuario propone **dos piezas de sujeción bajo la PCB**, tipo abrazadera, con pestañas que encajarían en aberturas de la placa. Se representan de forma conceptual en la maqueta 3D, no en la PCB: no hay ranuras ni huellas de clips definidas. Falta dimensionar material, elasticidad, pestañas, separación, sujeción axial, aislamiento y contactos de la 14500; evitar presión o roce sobre la celda, cortocircuitos y daños por soldar directamente en ella.
+El croquis del usuario propone **dos piezas de sujeción bajo la PCB**, tipo abrazadera, con pestañas que encajarían en aberturas de la placa. Se reservan dos zonas **entre boost y C1, y entre IMU y DRV8833**, sin solaparse con los rectángulos de los módulos. El driver se ha desplazado hacia la punta y la batería hacia él. Las zonas están dibujadas en naranja en el PDF y en `Dwgs.User` en KiCad: son únicamente reservas, **no ranuras de fabricación** ni keepouts eléctricos. La maqueta 3D representa aberturas y pestañas simbólicas, pero no un mecanismo de clic.
+
+Los huecos entre envolventes son provisionales y pequeños: faltan pines, soldaduras, conectores, pistas y tolerancias. Habrá que mantener libre la zona para el movimiento de las pestañas y especificar restricciones de cobre y distancias eléctricas al diseñar la PCB; ampliar o recolocar componentes si no caben. Dimensionar material, elasticidad, pestañas, separación, sujeción axial, aislamiento y contactos de la 14500; evitar presión o roce sobre la celda, cortocircuitos y daños por soldar directamente en ella.
 
 | Reserva en la maqueta | Dimensiones de referencia (mm) | Estado |
 |---|---:|---|

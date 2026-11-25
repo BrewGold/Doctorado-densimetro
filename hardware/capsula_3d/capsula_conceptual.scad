@@ -17,6 +17,8 @@ placa_largo = 164;
 placa_ancho = 24;
 placa_espesor = 1.6;
 placa_x = 10;
+pos_clips = [86.15, 130.3];
+ancho_clip = 2.7;
 
 radio = diametro_exterior / 2;
 radio_interior = radio - pared;
@@ -120,18 +122,23 @@ module caja_modulo(x, longitud, ancho, alto) {
 module clip_bateria(x) {
     translate([placa_x + x, 0, -9.5]) {
         difference() {
-            cilindro_x(8.3, 3);
-            translate([-0.1, 0, 0]) cilindro_x(7.3, 3.2);
-            translate([-0.1, -3.5, -10]) cube([3.2, 7, 5]);
+            cilindro_x(8.3, ancho_clip);
+            translate([-0.1, 0, 0]) cilindro_x(7.3, ancho_clip + 0.2);
+            translate([-0.1, -3.5, -10]) cube([ancho_clip + 0.2, 7, 5]);
         }
-        translate([0, -2, 7]) cube([3, 4, 1.7]);
+        translate([0, -2, 7]) cube([ancho_clip, 4, 4]);
     }
 }
 
 module componentes() {
     color([0.03, 0.43, 0.27])
-        translate([placa_x, -placa_ancho / 2, -placa_espesor / 2])
-            cube([placa_largo, placa_ancho, placa_espesor]);
+        difference() {
+            translate([placa_x, -placa_ancho / 2, -placa_espesor / 2])
+                cube([placa_largo, placa_ancho, placa_espesor]);
+            for (x = pos_clips)
+                translate([placa_x + x, -2, -placa_espesor])
+                    cube([ancho_clip, 4, 2 * placa_espesor]);
+        }
 
     // Alturas provisionales: no representan las envolventes medidas.
     color([0.12, 0.12, 0.16]) caja_modulo(3, 22.5, 17.8, 6);
@@ -139,16 +146,15 @@ module componentes() {
     color([0.16, 0.32, 0.60]) caja_modulo(50, 36, 17, 8);
     color([0.25, 0.25, 0.28]) caja_modulo(89, 12, 12, 10);
     color([0.18, 0.20, 0.22]) caja_modulo(104, 25.4, 17.78, 5);
-    color([0.22, 0.25, 0.38]) caja_modulo(132, 25.4, 17.78, 6);
+    color([0.22, 0.25, 0.38]) caja_modulo(135, 25.4, 17.78, 6);
 
     // 14500 nominal: 50 x 14; sin portapilas ni terminales.
     color([0.12, 0.39, 0.75])
-        translate([placa_x + 78, 0, -9.5]) cilindro_x(7, 50);
+        translate([placa_x + 84, 0, -9.5]) cilindro_x(7, 50);
 
-    // Abrazaderas esquemáticas: sin pestañas, ranuras ni fijación axial.
+    // Abrazaderas y ranuras simbólicas, no dimensiones de fabricación.
     color([0.9, 0.55, 0.16]) {
-        clip_bateria(83);
-        clip_bateria(120);
+        for (x = pos_clips) clip_bateria(x);
     }
 
     // Bobina de carga de 25 mm: plano transversal, espesor ilustrativo.
