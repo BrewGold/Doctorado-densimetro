@@ -74,11 +74,11 @@ pdf.drawString(55, page_height - 94, "Cara superior: reservas aproximadas de los
 top_y = page_height - 112
 draw_box(outline[0], top_y, colors.HexColor("#eef4f1"))
 labels = [
+    ["ESP32-C3", "USB hacia tapa"],
     ["RECEPTOR", "18 x 15"],
     ["BOOST MT3608", "36 x 17"],
     ["C1", "reserva"],
     ["IMU", "25,4 x 17,78"],
-    ["ESP32-C3", "22,5 x 17,8"],
     ["DRV8833", "25,4 x 17,78"],
 ]
 for rect, lines in zip(front, labels):
@@ -104,7 +104,7 @@ for note in [
     "Contorno provisional: 164 x 24 mm. C1: reserva arbitraria de 12 x 12 mm.",
     "Bobina y actuador fuera de la placa. Dimensiones en mm; dibujo no apto para fabricar.",
     "Faltan huellas, conectores, pines, pistas, corriente del actuador y protecciones.",
-    "Comprobar alturas, antena, batería, carga, flotación y guiado antes de cerrar el diseño.",
+    "USB y bobina pueden interferir; clips de batería y distancias sin validar.",
 ]:
     pdf.drawString(55, notes_y, note)
     notes_y -= 15

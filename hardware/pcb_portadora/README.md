@@ -6,7 +6,11 @@ Abrir `prototipo_mecanico.kicad_pcb` con el editor de PCB de KiCad 7 o posterior
 
 Para visualizarla sin KiCad, abrir [prototipo_mecanico.pdf](prototipo_mecanico.pdf). La imagen se regenera desde los rectángulos del archivo KiCad con `python3 hardware/pcb_portadora/generar_vista.py` y la biblioteca Python `reportlab`; el PDF separa las vistas superior y de batería para evitar solapamientos.
 
-El contorno rectangular de **164 × 24 mm** es una primera hipótesis de empaquetado, no una medida de cápsula ni un contorno validado. Está organizado desde la tapa hacia la punta: receptor, boost, reserva para condensador, IMU, ESP32 y DRV8833. La bobina receptora y el actuador quedan fuera de la placa, cerca de la tapa y la punta respectivamente. Los espacios no incluyen necesariamente conectores, cables, tornillos, pines, antena, carrera, altura o accesibilidad.
+El contorno rectangular de **164 × 24 mm** es una primera hipótesis de empaquetado, no una medida de cápsula ni un contorno validado. Desde la tapa hacia la punta: ESP32, receptor, boost, reserva para condensador, IMU y DRV8833. El ESP32 se orientará con el USB-C hacia la tapa; el bloque de la maqueta no representa todavía ni el conector ni su huella. La bobina receptora y el actuador quedan fuera de la placa, cerca de la tapa y la punta respectivamente. Los espacios no incluyen necesariamente conectores, cables, tornillos, pines, antena, carrera, altura o accesibilidad.
+
+El acceso USB **no está resuelto**: la bobina de carga ocupa el eje junto a la tapa y podría impedir introducir el conector. Habrá que comprobar el recorrido del cable y decidir si la bobina se aparta, si se extrae el conjunto u otra solución, sin comprometer el cierre. No conectar simultáneamente USB y otra alimentación hasta verificar el circuito de la placa.
+
+El croquis del usuario propone **dos piezas de sujeción bajo la PCB**, tipo abrazadera, con pestañas que encajarían en aberturas de la placa. Se representan de forma conceptual en la maqueta 3D, no en la PCB: no hay ranuras ni huellas de clips definidas. Falta dimensionar material, elasticidad, pestañas, separación, sujeción axial, aislamiento y contactos de la 14500; evitar presión o roce sobre la celda, cortocircuitos y daños por soldar directamente en ella.
 
 | Reserva en la maqueta | Dimensiones de referencia (mm) | Estado |
 |---|---:|---|

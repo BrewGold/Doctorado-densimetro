@@ -44,7 +44,7 @@ Las dimensiones usadas en un escenario de simulación no se consideran medidas d
 La propuesta sitúa la batería cerca del extremo lastrado, bajo la PCB, y la bobina receptora junto a la tapa opuesta. En sentido longitudinal, desde la tapa hacia el extremo lastrado, se prevé el siguiente orden físico:
 
 ```text
-Tapa / bobina → módulo receptor-cargador → elevador (boost) → IMU → ESP32 → punta lastrada
+Tapa / bobina → ESP32 (USB hacia la tapa) → receptor-cargador → boost → IMU → DRV8833 → punta lastrada
 ```
 
 Se prevé una PCB portadora para soldar los módulos, incorporando pines donde falten. Sus huellas, fijaciones y la altura del conjunto se determinarán al medir las placas y sus conexiones; véase el [esquema funcional](ESQUEMA_INICIAL_CONEXIONES.md).

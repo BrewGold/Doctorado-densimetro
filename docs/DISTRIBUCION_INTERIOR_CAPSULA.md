@@ -10,7 +10,7 @@ Propuesta para diseñar la cápsula impresa en 3D **a partir de los componentes*
        TAPA / EXTREMO DE CARGA                         EXTREMO LASTRADO
     _________________________________________________________________
    /                                                                 \
-  |  [bobina] [receptor] [boost] [IMU] [ESP32] [etapa] [actuador]    |
+  |  [bobina] [ESP32] [receptor] [boost] [IMU] [etapa] [actuador]    |
   |           ───────────── PCB / soporte ────────────    <───> x      |
   |                         [batería bajo la PCB]         [lastre]*  |
    \_________________________________________________________________/
@@ -20,8 +20,9 @@ Propuesta para diseñar la cápsula impresa en 3D **a partir de los componentes*
 ```
 
 - La bobina receptora va junto a la tapa, enfrentada al transmisor externo, con su orientación y separación a validar mediante una prueba de carga.
-- Receptor/cargador, boost, IMU y ESP32 conservan ese orden físico. Se diseñará una PCB portadora para soldar los módulos; en los que no traigan pines se colocarán pines adecuados. El dibujo no presupone que los módulos estén conectados eléctricamente en serie.
+- El ESP32 se sitúa en el extremo de la PCB próximo a la tapa, con el USB-C orientado hacia ella. Siguen el receptor/cargador, boost, IMU y etapa DRV8833. Se diseñará una PCB portadora para soldar los módulos; en los que no traigan pines se colocarán pines adecuados. El dibujo no presupone conexiones eléctricas en serie. La bobina puede obstruir el USB: comprobar el conector y la posibilidad de apartarla o extraer la PCB; no se garantiza acceso con la cápsula montada.
 - La batería se sitúa bajo la PCB y cerca del extremo lastrado, donde quepa sin invadir el actuador. La orientación «bajo» se refiere a la cara del soporte, no a una dirección vertical fija durante la flotación.
+- El usuario propone dos abrazaderas bajo la PCB con pestañas que encajen en la placa. Su representación 3D es esquemática: ranuras, elasticidad, retención axial, aislamiento y contactos de la batería quedan por diseñar.
 - El actuador se sitúa en la punta, sujeto por su parte fija. Su masa móvil se guía paralela al eje `x` de la cápsula, con espacio para el recorrido y sin tocar carcasa, cables o lastre. La etapa de accionamiento se propone cerca del actuador, pero su ubicación depende de sus dimensiones, temperatura e interferencias.
 - El lastre debe ser fijable y, si es posible, ajustable; su posición final se determina con el conjunto real y no se supone que coincida con el espacio inmediatamente detrás del actuador.
 
