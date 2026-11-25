@@ -51,7 +51,7 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 | Actuador completo | Diámetro 20 mm, cuerpo de 13,5 mm de altura y masa total 25 g | Orientación real y envolvente completa, fijación, masa móvil y espacio de la guía |
 | Parte móvil | Altura medida 12,2 mm; ficha de variante 20VC001: carrera de 3 mm | Carrera útil y posiciones extremas reales; no confundir altura con carrera |
 | Batería | Recargable de litio 14500, 3,7 V nominales y 800 mAh indicados; aproximadamente 14 mm de diámetro y 50 mm de largo nominales | Medidas reales con terminales y protección, masa, referencia, límites de carga y descarga, protección y fijación |
-| ESP32-C3 | Imagen identificada por el usuario: 17,8 × 22,5 mm y ocho contactos por fila; paso entre pines de 2,54 mm confirmado por el usuario | Verificar medidas en la unidad física, modelo, pinout, separación entre filas, altura, masa y zona de antena |
+| ESP32-C3 | Imagen identificada por el usuario: 17,8 × 22,5 mm y ocho contactos por fila; paso entre pines 2,54 mm. Separación entre filas igual a la placa de nueve según el usuario: estimación 15,24 mm si sus márgenes son simétricos | Medir separación entre filas y demás dimensiones en la unidad física; verificar modelo, pinout, altura, masa y zona de antena |
 | Boost e IMU | Sin dimensiones completas confirmadas | Modelo, largo × ancho × alto, masa, conectores y orientación |
 | Etapa de accionamiento y lastre | Sin diseño o dimensiones definidos | Envolvente, masa, fijación, alimentación y margen térmico |
 
