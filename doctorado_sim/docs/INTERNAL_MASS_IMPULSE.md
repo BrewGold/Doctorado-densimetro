@@ -4,6 +4,8 @@
 
 Se comparan dos movimientos de una misma masa interna situada cerca de la punta lastrada: uno paralelo al eje longitudinal y otro vertical **en la posicion inicial de equilibrio**. Ambos usan el mismo recorrido y duracion; la direccion del movimiento permanece fija respecto a la capsula y gira con ella. Por tanto, el segundo recorrido no permanece exactamente vertical durante la oscilacion y tampoco es perpendicular al eje longitudinal inicialmente.
 
+Para el siguiente experimento se ha seleccionado el **recorrido longitudinal** como configuracion de trabajo. La comparacion vertical se conserva como referencia exploratoria; esta decision no valida el modelo ni demuestra que la configuracion elegida sea optima para todos los fluidos.
+
 La inclinacion geometrica de **34,91 grados sobre la horizontal** es la estimacion hipotetica explicada en [ondas en paredes circulares](CIRCULAR_WALL_WAVES.md), no una medida directa del angulo del TFM. El modelo representa desplazamientos angulares respecto a ese equilibrio, no convierte los grados en `ang_deg` de la IMU. El punto de reposo de la masa movil se situa a 60 mm del centro de masa supuesto de la carcasa, hacia la punta. La carcasa agrega la masa fija, incluido el lastre: no se calcula su distribucion interna.
 
 La simulacion **no identifica ni predice el actuador real**. La trayectoria de la masa se impone idealmente; no hay modelo de solenoide, fuerzas de motor, topes, consumo, campo magnetico ni control. La geometria dibujada es esquematica, no un plano ni una comprobacion de espacio.
