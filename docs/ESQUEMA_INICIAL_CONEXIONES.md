@@ -38,7 +38,7 @@ Esta imagen sirve para planificar la posición del módulo, no para validar sus 
 
 La disposición física prevista, desde la tapa hacia el extremo lastrado, es **ESP32 → receptor/cargador → boost → IMU → DRV8833**. El USB-C apunta hacia la tapa; comprobar su acceso y la posible interferencia con la bobina. No implica que los módulos estén conectados eléctricamente en serie: el ESP32 se comunica con la IMU por I²C. La distribución y las distancias se comprobarán con las dimensiones, la interferencia y las restricciones de antena reales; véase [Materiales y ensamblajes](MATERIALES_Y_ENSAMBLAJES.md).
 
-En una futura ampliación se prevé situar el actuador y su amplificador o etapa de accionamiento en la punta lastrada. Su tipo, alimentación y señales de control están por definir; no forman parte del circuito inicial ni se ha asignado aún una conexión eléctrica.
+El actuador se prevé dentro del cuerpo cilíndrico, próximo a la ojiva que aloja el lastre. Su etapa de accionamiento se reserva en la PCB; la alimentación y señales de control están por definir y no se ha asignado aún una conexión eléctrica.
 
 ### Candidato de puente H para el actuador
 

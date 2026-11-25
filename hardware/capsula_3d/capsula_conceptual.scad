@@ -5,7 +5,7 @@ $fn = 128;
 
 diametro_exterior = 48;
 pared = 2;
-largo_cuerpo = 184;
+largo_cuerpo = 214;
 espesor_tapa = 3;
 largo_ojiva = 32;
 largo_encaje = 8;
@@ -22,6 +22,11 @@ ancho_clip = 2.7;
 holgura_guia_pcb = 0.4;
 holgura_bobina_diametral = 0.8;
 holgura_actuador_diametral = 0.8;
+actuador_x = 181;
+actuador_largo_referencia = 13.5;
+soporte_actuador_x = 185;
+soporte_actuador_largo = 4;
+fin_guias_pcb = 179;
 
 radio = diametro_exterior / 2;
 radio_interior = radio - pared;
@@ -33,6 +38,13 @@ assert(largo_encaje < placa_x && placa_x + placa_largo < largo_cuerpo - largo_en
        "La PCB interfiere con las zonas de encaje");
 assert(largo_cuerpo >= placa_x + placa_largo, "La PCB excede el cuerpo");
 assert(placa_ancho < 2 * radio_interior, "La PCB excede el diámetro interior");
+assert(fin_guias_pcb > placa_x + placa_largo &&
+       fin_guias_pcb < soporte_actuador_x, "Separación de guías insuficiente");
+assert(actuador_x > placa_x + placa_largo &&
+       soporte_actuador_x >= actuador_x &&
+       soporte_actuador_x + soporte_actuador_largo <= actuador_x + actuador_largo_referencia &&
+       actuador_x + actuador_largo_referencia < largo_cuerpo - largo_encaje,
+       "Envolvente del actuador fuera de su reserva");
 assert(modo == "corte" || modo == "conjunto" || modo == "cuerpo" ||
        modo == "tapa" || modo == "punta" || modo == "prueba_pcb" ||
        modo == "prueba_bobina" || modo == "prueba_actuador", "Modo desconocido");
@@ -50,6 +62,7 @@ module cuerpo() {
                 cilindro_x(radio_interior, largo_cuerpo - 2 * largo_encaje);
         }
         guias_pcb();
+        soporte_actuador();
     }
 }
 
@@ -58,17 +71,17 @@ module guias_pcb() {
     for (lado = [-1, 1])
         difference() {
             translate([largo_encaje, lado > 0 ? 11.6 : -22.1, -3])
-                cube([largo_cuerpo - 2 * largo_encaje, 10.5, 6]);
+                cube([fin_guias_pcb - largo_encaje, 10.5, 6]);
             translate([largo_encaje - 0.1, lado > 0 ? 11.6 : -14,
                        -(placa_espesor + holgura_guia_pcb) / 2])
-                cube([largo_cuerpo - 2 * largo_encaje + 0.2, 2.4,
+                cube([fin_guias_pcb - largo_encaje + 0.2, 2.4,
                       placa_espesor + holgura_guia_pcb]);
             // Evita que el riel sobresalga de la superficie exterior.
             difference() {
                 translate([largo_encaje - 0.1, -25, -5])
-                    cube([largo_cuerpo - 2 * largo_encaje + 0.2, 50, 10]);
+                    cube([fin_guias_pcb - largo_encaje + 0.2, 50, 10]);
                 translate([largo_encaje - 0.2, 0, 0])
-                    cilindro_x(radio, largo_cuerpo - 2 * largo_encaje + 0.4);
+                    cilindro_x(radio, fin_guias_pcb - largo_encaje + 0.4);
             }
         }
 }
@@ -136,26 +149,22 @@ module punta() {
                 translate([-0.1, 0, 0])
                     cilindro_x(radio_encaje - 1.8, 1.2);
             }
-            soporte_actuador();
         }
     }
 }
 
 module soporte_actuador() {
-    // Aro y nervios de prueba solo para centrar la carcasa fija.
+    // Reserva central para carcasa fija: fijación y movimiento sin validar.
+    translate([soporte_actuador_x, 0, 0])
     difference() {
         union() {
-            translate([1, 0, 0]) cilindro_x(12.5, 4);
-            translate([1, -22.1, -2]) cube([4, 44.2, 4]);
-            translate([1, -2, -22.1]) cube([4, 4, 44.2]);
+            cilindro_x(12.5, soporte_actuador_largo);
+            translate([0, -22.1, -2]) cube([soporte_actuador_largo, 44.2, 4]);
+            translate([0, -2, -22.1]) cube([soporte_actuador_largo, 4, 44.2]);
         }
-        translate([0.9, 0, 0])
-            cilindro_x((20 + holgura_actuador_diametral) / 2, 4.2);
-        // Recorta los nervios en el exterior de la ojiva.
-        difference() {
-            translate([0.9, -25, -25]) cube([4.2, 50, 50]);
-            volumen_ojiva(pared - 0.3);
-        }
+        translate([-0.1, 0, 0])
+            cilindro_x((20 + holgura_actuador_diametral) / 2,
+                       soporte_actuador_largo + 0.2);
     }
 }
 
@@ -217,7 +226,7 @@ module componentes() {
 
     // Envolvente indicativa del cuerpo del actuador; no es la guía ni la carrera.
     color([0.65, 0.68, 0.70])
-        translate([largo_cuerpo + 1, 0, 0]) cilindro_x(10, 13.5);
+        translate([actuador_x, 0, 0]) cilindro_x(10, actuador_largo_referencia);
 }
 
 if (modo == "cuerpo") cuerpo();
