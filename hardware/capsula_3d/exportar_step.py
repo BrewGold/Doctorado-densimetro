@@ -11,8 +11,8 @@ HERE = Path(__file__).resolve().parent
 source = (HERE / "capsula_conceptual.scad").read_text(encoding="utf-8")
 
 
-def parameter(name):
-    match = re.search(rf"^{re.escape(name)}\s*=\s*(-?[0-9.]+)\s*;", source, re.M)
+def parameter(name, text=source):
+    match = re.search(rf"^{re.escape(name)}\s*=\s*(-?[0-9.]+)\s*;", text, re.M)
     if not match:
         raise ValueError(f"Missing scalar OpenSCAD parameter: {name}")
     return float(match.group(1))
@@ -156,3 +156,39 @@ for name, part in (("cuerpo", body), ("tapa", cap), ("ojiva", nose), ("bandeja",
     cq.exporters.export(part, str(HERE / f"{name}_conceptual.step"))
 
 assembly.save(str(HERE / "capsula_conceptual.step"), exportType="STEP")
+
+cage_source = (HERE / "jaula_actuador.scad").read_text(encoding="utf-8")
+
+
+def cage_parameter(name):
+    return parameter(name, cage_source)
+
+
+cage_radius = cage_parameter("radio_exterior")
+base_thickness = cage_parameter("espesor_base")
+cover_thickness = cage_parameter("espesor_cierre")
+cover_x = (base_thickness + cage_parameter("largo_actuador")
+           + cage_parameter("carrera") + cage_parameter("margen_axial"))
+cage_base = cylinder(0, cage_radius, base_thickness)
+for y in (-15.5, 10.5):
+    cage_base = cage_base.union(box(base_thickness - 0.1, y, -3.5,
+                                    cover_x - base_thickness + 0.1, 5, 7))
+cage_cover = cylinder(0, cage_radius, cover_thickness)
+for y in (-13, 13):
+    cage_base = cage_base.cut(cylinder(-0.1, cage_parameter("paso_m3") / 2,
+                                       cover_x + 0.2).translate((0, y, 0)))
+    cage_cover = cage_cover.cut(cylinder(-0.1, cage_parameter("paso_m3") / 2,
+                                         cover_thickness + 0.2).translate((0, y, 0)))
+for y in (-cage_parameter("separacion_m25") / 2, cage_parameter("separacion_m25") / 2):
+    cage_base = cage_base.cut(cylinder(-0.1, cage_parameter("paso_m25") / 2,
+                                       base_thickness + 0.2).translate((0, y, 0)))
+cage_base = cage_base.cut(cylinder(-0.1, 2, base_thickness + 0.2))
+cage_base = cage_base.cut(box(-0.1, -3, 10.8, base_thickness + 0.2, 6, 8))
+cage_cover = cage_cover.cut(cylinder(-0.1, 4, cover_thickness + 0.2))
+cage_assembly = cq.Assembly(name="Jaula_ajuste_en_seco")
+for name, part, x in (("jaula_base", cage_base, 0), ("jaula_cierre", cage_cover, cover_x)):
+    if not part.val().isValid() or len(part.val().Solids()) != 1:
+        raise ValueError(f"Invalid cage geometry: {name}")
+    cq.exporters.export(part, str(HERE / f"{name}.step"))
+    cage_assembly.add(part.translate((x, 0, 0)), name=name)
+cage_assembly.save(str(HERE / "jaula_actuador.step"), exportType="STEP")

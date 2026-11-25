@@ -6,6 +6,26 @@ La [vista en corte](capsula_corte.png) muestra la bandeja extraíble en amarillo
 
 ## Modelo para SolidWorks
 
+### Prototipo de plástico de la jaula del actuador
+
+Primer prototipo **independiente para ajuste en seco**, no un actuador listo para funcionar. Fuente: `jaula_actuador.scad`. Se entregan [base STL](jaula_base.stl), [cierre STL](jaula_cierre.stl), [disposición de impresión STL](jaula_impresion.stl) y [conjunto STEP](jaula_actuador.step). La jaula todavía **no está unida a la bandeja ni incorporada al conjunto STEP de la cápsula**: su adaptación y anclaje requieren verificar primero el actuador real. No imprimir todavía una cápsula completa para este montaje.
+
+La cara de salida de cables se considera fija, según confirmación del usuario. La base tiene 3 mm de espesor y dos pasos Ø2,9 mm para tornillos M2,5, con separación provisional de 9 mm tomada de esa vista del dibujo. Verificar separación, orientación y correspondencia en la unidad antes de montar. La entrada acordada de **3 mm en el actuador** es provisional y no la impone el plástico: con esta base correspondería a un tornillo de 6 mm bajo cabeza sin arandela; una arandela reduce la entrada. **No introducir los tornillos hasta comprobar la profundidad útil de las roscas** y que no alcancen el bobinado. La cara debe apoyar en una superficie fija adecuada, nunca sobre los hilos.
+
+Dos laterales de 5 × 7 mm unen la base con un cierre desmontable de 3 mm. Dos conductos longitudinales Ø3,4 mm, a ±13 mm del eje, están previstos para tornillos pasantes M3 con tuercas y arandelas: no son roscas impresas. La longitud del tornillo se elegirá con la pieza impresa, arandelas, tuerca y salida de rosca; el apilamiento plástico nominal es de 23 mm. Hay un alivio central Ø4 mm en la base y Ø8 mm en el cierre, y una muesca superior de cables de 6 mm de ancho, todos provisionales.
+
+La cavidad axial entre base y cierre mide **17 mm = 13,5 mm de envolvente + 3 mm de carrera + 0,5 mm de margen geométrico**. Esta suma no acredita una carrera útil: presupone la cara fija contra la base y el movimiento hacia el cierre; faltan las posiciones extremas reales. El radio exterior es 17,5 mm y el interior entre laterales tiene 21 mm de ancho. El cierre solo podrá retener la pieza móvil si sus superficies, diámetro y posiciones se corresponden con el dibujo; no se ha demostrado contención lateral, guiado o retención en todas las posiciones. No usarlo como tope de impacto ni energizar en esta jaula de ajuste.
+
+Para la prueba se propone PETG, sin cambiar el material de carcasa acordado. `jaula_impresion.stl` coloca la base y el cierre separados, con sus caras planas sobre la cama; configurar soportes según el laminador. Como punto de partida de impresión, capa de 0,2 mm y cuatro perímetros, sin garantía de resistencia; revisar las trayectorias y los puentes sobre agujeros. Comprobar dimensiones, capas, tornillos y ausencia de grietas con piezas inertes, sin batería. Los ajustes, rigidez y durabilidad deben comprobarse antes de definir la versión funcional; no basta con que encaje.
+
+```bash
+for parte in base cierre impresion; do
+  openscad -D "modo=\"$parte\"" -o "hardware/capsula_3d/jaula_$parte.stl" hardware/capsula_3d/jaula_actuador.scad
+done
+```
+
+### Conjunto de la cápsula
+
 El [conjunto STEP](capsula_conceptual.step) se puede importar desde SolidWorks con **Archivo → Abrir**, seleccionando el formato STEP. Es un intercambio de geometría, **no un archivo nativo `.SLDASM` ni conserva un árbol de operaciones paramétricas de SolidWorks**. La importación y la apariencia pueden depender de la versión y sus opciones. También están disponibles las piezas [bandeja](bandeja_conceptual.step), [cuerpo](cuerpo_conceptual.step), [tapa](tapa_conceptual.step) y [ojiva](ojiva_conceptual.step). Para ver el interior, ocultar `Cuerpo_PETG` o activar una vista de sección longitudinal.
 
 El conjunto contiene piezas y bloques simplificados en milímetros: cuerpo, bandeja, tapa, ojiva, PCB de **1,6 mm**, batería, actuador, bobina de carga y envolventes de módulos. La junta tórica, los clips y sus aberturas en la PCB son ilustrativos; no incluye contactos ni cableado. El perfil de la ojiva se aproxima mediante segmentos, con una pequeña diferencia en el extremo interior respecto a OpenSCAD. El STEP es una representación de estudio, no un plano ni una comprobación de montaje.
