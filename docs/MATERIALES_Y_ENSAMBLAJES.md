@@ -47,6 +47,8 @@ La propuesta sitúa la batería cerca del extremo lastrado, bajo la PCB, y la bo
 Tapa / bobina → módulo receptor-cargador → elevador (boost) → IMU → ESP32 → punta lastrada
 ```
 
+Se prevé una PCB portadora para soldar los módulos, incorporando pines donde falten. Sus huellas, fijaciones y la altura del conjunto se determinarán al medir las placas y sus conexiones; véase el [esquema funcional](ESQUEMA_INICIAL_CONEXIONES.md).
+
 La posición de la batería bajo la PCB y la distribución de los módulos deben ajustarse a las dimensiones reales. El orden describe su ubicación física, no conexiones eléctricas en serie. Deben verificarse espacio y sujeción, estanqueidad, temperatura, separación del convertidor respecto a la IMU y condiciones de antena del ESP32 antes de fijar la disposición definitiva. Se prevé una interfaz de cuatro pines entre la PCB principal y el receptor/cargador, con pinout pendiente; `BOUT` se considera una posible entrada al elevador, no una conexión validada.
 
 Para una vista esquemática del conjunto y las dimensiones pendientes, consultar la [distribución interior preliminar](DISTRIBUCION_INTERIOR_CAPSULA.md).

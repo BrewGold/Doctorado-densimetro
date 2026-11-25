@@ -4,6 +4,8 @@
 
 Este es el esquema funcional inicial para reconstruir en KiCad la electrónica descrita en el TFM. Define las conexiones entre módulos, no todavía el esquemático de fabricación a nivel de pines y footprints. Los modelos exactos de las placas deben confirmarse antes de fijar pines, tensiones y huellas.
 
+Se diseñará una **PCB portadora para soldar los módulos**, no una integración desde cero de todos sus componentes. En los módulos que no traigan pines se colocarán pines soldados adecuados a sus pads; habrá que comprobar su paso, número, orientación y altura, así como las necesidades de acceso y montaje, antes de elegir las huellas. La posición de cada módulo y el tipo de unión a la PCB se definirán con las piezas reales. Esto no sustituye la identificación de sus conexiones eléctricas ni implica que se vaya a soldar directamente sobre la batería.
+
 La arquitectura del TFM utilizaba batería → convertidor elevador MT3608 → placa ESP32-C3; IMU LSM6DSOX por I²C; transmisión inalámbrica por Wi-Fi al PC. Para el nuevo diseño se ha pedido un receptor/cargador inalámbrico que sustituirá al cargador de batería anterior, cuya referencia no está identificada aquí. El MT3608 es un elevador de tensión, no un cargador: se conserva como candidato para la etapa de alimentación, sujeto a verificación. La frecuencia de adquisición documentada es 100 Hz y el protocolo de datos es UDP.
 
 ## Diagrama funcional
@@ -80,7 +82,7 @@ No conectar ni cargar una batería de química desconocida. El receptor/cargador
 
 - Confirmar las referencias exactas de ESP32, breakout IMU, batería y módulo MT3608.
 - Confirmar los terminales y características del receptor/cargador recibido y la protección requerida para la batería.
-- Decidir si el primer diseño será una PCB portadora para módulos existentes o una integración de componentes soldados directamente.
+- Definir las uniones y pines de cada módulo a la PCB portadora y la sujeción y conexión segura de la batería.
 - Obtener dimensiones, pinout y footprints de fabricante.
 - Definir conector, interruptor, protección de entrada y puntos de prueba.
 - Verificar alimentación, restricciones de antena Wi-Fi, fijación mecánica y envolvente de la cápsula.
