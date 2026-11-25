@@ -13,7 +13,7 @@ La prioridad es que la cápsula pueda ensayarse en una configuración documentad
 | Cápsula | Cuerpo/carcasa | Flotabilidad y soporte de componentes | Geometría conceptual; fabricación y material por confirmar | Material, dimensiones, masa, espesor, uniones y estanqueidad |
 | Balanceo | Lastre | Crear o ajustar el desbalance | Mencionado; pieza y ubicación exactas por documentar | Material, masa, forma, posición respecto a ejes y método de fijación |
 | Medida | IMU | Registrar movimiento y estimar orientación | Sensor disponible según el planteamiento experimental | Modelo, rango, frecuencia de muestreo, orientación de ejes, configuración y calibración |
-| Alimentación | Batería 14500 | Alimentar la instrumentación | Formato indicado; química y especificación por confirmar | Medidas reales, masa, química, tensión, capacidad, protección, posición y sujeción |
+| Alimentación | Batería 14500 | Alimentar la instrumentación | Recargable de litio, 3,7 V nominales y 800 mAh indicados | Medidas reales, masa, referencia, límites de carga y descarga, protección, posición y sujeción |
 | Alimentación | Receptor/cargador inalámbrico con bobina circular | Carga de la batería dentro de la cápsula | Pedido; sustituye al cargador anterior | Bobina de 25 mm, placa aprox. 15 × 18 mm; confirmar polaridad, corriente, protección, temperatura y compatibilidad |
 | Alimentación | MT3608 | Elevador de tensión para la electrónica | Usado en el TFM; candidato sujeto a validación | Verificar tensión y corriente de `BOUT`, salida necesaria y compatibilidad con el ESP32 |
 | Eléctrico | Cableado y conectores | Alimentación y adquisición | Mencionados; recorrido por documentar | Masa, longitud, conectores, sujeción y efecto sobre sellado o movimiento |

@@ -50,7 +50,7 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 | Placa del receptor | Aproximadamente 15 × 18 mm | Espesor, conectores, posición de cables y fijación |
 | Actuador completo | Diámetro 20 mm, cuerpo de 13,5 mm de altura y masa total 25 g | Orientación real y envolvente completa, fijación, masa móvil y espacio de la guía |
 | Parte móvil | Altura medida 12,2 mm; ficha de variante 20VC001: carrera de 3 mm | Carrera útil y posiciones extremas reales; no confundir altura con carrera |
-| Batería | Formato 14500: aproximadamente 14 mm de diámetro y 50 mm de largo nominales | Medidas reales con terminales y protección, masa, química, tensión, protección y fijación |
+| Batería | Recargable de litio 14500, 3,7 V nominales y 800 mAh indicados; aproximadamente 14 mm de diámetro y 50 mm de largo nominales | Medidas reales con terminales y protección, masa, referencia, límites de carga y descarga, protección y fijación |
 | Boost, IMU y ESP32 | Sin dimensiones completas confirmadas | Modelo, largo × ancho × alto, masa, conectores y orientación |
 | Etapa de accionamiento y lastre | Sin diseño o dimensiones definidos | Envolvente, masa, fijación, alimentación y margen térmico |
 
@@ -68,4 +68,4 @@ Todavía no se puede determinar la longitud ni el diámetro necesarios: faltan e
 6. Comprobar experimentalmente carga inalámbrica, temperatura, interferencia del boost y del actuador con la IMU y funcionamiento de la antena del ESP32 en su ubicación real. No fijar separaciones definitivas sin las fichas y pruebas correspondientes.
 7. Pesar el conjunto fabricado, comprobar flotación y ángulo de equilibrio, y ajustar el lastre. Añadir los 25 g del actuador completo cambia la masa y el centro de masas; no deben tratarse como masa móvil. Registrar la configuración antes de comparar ensayos.
 
-La función y polaridad del receptor, la protección de batería y el puente H siguen pendientes de verificación. La disposición mecánica no valida el circuito ni autoriza a conectar la bobina al GPIO; véase el [esquema funcional](ESQUEMA_INICIAL_CONEXIONES.md) y el [inventario](MATERIALES_Y_ENSAMBLAJES.md).
+La función y polaridad del receptor, la compatibilidad de carga con la celda concreta, la protección de batería y el puente H siguen pendientes de verificación. Los 3,7 V son nominales, no una tensión constante; la capacidad indicada no determina la corriente de carga o descarga admisible. La disposición mecánica no valida el circuito ni autoriza a conectar la bobina al GPIO; véase el [esquema funcional](ESQUEMA_INICIAL_CONEXIONES.md) y el [inventario](MATERIALES_Y_ENSAMBLAJES.md).
