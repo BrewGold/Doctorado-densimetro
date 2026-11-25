@@ -1,0 +1,67 @@
+# Distribución preliminar de los componentes
+
+## Alcance
+
+Propuesta para organizar la cápsula impresa en 3D y preparar las medidas del montaje. Los dibujos son **esquemas sin escala**, no un plano ni una comprobación de encaje. Se mantiene el orden acordado desde la tapa y se reserva la punta para el actuador de recorrido longitudinal y su etapa de accionamiento.
+
+## Vista longitudinal
+
+```text
+       TAPA / EXTREMO DE CARGA                         EXTREMO LASTRADO
+    _________________________________________________________________
+   /                                                                 \
+  |  [bobina] [receptor] [boost] [IMU] [ESP32] [etapa] [actuador]    |
+  |           ───────────── PCB / soporte ────────────    <───> x      |
+  |                         [batería bajo la PCB]         [lastre]*  |
+   \_________________________________________________________________/
+                       x positivo hacia la punta
+
+   * Posición, forma y masa del lastre por ajustar; no invadir la carrera.
+```
+
+- La bobina receptora va junto a la tapa, enfrentada al transmisor externo, con su orientación y separación a validar mediante una prueba de carga.
+- Receptor/cargador, boost, IMU y ESP32 conservan ese orden físico. La PCB o soporte puede alojarlos o conectarse a sus módulos; el dibujo no presupone integración en una sola placa ni conexiones en serie.
+- La batería se sitúa bajo la PCB y cerca del extremo lastrado, donde quepa sin invadir el actuador. La orientación «bajo» se refiere a la cara del soporte, no a una dirección vertical fija durante la flotación.
+- El actuador se sitúa en la punta, sujeto por su parte fija. Su masa móvil se guía paralela al eje `x` de la cápsula, con espacio para el recorrido y sin tocar carcasa, cables o lastre. La etapa de accionamiento se propone cerca del actuador, pero su ubicación depende de sus dimensiones, temperatura e interferencias.
+- El lastre debe ser fijable y, si es posible, ajustable; su posición final se determina con el conjunto real y no se supone que coincida con el espacio inmediatamente detrás del actuador.
+
+Para el objetivo de generar ángulo también importa la **posición transversal de la guía respecto al centro de masas conjunto**: un recorrido longitudinal alineado con él no produce par instantáneo directo alrededor de ese centro en un modelo ideal. El centro de masas, el empuje y sus cambios durante el movimiento se deben medir o estimar con el montaje real; la disposición axial por sí sola no garantiza una excitación angular suficiente.
+
+## Sección transversal orientativa
+
+```text
+             interior de la carcasa
+                ___________
+              /             \
+             |    módulos    |
+             | ─── PCB ───── |    PCB y soporte fijados a la carcasa
+             |   batería     |
+              \_____________/
+```
+
+La sección es esquemática: módulos, conectores, soportes y batería pueden sobresalir de la PCB. El espacio disponible se reduce hacia los extremos curvos y por el espesor de pared, las fijaciones y las tolerancias. La ubicación de la batería bajo la PCB no implica que ambas ocupen toda la longitud de la cápsula.
+
+## Dimensiones conocidas y comprobaciones
+
+| Elemento | Referencia disponible | Pendiente para comprobar el montaje |
+|---|---|---|
+| Cápsula del TFM | Aproximadamente 125 × 40 mm exteriores; referencia, no medida del nuevo diseño | Longitud y diámetro interiores útiles, perfil de los extremos, espesor, cierre y espacio de montaje |
+| Bobina receptora | Diámetro 25 mm | Espesor, salida de cables, orientación y distancia efectiva al transmisor con la tapa y soportes |
+| Placa del receptor | Aproximadamente 15 × 18 mm | Espesor, conectores, posición de cables y fijación |
+| Actuador completo | Diámetro 20 mm, cuerpo de 13,5 mm de altura y masa total 25 g | Orientación real y envolvente completa, fijación, masa móvil y espacio de la guía |
+| Parte móvil | Altura medida 12,2 mm; ficha de variante 20VC001: carrera de 3 mm | Carrera útil y posiciones extremas reales; no confundir altura con carrera |
+| Batería, boost, IMU y ESP32 | Sin dimensiones completas confirmadas | Modelo, largo × ancho × alto, masa, conectores y orientación |
+| Etapa de accionamiento y lastre | Sin diseño o dimensiones definidos | Envolvente, masa, fijación, alimentación y margen térmico |
+
+El diámetro de 20 mm del actuador es menor que los 40 mm exteriores de referencia, pero esto **no demuestra que quepa**: hay que medir el interior, en especial en la punta curva, y sumar guía, cableado y holguras. Del mismo modo, no se puede deducir la longitud total necesaria sumando las cotas disponibles: falta conocer cómo se orientan y solapan los componentes.
+
+## Preparación del montaje
+
+1. Medir la cavidad interior a lo largo de la cápsula, incluyendo tapa, cierre y zonas curvas. Identificar dónde se puede introducir y fijar un soporte desmontable.
+2. Medir cada componente con conectores y cables, incluyendo la envolvente completa del actuador en sus posiciones extremas. Verificar mecánicamente su carrera antes de fijar topes o mandar desplazamientos.
+3. Dibujar o modelar cada envolvente en el mismo sistema de referencia: `x` desde la tapa hacia la punta y dos ejes transversales fijos a la cápsula. Registrar posición, orientación y masa de cada pieza, soportes y cables incluidos.
+4. Ajustar el soporte y las posiciones para evitar interferencias, proteger la batería de contactos y rozamientos, y permitir montaje, mantenimiento y sellado. Fijar rígidamente la IMU y registrar sus ejes respecto a los de la cápsula.
+5. Comprobar experimentalmente carga inalámbrica, temperatura, interferencia del boost y del actuador con la IMU y funcionamiento de la antena del ESP32 en su ubicación real. No fijar separaciones definitivas sin las fichas y pruebas correspondientes.
+6. Pesar el conjunto, comprobar flotación y ángulo de equilibrio, y ajustar el lastre. Añadir los 25 g del actuador completo cambia la masa y el centro de masas; no deben tratarse como masa móvil. Registrar la configuración antes de comparar ensayos.
+
+La función y polaridad del receptor, la protección de batería y el puente H siguen pendientes de verificación. La disposición mecánica no valida el circuito ni autoriza a conectar la bobina al GPIO; véase el [esquema funcional](ESQUEMA_INICIAL_CONEXIONES.md) y el [inventario](MATERIALES_Y_ENSAMBLAJES.md).
