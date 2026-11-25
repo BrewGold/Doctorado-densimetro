@@ -64,6 +64,8 @@ Todavía no se puede determinar la longitud ni el diámetro necesarios: faltan e
 
 La [maqueta mecánica de la PCB portadora](../hardware/pcb_portadora/README.md) propone una primera distribución en KiCad; es provisional y no apta para fabricación.
 
+La [maqueta conceptual 3D de la cápsula](../hardware/capsula_3d/README.md) interpreta el croquis con tapa de carga, cuerpo y punta separados; todavía no incorpora roscas, fijaciones ni juntas.
+
 ## Dimensionado y preparación del montaje
 
 1. Medir cada componente con conectores y cables, incluyendo la envolvente completa del actuador en sus posiciones extremas. Verificar mecánicamente su carrera antes de fijar topes o mandar desplazamientos.
