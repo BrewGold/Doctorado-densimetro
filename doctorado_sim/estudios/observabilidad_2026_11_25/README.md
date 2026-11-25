@@ -5,6 +5,9 @@ generados, figuras y resultados numéricos para dar continuidad al modelo de la
 cápsula. **Las precisiones indicadas son simuladas y no están validadas como
 prestaciones de un densímetro ni de un viscosímetro.**
 
+La [decisión de continuar con frecuencia fija](../../../docs/ESTRATEGIA_FRECUENCIA_FIJA.md)
+resume el punto de partida a 1,9 Hz y los límites de las comparaciones.
+
 ## Evidencia y límites comunes
 
 - Los primeros barridos usan \(I=8·10^{-5}+5·10^{-8}\rho\),

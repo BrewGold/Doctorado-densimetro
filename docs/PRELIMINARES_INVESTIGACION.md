@@ -32,7 +32,9 @@ Se propone usar agua como referencia, registrando temperatura. Cerca de 20 °C, 
 
 ## 3. Perturbación libre, excitación activa y función de transferencia
 
-La primera opción experimental es perturbar y soltar con condiciones reproducibles. Después de la liberación, el modelo de respuesta libre supone entrada externa nula. Permite caracterizar modos, pero no identificar la ganancia completa de entrada a salida.
+La perturbación y suelta con condiciones reproducibles es una opción para caracterizar la respuesta libre. Después de la liberación, el modelo de respuesta libre supone entrada externa nula. Permite caracterizar modos, pero no identificar la ganancia completa de entrada a salida.
+
+Para la siguiente etapa se ha elegido la **excitación a frecuencia fija** como estrategia principal; inicialmente se estudiará 1,9 Hz, sin considerarla óptima ni una resonancia mecánica demostrada. El pulso libre y la frecuencia adaptativa siguen siendo comparadores. La [estrategia de frecuencia fija](ESTRATEGIA_FRECUENCIA_FIJA.md) documenta la decisión, las diferencias entre simulaciones y el protocolo de validación.
 
 Para identificar una función de transferencia hay que definir la entrada: torque, fuerza, movimiento de la base u orden eléctrica del actuador producen transferencias diferentes. En un candidato lineal de segundo orden:
 
