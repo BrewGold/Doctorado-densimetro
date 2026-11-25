@@ -64,7 +64,7 @@ Todavía no se puede determinar la longitud ni el diámetro necesarios: faltan e
 
 La [maqueta mecánica de la PCB portadora](../hardware/pcb_portadora/README.md) propone una primera distribución en KiCad; es provisional y no apta para fabricación.
 
-La [maqueta conceptual 3D de la cápsula](../hardware/capsula_3d/README.md) interpreta el croquis con tapa de carga, cuerpo y punta separados; todavía no incorpora roscas, fijaciones ni juntas.
+La [maqueta conceptual 3D de la cápsula](../hardware/capsula_3d/README.md) interpreta el croquis con cuerpo cilíndrico, tapa de carga con junta ilustrativa y ojiva para el lastre. Los encajes son lisos: todavía no incorpora roscas funcionales ni fijaciones y la junta no está validada.
 
 ## Dimensionado y preparación del montaje
 

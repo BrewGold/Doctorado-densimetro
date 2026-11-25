@@ -1,4 +1,4 @@
-// Maqueta geométrica, sin cierres, soportes ni estanqueidad.
+// Maqueta geométrica: encajes lisos simbólicos, sin roscas funcionales.
 // Eje X: tapa de carga (izquierda) hacia punta lastrada (derecha).
 modo = "corte"; // [corte, conjunto, cuerpo, tapa, punta]
 $fn = 128;
@@ -7,6 +7,12 @@ diametro_exterior = 48;
 pared = 2;
 largo_cuerpo = 184;
 espesor_tapa = 3;
+largo_ojiva = 32;
+largo_encaje = 8;
+radio_encaje = 20.6;
+radio_paso_extremos = 21;
+radio_junta = 22;
+seccion_junta = 2;
 placa_largo = 164;
 placa_ancho = 24;
 placa_espesor = 1.6;
@@ -15,6 +21,11 @@ placa_x = 10;
 radio = diametro_exterior / 2;
 radio_interior = radio - pared;
 assert(diametro_exterior > 2 * pared, "Pared incompatible con diámetro");
+assert(largo_ojiva >= radio, "La ojiva tangente requiere longitud >= radio");
+assert(radio_encaje < radio_paso_extremos &&
+       radio_paso_extremos < radio_interior, "Encajes incompatibles");
+assert(largo_encaje < placa_x && placa_x + placa_largo < largo_cuerpo - largo_encaje,
+       "La PCB interfiere con las zonas de encaje");
 assert(largo_cuerpo >= placa_x + placa_largo, "La PCB excede el cuerpo");
 assert(placa_ancho < 2 * radio_interior, "La PCB excede el diámetro interior");
 assert(modo == "corte" || modo == "conjunto" || modo == "cuerpo" ||
@@ -27,34 +38,76 @@ module cilindro_x(r, h) {
 module cuerpo() {
     difference() {
         cilindro_x(radio, largo_cuerpo);
-        translate([-0.1, 0, 0]) cilindro_x(radio_interior, largo_cuerpo + 0.2);
+        translate([-0.1, 0, 0]) cilindro_x(radio_paso_extremos, largo_cuerpo + 0.2);
+        translate([largo_encaje, 0, 0])
+            cilindro_x(radio_interior, largo_cuerpo - 2 * largo_encaje);
     }
 }
 
 module tapa() {
-    translate([-espesor_tapa, 0, 0]) cilindro_x(radio, espesor_tapa);
-}
-
-module semiesfera(r) {
-    intersection() {
-        sphere(r = r);
-        translate([0, -r, -r]) cube([r, 2 * r, 2 * r]);
+    difference() {
+        union() {
+            translate([-espesor_tapa, 0, 0]) cilindro_x(radio, espesor_tapa + 0.05);
+            difference() {
+                cilindro_x(radio_encaje, largo_encaje);
+                translate([-0.1, 0, 0])
+                    cilindro_x(radio_encaje - 1.8, largo_encaje + 0.2);
+            }
+        }
+        // Ranura orientativa; no está dimensionada para estanqueidad.
+        translate([-1.2, 0, 0])
+            difference() {
+                cilindro_x(radio_junta + 1.2, 1.3);
+                translate([-0.1, 0, 0]) cilindro_x(radio_junta - 1.2, 1.5);
+            }
     }
 }
 
+module junta() {
+    translate([-0.5, 0, 0]) rotate([0, 90, 0])
+        rotate_extrude() translate([radio_junta, 0, 0]) circle(d = seccion_junta);
+}
+
+// Arco circular tangente al cilindro; espesor radial ilustrativo.
+radio_arco = (largo_ojiva * largo_ojiva + radio * radio) / (2 * radio);
+function radio_ojiva(x) = sqrt(max(0, radio_arco * radio_arco - x * x))
+                          + radio - radio_arco;
+module volumen_ojiva(reduccion = 0) {
+    rotate([0, 90, 0]) rotate_extrude()
+        polygon(concat([[0, 0]],
+                       [for (i = [0:128])
+                            [max(0, radio_ojiva(largo_ojiva * i / 128) - reduccion),
+                             largo_ojiva * i / 128]],
+                       [[0, largo_ojiva]]));
+}
+
 module punta() {
-    translate([largo_cuerpo, 0, 0])
-        difference() {
-            semiesfera(radio);
-            semiesfera(radio_interior);
+    translate([largo_cuerpo, 0, 0]) {
+        union() {
+            difference() {
+                volumen_ojiva();
+                volumen_ojiva(pared);
+            }
+            difference() {
+                translate([-largo_encaje, 0, 0])
+                    cilindro_x(radio_encaje, largo_encaje + 0.5);
+                translate([-largo_encaje - 0.1, 0, 0])
+                    cilindro_x(radio_encaje - 1.8, largo_encaje + 0.7);
+            }
+            difference() {
+                cilindro_x(radio_interior + 0.1, 1);
+                translate([-0.1, 0, 0])
+                    cilindro_x(radio_encaje - 1.8, 1.2);
+            }
         }
+    }
 }
 
 module carcasa_en_corte() {
     difference() {
         children();
         translate([-espesor_tapa - 1, -radio - 1, -radio - 1])
-            cube([largo_cuerpo + radio + espesor_tapa + 2,
+            cube([largo_cuerpo + largo_ojiva + espesor_tapa + 2,
                   radio + 1, 2 * radio + 2]);
     }
 }
@@ -97,11 +150,13 @@ if (modo == "conjunto") {
     color([0.78, 0.83, 0.84, 0.35]) cuerpo();
     color([0.83, 0.86, 0.88, 0.5]) tapa();
     color([0.54, 0.58, 0.61, 0.5]) punta();
+    color([0.1, 0.1, 0.1]) junta();
     componentes();
 }
 if (modo == "corte") {
     color([0.78, 0.83, 0.84]) carcasa_en_corte() cuerpo();
     color([0.83, 0.86, 0.88]) carcasa_en_corte() tapa();
     color([0.54, 0.58, 0.61]) carcasa_en_corte() punta();
+    color([0.1, 0.1, 0.1]) carcasa_en_corte() junta();
     componentes();
 }
