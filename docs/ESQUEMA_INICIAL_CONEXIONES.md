@@ -51,6 +51,17 @@ En una futura ampliación se prevé situar el actuador y su amplificador o etapa
 
 El bus I²C y todas sus señales deben permanecer a nivel lógico de 3,3 V. No añadir pull-ups externos hasta comprobar si el breakout ya los incorpora. El firmware incluido en el TFM usa la dirección I²C `0x6A`; confirmar el strap de dirección del breakout para que coincida. La selección de interfaz I²C/SPI y el estado de pines `CS`/`SDO` dependen de la placa breakout concreta y se fijarán a partir de su documentación.
 
+## IMU Adafruit LSM6DSOX: referencia para la portadora
+
+El diseño oficial [Adafruit LSM6DSOX, producto 4438](https://github.com/adafruit/Adafruit-LSM6DSOX-PCB) se parece al breakout de la fotografía del montaje del TFM, pero falta confirmar referencia y revisión en la unidad física. Los datos siguientes proceden de su esquema y placa Eagle, revisión Git `c05abef4675b0380fbf3d23171615a2f1ac0b130`:
+
+- Contorno de PCB **25,40 × 17,78 mm**; fila principal de nueve agujeros con paso **2,54 mm** y taladro de **1,00 mm** en el diseño. Hay otra fila de cinco contactos y dos conectores STEMMA QT: dejar espacio para los que se utilicen y su altura.
+- Orden eléctrico de la fila principal, del pad 1 al 9: **VIN, 3Vo, GND, SCL, SDA, SDO, CS, INT1, INT2**. Antes de crear la huella, comprobar desde qué cara y extremo se mira y contrastar con la serigrafía de la placa real.
+- Para conservar el firmware del TFM: **GPIO5 → SDA**, **GPIO6 → SCL**, y masa común. La alimentación del breakout se decidirá tras verificar la fuente y el módulo real: `VIN` es entrada del regulador de la placa y `3Vo` está conectado a su salida de 3,3 V; no son pines intercambiables por defecto.
+- El diseño incorpora resistencias de pull-up y adaptación de nivel en I²C. No añadir pull-ups a la portadora sin revisar las ya presentes, su tensión y el resto del bus. Confirmar configuración de `CS` y `SDO`, dirección `0x6A` y arranque con el breakout real.
+
+Las dimensiones son del contorno de la placa, no de la envolvente completa de conectores, pines y soldaduras. Verificar el montaje, la altura y separación antes de fabricar; no fijar una huella definitiva basándose solo en la fotografía.
+
 ## Placa ESP32-C3 mostrada
 
 La imagen facilitada muestra una placa con conector USB y dos filas de ocho contactos. Con el conector USB arriba y en la misma vista de la imagen, las etiquetas de arriba abajo son:

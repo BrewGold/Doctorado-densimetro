@@ -52,7 +52,8 @@ La sección es esquemática: módulos, conectores, soportes y batería pueden so
 | Parte móvil | Altura medida 12,2 mm; ficha de variante 20VC001: carrera de 3 mm | Carrera útil y posiciones extremas reales; no confundir altura con carrera |
 | Batería | Recargable de litio 14500, 3,7 V nominales y 800 mAh indicados; aproximadamente 14 mm de diámetro y 50 mm de largo nominales | Medidas reales con terminales y protección, masa, referencia, límites de carga y descarga, protección y fijación |
 | ESP32-C3 | Imagen identificada por el usuario: 17,8 × 22,5 mm y ocho contactos por fila; paso entre pines 2,54 mm. Separación entre filas igual a la placa de nueve según el usuario: estimación 15,24 mm si sus márgenes son simétricos | Medir separación entre filas y demás dimensiones en la unidad física; verificar modelo, pinout, altura, masa y zona de antena |
-| Boost e IMU | Sin dimensiones completas confirmadas | Modelo, largo × ancho × alto, masa, conectores y orientación |
+| IMU | Diseño Adafruit LSM6DSOX 4438 visualmente similar al TFM: PCB 25,40 × 17,78 mm, fila principal de nueve contactos a 2,54 mm | Confirmar modelo y revisión de la unidad, altura, masa, conectores y orientación; incluir pines y soldaduras |
+| Boost | Sin dimensiones completas confirmadas | Modelo, largo × ancho × alto, masa, conectores y orientación |
 | Etapa de accionamiento y lastre | Sin diseño o dimensiones definidos | Envolvente, masa, fijación, alimentación y margen térmico |
 
 La batería 14500 se propone bajo la PCB, con su eje paralelo al de la cápsula; su portabatería o sujeción y conexiones aumentarán la envolvente. Las cotas nominales no sustituyen la medida de la unidad: algunas protecciones o terminales modifican su tamaño.
