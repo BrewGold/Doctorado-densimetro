@@ -97,6 +97,19 @@ El firmware del TFM (`apendice_ejemplo.tex` en ese archivo) declara `SDA_PIN = 5
 
 El usuario indica unas dimensiones de **17 × 36 mm** para el módulo boost MT3608. En la fotografía del montaje del TFM se aprecian contactos rotulados `VIN+`, `VIN−`, `VOUT+` y `VOUT−`. Es necesario confirmar que el módulo a montar corresponde a la fotografía y medir la ubicación y paso de esos contactos y la altura de sus componentes antes de dibujar su huella. La medida del contorno no incluye necesariamente pines ni soldaduras.
 
+La imagen facilitada después muestra un módulo visualmente similar al del TFM, con cuatro agujeros de conexión y un potenciómetro de ajuste. Vista por la cara de componentes y en la orientación de la imagen: salida `VOUT+` y `VOUT−` a la izquierda; entrada `VIN+` y `VIN−` a la derecha, con los positivos arriba. Confirmar esta orientación y polaridad en la unidad física, así como las distancias entre centros y el diámetro de los agujeros: la imagen no los acota y no garantiza que estén sobre una cuadrícula de 2,54 mm. Los rangos impresos en la imagen son datos del anuncio, no una validación de la unidad o de la alimentación de la cápsula.
+
+Para una **plantilla mecánica preliminar**, se escala la imagen suponiendo que el contorno visible corresponde a 36 × 17 mm. Tomando el extremo de salida a la izquierda y el borde superior como origen, se estiman los centros siguientes:
+
+| Contacto | x desde la izquierda | y desde arriba |
+|---|---:|---:|
+| VOUT+ | 2,8 mm | 4,9 mm |
+| VOUT− | 2,8 mm | 12,0 mm |
+| VIN+ | 33,4 mm | 4,9 mm |
+| VIN− | 33,4 mm | 12,0 mm |
+
+Esto da aproximadamente **30,6 mm entre extremos** y **7,1 mm entre centros de cada pareja**. Se han escalado ancho y alto por separado porque las proporciones de la imagen no coinciden exactamente con 36:17; pueden existir distorsión y errores al localizar bordes y centros. No se ha medido el diámetro de los agujeros. Estas coordenadas no son cotas verificadas ni demuestran compatibilidad con la cuadrícula de 2,54 mm: medir la pieza real con calibre antes de fijar la huella o fabricar.
+
 | Ref. | Componente del TFM | Representación en el esquema inicial |
 |---|---|---|
 | `J1` | Batería, modelo no especificado | Conector de dos vías; asignación por verificar |
