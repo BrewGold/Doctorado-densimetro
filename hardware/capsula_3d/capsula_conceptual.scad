@@ -31,6 +31,12 @@ carrera_referencia = 3;
 soporte_actuador_x = 185;
 soporte_actuador_largo = 4;
 fin_guias_pcb = 200;
+alma_bandeja_x = 4;
+alma_bandeja_largo = 185;
+alma_bandeja_y = 12.8;
+alma_bandeja_ancho = 1.6;
+alma_bandeja_z = -10;
+alma_bandeja_alto = 9.2;
 
 radio = diametro_exterior / 2;
 radio_interior = radio - pared;
@@ -167,6 +173,10 @@ module bandeja() {
         for (lado = [-1, 1]) {
             translate([4, lado > 0 ? 14.2 : -15.3, -10.4])
                 cube([185, 1.1, 1.8]);
+            translate([alma_bandeja_x,
+                       lado > 0 ? alma_bandeja_y : -alma_bandeja_y - alma_bandeja_ancho,
+                       alma_bandeja_z])
+                cube([alma_bandeja_largo, alma_bandeja_ancho, alma_bandeja_alto]);
             for (x = [20, 72, 112, 166])
                 translate([x, lado > 0 ? 11.5 : -14.4, -9])
                     cube([3, 2.9, 8.2]);

@@ -65,7 +65,7 @@ Todavía no se puede determinar la longitud ni el diámetro necesarios: faltan e
 
 La [maqueta mecánica de la PCB portadora](../hardware/pcb_portadora/README.md) propone una primera distribución en KiCad; es provisional y no apta para fabricación.
 
-La [maqueta 3D de la cápsula en PETG translúcido](../hardware/capsula_3d/README.md) propone una bandeja extraíble que lleva la PCB, la bobina de carga y el actuador, y se desliza sobre guías del cuerpo. Sus soportes y fijaciones no están validados; los cupones existentes corresponden a la versión anterior. Los encajes son lisos: todavía no incorpora roscas funcionales ni un mecanismo de retención validado y la junta no está validada.
+La [maqueta 3D de la cápsula en PETG translúcido](../hardware/capsula_3d/README.md) propone una bandeja extraíble que lleva la PCB, la bobina de carga y el actuador, y se desliza sobre guías del cuerpo. Se han añadido almas longitudinales como propuesta de refuerzo, pero no se ha demostrado rigidez suficiente ni resistencia a golpes del actuador; fijaciones, holguras y respuesta dinámica deben dimensionarse y ensayarse. Los cupones existentes corresponden a la versión anterior. Los encajes son lisos: todavía no incorpora roscas funcionales ni un mecanismo de retención validado y la junta no está validada.
 
 ## Dimensionado y preparación del montaje
 

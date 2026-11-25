@@ -12,7 +12,7 @@ source = (HERE / "capsula_conceptual.scad").read_text(encoding="utf-8")
 
 
 def parameter(name):
-    match = re.search(rf"^{re.escape(name)}\s*=\s*([0-9.]+)\s*;", source, re.M)
+    match = re.search(rf"^{re.escape(name)}\s*=\s*(-?[0-9.]+)\s*;", source, re.M)
     if not match:
         raise ValueError(f"Missing scalar OpenSCAD parameter: {name}")
     return float(match.group(1))
@@ -63,6 +63,12 @@ support_length = parameter("soporte_actuador_largo")
 tray = annulus(4, 14.8, (25 + parameter("holgura_bobina_diametral")) / 2, 3)
 for side in (-1, 1):
     tray = tray.union(box(4, 14.2 if side > 0 else -15.3, -10.4, 185, 1.1, 1.8))
+    web_y = parameter("alma_bandeja_y")
+    web_width = parameter("alma_bandeja_ancho")
+    tray = tray.union(box(parameter("alma_bandeja_x"),
+                          web_y if side > 0 else -web_y - web_width,
+                          parameter("alma_bandeja_z"), parameter("alma_bandeja_largo"),
+                          web_width, parameter("alma_bandeja_alto")))
     for x in (20, 72, 112, 166):
         tray = tray.union(box(x, 11.5 if side > 0 else -14.4, -9, 3, 2.9, 8.2))
     tray = tray.union(box(4, 10.5 if side > 0 else -14.4, -10, 3, 3.9, 1.2))
