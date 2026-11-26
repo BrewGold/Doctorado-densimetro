@@ -1,0 +1,1475 @@
+{
+  "design": {
+    "excitation_hz": 1.9,
+    "excitation_amplitude_arbitrary_units": 0.001,
+    "duration_s": 30,
+    "training_s": [
+      0,
+      15
+    ],
+    "validation_s": [
+      15,
+      30
+    ],
+    "sampling_sensor_hz": 104,
+    "sampling_host_hz": 100,
+    "assumed_lowpass_hz": 20,
+    "repetitions_per_scenario": 12,
+    "second_mode_frequency_range_hz": [
+      1.81,
+      1.85
+    ],
+    "second_mode_input_gain_fraction": 0.35,
+    "state_model": "Independent oscillators driven by the same sinusoidal actuator; angle and angular velocity are sums of the mode outputs.",
+    "noise_and_offsets": "Gaussian sensor noise, constant independent biases, idealized low-pass and quantization; angular output via g*sin(theta).",
+    "tangential_lever_arm_m": 0.03,
+    "fit": "Joint linearized accelerometer and gyro model, fitted offsets, per-mode free initial conditions and input gains; fixed input frequency and modeled filter; no information on rho or mu.",
+    "test_metric": "RMS test-window difference from noiseless physical signal, including bias-estimation error, divided by centered true test-window signal RMS; truth is available only in simulation."
+  },
+  "summary": {
+    "un_modo": {
+      "1": {
+        "median_acc_normalized_rmse_percent": 0.07307863365030204,
+        "median_gyro_normalized_rmse_percent": 0.018519819421935493,
+        "max_acc_normalized_rmse_percent": 0.11221683274383687,
+        "pole_bound_count": 0
+      },
+      "2": {
+        "median_acc_normalized_rmse_percent": 0.07783535500985131,
+        "median_gyro_normalized_rmse_percent": 0.02348628104413583,
+        "max_acc_normalized_rmse_percent": 0.11036824641557014,
+        "pole_bound_count": 4
+      }
+    },
+    "dos_modos": {
+      "1": {
+        "median_acc_normalized_rmse_percent": 12.574892753009486,
+        "median_gyro_normalized_rmse_percent": 12.664089292298854,
+        "max_acc_normalized_rmse_percent": 23.959939730828015,
+        "pole_bound_count": 0
+      },
+      "2": {
+        "median_acc_normalized_rmse_percent": 0.11350561656283276,
+        "median_gyro_normalized_rmse_percent": 0.10141372731042458,
+        "max_acc_normalized_rmse_percent": 0.17823410991833386,
+        "pole_bound_count": 0
+      }
+    },
+    "dos_modos_aceleracion_tangencial": {
+      "1": {
+        "median_acc_normalized_rmse_percent": 66.13558965577619,
+        "median_gyro_normalized_rmse_percent": 9.51631878434816,
+        "max_acc_normalized_rmse_percent": 94.80438511470591,
+        "pole_bound_count": 0
+      },
+      "2": {
+        "median_acc_normalized_rmse_percent": 76.8040411228297,
+        "median_gyro_normalized_rmse_percent": 0.3001882170123312,
+        "max_acc_normalized_rmse_percent": 77.12181074975288,
+        "pole_bound_count": 0
+      }
+    }
+  },
+  "trials": [
+    {
+      "scenario": "un_modo",
+      "trial": 0,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.1110247404863228,
+      "gyro_normalized_rmse_percent": 0.022841038845652844,
+      "estimated_poles": [
+        1.8956521620862696,
+        0.05566745840201061
+      ],
+      "true_poles": [
+        1.8956505154894672,
+        0.05574364178874204
+      ],
+      "maximum_angle_deg": 5.241512020195521,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 0,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.10785983315515109,
+      "gyro_normalized_rmse_percent": 0.020437276331884333,
+      "estimated_poles": [
+        1.8956553851494597,
+        0.05568004225963449,
+        1.6868569507495554,
+        0.046982054540960896
+      ],
+      "true_poles": [
+        1.8956505154894672,
+        0.05574364178874204
+      ],
+      "maximum_angle_deg": 5.241512020195521,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 1,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.10228050342783927,
+      "gyro_normalized_rmse_percent": 0.02050703294750901,
+      "estimated_poles": [
+        1.8964164347005479,
+        0.05763731467604611
+      ],
+      "true_poles": [
+        1.8964180855276915,
+        0.05768561066837506
+      ],
+      "maximum_angle_deg": 5.169955992872324,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 1,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.11036824641557014,
+      "gyro_normalized_rmse_percent": 0.0373919588209179,
+      "estimated_poles": [
+        1.8964081932619765,
+        0.05760983284894024,
+        1.7155930783402653,
+        0.15450884052116995
+      ],
+      "true_poles": [
+        1.8964180855276915,
+        0.05768561066837506
+      ],
+      "maximum_angle_deg": 5.169955992872324,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 2,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.0728114879617188,
+      "gyro_normalized_rmse_percent": 0.025081178861797487,
+      "estimated_poles": [
+        1.8891047582785891,
+        0.06432159612800623
+      ],
+      "true_poles": [
+        1.889106577512422,
+        0.06426637932597005
+      ],
+      "maximum_angle_deg": 4.238942594114316,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 2,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.0713306791345461,
+      "gyro_normalized_rmse_percent": 0.02887921600648552,
+      "estimated_poles": [
+        1.8890970470556454,
+        0.06430084022584867,
+        1.6376382999310841,
+        0.29869208242861467
+      ],
+      "true_poles": [
+        1.889106577512422,
+        0.06426637932597005
+      ],
+      "maximum_angle_deg": 4.238942594114316,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 3,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.07236762772691009,
+      "gyro_normalized_rmse_percent": 0.009959841531274044,
+      "estimated_poles": [
+        1.899104826733546,
+        0.06451616645828111
+      ],
+      "true_poles": [
+        1.8991062835881494,
+        0.06449733264634662
+      ],
+      "maximum_angle_deg": 4.886682486515702,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 3,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.06908673880595878,
+      "gyro_normalized_rmse_percent": 0.023053546108640854,
+      "estimated_poles": [
+        1.8991180568771715,
+        0.06453967266104725,
+        1.7568739202031838,
+        0.2999999999999972
+      ],
+      "true_poles": [
+        1.8991062835881494,
+        0.06449733264634662
+      ],
+      "maximum_angle_deg": 4.886682486515702,
+      "at_pole_bounds": 1
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 4,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.07647042650080468,
+      "gyro_normalized_rmse_percent": 0.001150766456206227,
+      "estimated_poles": [
+        1.8929309704571973,
+        0.06151550617991331
+      ],
+      "true_poles": [
+        1.892931346518576,
+        0.06150845280328083
+      ],
+      "maximum_angle_deg": 4.744268215498043,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 4,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.08176177954921361,
+      "gyro_normalized_rmse_percent": 0.010157580851876373,
+      "estimated_poles": [
+        1.892928442528003,
+        0.06149400278904077,
+        2.0556880812420757,
+        0.01532167197752903
+      ],
+      "true_poles": [
+        1.892931346518576,
+        0.06150845280328083
+      ],
+      "maximum_angle_deg": 4.744268215498043,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 5,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.0600691201014939,
+      "gyro_normalized_rmse_percent": 0.022889636459475927,
+      "estimated_poles": [
+        1.8916911483764869,
+        0.05694341519794743
+      ],
+      "true_poles": [
+        1.891693478767835,
+        0.05687994899838627
+      ],
+      "maximum_angle_deg": 4.856066344417386,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 5,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.10503545650208143,
+      "gyro_normalized_rmse_percent": 0.029206133954723174,
+      "estimated_poles": [
+        1.891690211697315,
+        0.05676962750047501,
+        1.8281185049337187,
+        0.2999999998562287
+      ],
+      "true_poles": [
+        1.891693478767835,
+        0.05687994899838627
+      ],
+      "maximum_angle_deg": 4.856066344417386,
+      "at_pole_bounds": 1
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 6,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.05788210466690492,
+      "gyro_normalized_rmse_percent": 0.022795038153019618,
+      "estimated_poles": [
+        1.9046709862264297,
+        0.06590859840982506
+      ],
+      "true_poles": [
+        1.9046706703621161,
+        0.06584347981239452
+      ],
+      "maximum_angle_deg": 4.6881227337432305,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 6,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.06892211712437356,
+      "gyro_normalized_rmse_percent": 0.012286833081120446,
+      "estimated_poles": [
+        1.9046780661231193,
+        0.06585266579930756,
+        2.0424142071847915,
+        0.17013529077835335
+      ],
+      "true_poles": [
+        1.9046706703621161,
+        0.06584347981239452
+      ],
+      "maximum_angle_deg": 4.6881227337432305,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 7,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.07334577933888527,
+      "gyro_normalized_rmse_percent": 0.016047881921726653,
+      "estimated_poles": [
+        1.9075051090071797,
+        0.057349452398644765
+      ],
+      "true_poles": [
+        1.9075034910536202,
+        0.057322114560729304
+      ],
+      "maximum_angle_deg": 4.892715445521361,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 7,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.0716948865046851,
+      "gyro_normalized_rmse_percent": 0.02416778103309244,
+      "estimated_poles": [
+        1.9074958684816945,
+        0.05741851793673867,
+        1.8816330738702394,
+        0.299999999778135
+      ],
+      "true_poles": [
+        1.9075034910536202,
+        0.057322114560729304
+      ],
+      "maximum_angle_deg": 4.892715445521361,
+      "at_pole_bounds": 1
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 8,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.069398085875712,
+      "gyro_normalized_rmse_percent": 0.016532605896361973,
+      "estimated_poles": [
+        1.9028607727029483,
+        0.07146174729455015
+      ],
+      "true_poles": [
+        1.9028631943871344,
+        0.0714365314363919
+      ],
+      "maximum_angle_deg": 4.507145208525516,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 8,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.073908930470489,
+      "gyro_normalized_rmse_percent": 0.008158481991712683,
+      "estimated_poles": [
+        1.9028652197854274,
+        0.07143655280556988,
+        2.0466697083195418,
+        0.005000000000000001
+      ],
+      "true_poles": [
+        1.9028631943871344,
+        0.0714365314363919
+      ],
+      "maximum_angle_deg": 4.507145208525516,
+      "at_pole_bounds": 1
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 9,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.11221683274383687,
+      "gyro_normalized_rmse_percent": 0.02717419441938541,
+      "estimated_poles": [
+        1.905526969764089,
+        0.05555468780280565
+      ],
+      "true_poles": [
+        1.905531121702537,
+        0.05562590522021465
+      ],
+      "maximum_angle_deg": 5.159185737293408,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 9,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.1067670350249085,
+      "gyro_normalized_rmse_percent": 0.03262769377288951,
+      "estimated_poles": [
+        1.905520987029377,
+        0.05559855720690217,
+        1.7260342994143998,
+        0.18776923768351297
+      ],
+      "true_poles": [
+        1.905531121702537,
+        0.05562590522021465
+      ],
+      "maximum_angle_deg": 5.159185737293408,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 10,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.08821482692831115,
+      "gyro_normalized_rmse_percent": 0.00777635328813829,
+      "estimated_poles": [
+        1.9087515710090859,
+        0.05553275335908693
+      ],
+      "true_poles": [
+        1.9087529858827688,
+        0.05555457455788326
+      ],
+      "maximum_angle_deg": 4.855517192844935,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 10,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.08278905630237583,
+      "gyro_normalized_rmse_percent": 0.010240489045834428,
+      "estimated_poles": [
+        1.908757373867427,
+        0.055533267678738174,
+        1.738707859097487,
+        0.06954190240470846
+      ],
+      "true_poles": [
+        1.9087529858827688,
+        0.05555457455788326
+      ],
+      "maximum_angle_deg": 4.855517192844935,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 11,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 0.05210114411871722,
+      "gyro_normalized_rmse_percent": 0.012711232000376292,
+      "estimated_poles": [
+        1.8881078581756896,
+        0.07135415133189996
+      ],
+      "true_poles": [
+        1.8881097368190762,
+        0.07132569246917417
+      ],
+      "maximum_angle_deg": 3.864683128908951,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "un_modo",
+      "trial": 11,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.0444927855489992,
+      "gyro_normalized_rmse_percent": 0.02391901597963081,
+      "estimated_poles": [
+        1.888104244759745,
+        0.07138790499120408,
+        1.6830906301760151,
+        0.16463353609946796
+      ],
+      "true_poles": [
+        1.8881097368190762,
+        0.07132569246917417
+      ],
+      "maximum_angle_deg": 3.864683128908951,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 0,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 17.87382310567898,
+      "gyro_normalized_rmse_percent": 17.96396685893404,
+      "estimated_poles": [
+        1.8834471429787665,
+        0.11497402667203133
+      ],
+      "true_poles": [
+        1.8887887162900976,
+        0.06903789415568583,
+        1.838586481822952,
+        0.0799592148598327
+      ],
+      "maximum_angle_deg": 4.257768480448066,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 0,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.06594255242950163,
+      "gyro_normalized_rmse_percent": 0.09387499329749756,
+      "estimated_poles": [
+        1.88880278166095,
+        0.06939093454473709,
+        1.838413771303434,
+        0.07919389785991224
+      ],
+      "true_poles": [
+        1.8887887162900976,
+        0.06903789415568583,
+        1.838586481822952,
+        0.0799592148598327
+      ],
+      "maximum_angle_deg": 4.257768480448066,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 1,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 18.165139411478016,
+      "gyro_normalized_rmse_percent": 18.277202448496126,
+      "estimated_poles": [
+        1.8856578689780228,
+        0.10658806566762774
+      ],
+      "true_poles": [
+        1.8902383686634636,
+        0.06365596175371331,
+        1.835890193345325,
+        0.0657626768537816
+      ],
+      "maximum_angle_deg": 4.573990343217829,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 1,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.13035801330916075,
+      "gyro_normalized_rmse_percent": 0.18100927908055267,
+      "estimated_poles": [
+        1.8902726110142098,
+        0.06420086916391027,
+        1.8357454480236368,
+        0.0651438428891875
+      ],
+      "true_poles": [
+        1.8902383686634636,
+        0.06365596175371331,
+        1.835890193345325,
+        0.0657626768537816
+      ],
+      "maximum_angle_deg": 4.573990343217829,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 2,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 10.872653888001098,
+      "gyro_normalized_rmse_percent": 10.93573939388975,
+      "estimated_poles": [
+        1.8920915446404691,
+        0.08411657275642971
+      ],
+      "true_poles": [
+        1.8943432304386805,
+        0.06824780837372117,
+        1.8292836744097185,
+        0.05822837424231206
+      ],
+      "maximum_angle_deg": 4.683412122874624,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 2,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.16147613689580875,
+      "gyro_normalized_rmse_percent": 0.21643898377847595,
+      "estimated_poles": [
+        1.8943563414589708,
+        0.06888165569691607,
+        1.8291610252628971,
+        0.056450365882744616
+      ],
+      "true_poles": [
+        1.8943432304386805,
+        0.06824780837372117,
+        1.8292836744097185,
+        0.05822837424231206
+      ],
+      "maximum_angle_deg": 4.683412122874624,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 3,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 2.2849798718394663,
+      "gyro_normalized_rmse_percent": 2.2661350976478127,
+      "estimated_poles": [
+        1.8856028166977958,
+        0.05364197682243254
+      ],
+      "true_poles": [
+        1.8855570498258378,
+        0.06228635121119183,
+        1.8141513674666456,
+        0.0952996415025413
+      ],
+      "maximum_angle_deg": 4.102533455695217,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 3,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.04736328950993337,
+      "gyro_normalized_rmse_percent": 0.056306347119263474,
+      "estimated_poles": [
+        1.885564683070534,
+        0.062427743277280776,
+        1.814063246082039,
+        0.0946471312199306
+      ],
+      "true_poles": [
+        1.8855570498258378,
+        0.06228635121119183,
+        1.8141513674666456,
+        0.0952996415025413
+      ],
+      "maximum_angle_deg": 4.102533455695217,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 4,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 2.739593644793551,
+      "gyro_normalized_rmse_percent": 2.715685433352436,
+      "estimated_poles": [
+        1.8914296986548516,
+        0.055064242573578046
+      ],
+      "true_poles": [
+        1.891852255300852,
+        0.06441193437189596,
+        1.8203207198270608,
+        0.072297767282582
+      ],
+      "maximum_angle_deg": 4.710417736086224,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 4,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.07465038387807059,
+      "gyro_normalized_rmse_percent": 0.07230171405460219,
+      "estimated_poles": [
+        1.8918855598389668,
+        0.0645381881978139,
+        1.8201982564211536,
+        0.07186468951780571
+      ],
+      "true_poles": [
+        1.891852255300852,
+        0.06441193437189596,
+        1.8203207198270608,
+        0.072297767282582
+      ],
+      "maximum_angle_deg": 4.710417736086224,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 5,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 21.53630627737829,
+      "gyro_normalized_rmse_percent": 21.502926774969314,
+      "estimated_poles": [
+        1.891410924942069,
+        0.11877972347984204
+      ],
+      "true_poles": [
+        1.8970633254401774,
+        0.06068446193738927,
+        1.8469352866358215,
+        0.07478398405969315
+      ],
+      "maximum_angle_deg": 5.20136456639408,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 5,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.1199781661446745,
+      "gyro_normalized_rmse_percent": 0.18998347334471669,
+      "estimated_poles": [
+        1.897124079311974,
+        0.061041309547344616,
+        1.846699387881813,
+        0.0753035640303401
+      ],
+      "true_poles": [
+        1.8970633254401774,
+        0.06068446193738927,
+        1.8469352866358215,
+        0.07478398405969315
+      ],
+      "maximum_angle_deg": 5.20136456639408,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 6,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 19.57903508786394,
+      "gyro_normalized_rmse_percent": 19.62047832439524,
+      "estimated_poles": [
+        1.8797661492230004,
+        0.11159840801037654
+      ],
+      "true_poles": [
+        1.8863899272304816,
+        0.06310499796047717,
+        1.8456525261985248,
+        0.06804668831107816
+      ],
+      "maximum_angle_deg": 4.329541372354908,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 6,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.17014394870680688,
+      "gyro_normalized_rmse_percent": 0.10895246132335162,
+      "estimated_poles": [
+        1.8863134207624146,
+        0.06287656910987388,
+        1.8459536570157438,
+        0.06704468958333135
+      ],
+      "true_poles": [
+        1.8863899272304816,
+        0.06310499796047717,
+        1.8456525261985248,
+        0.06804668831107816
+      ],
+      "maximum_angle_deg": 4.329541372354908,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 7,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 14.277131618017874,
+      "gyro_normalized_rmse_percent": 14.39243919070796,
+      "estimated_poles": [
+        1.8875532716428804,
+        0.0959437923414216
+      ],
+      "true_poles": [
+        1.890630776073853,
+        0.06828460375775702,
+        1.8299397033051563,
+        0.052584987601311514
+      ],
+      "maximum_angle_deg": 4.424840187886543,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 7,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.17823410991833386,
+      "gyro_normalized_rmse_percent": 0.13888356142190916,
+      "estimated_poles": [
+        1.8906819138264606,
+        0.06807500237385836,
+        1.829830552209704,
+        0.053562667296571
+      ],
+      "true_poles": [
+        1.890630776073853,
+        0.06828460375775702,
+        1.8299397033051563,
+        0.052584987601311514
+      ],
+      "maximum_angle_deg": 4.424840187886543,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 8,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 10.256029460206047,
+      "gyro_normalized_rmse_percent": 10.269047509150411,
+      "estimated_poles": [
+        1.89195284975715,
+        0.040473343168963005
+      ],
+      "true_poles": [
+        1.8911250722606647,
+        0.07404546384752253,
+        1.8100294199146545,
+        0.05474685151039074
+      ],
+      "maximum_angle_deg": 4.18841622312698,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 8,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.059560959081887105,
+      "gyro_normalized_rmse_percent": 0.016839315195671715,
+      "estimated_poles": [
+        1.8911275815884394,
+        0.07407208704266184,
+        1.8099605524960103,
+        0.05470409141506365
+      ],
+      "true_poles": [
+        1.8911250722606647,
+        0.07404546384752253,
+        1.8100294199146545,
+        0.05474685151039074
+      ],
+      "maximum_angle_deg": 4.18841622312698,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 9,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 6.423766203395664,
+      "gyro_normalized_rmse_percent": 6.348513708873573,
+      "estimated_poles": [
+        1.8996781625441281,
+        0.04020918550207805
+      ],
+      "true_poles": [
+        1.9002164157542714,
+        0.06531218505362621,
+        1.8207858000925456,
+        0.059556487289753574
+      ],
+      "maximum_angle_deg": 4.92225808116536,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 9,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.11261528202875529,
+      "gyro_normalized_rmse_percent": 0.07754370896401716,
+      "estimated_poles": [
+        1.9001855557952387,
+        0.06542299135638181,
+        1.8208924031071263,
+        0.05945886767818326
+      ],
+      "true_poles": [
+        1.9002164157542714,
+        0.06531218505362621,
+        1.8207858000925456,
+        0.059556487289753574
+      ],
+      "maximum_angle_deg": 4.92225808116536,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 10,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 8.625490119598165,
+      "gyro_normalized_rmse_percent": 8.529190654986802,
+      "estimated_poles": [
+        1.9043841369286385,
+        0.04565789066536184
+      ],
+      "true_poles": [
+        1.905842574916628,
+        0.07078958333433066,
+        1.8117720225262162,
+        0.09398446381800507
+      ],
+      "maximum_angle_deg": 4.342000899433667,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 10,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.09490529374037501,
+      "gyro_normalized_rmse_percent": 0.05918954432534644,
+      "estimated_poles": [
+        1.9058671740387658,
+        0.07062500982268896,
+        1.8116814808750967,
+        0.09326775497888336
+      ],
+      "true_poles": [
+        1.905842574916628,
+        0.07078958333433066,
+        1.8117720225262162,
+        0.09398446381800507
+      ],
+      "maximum_angle_deg": 4.342000899433667,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 11,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 23.959939730828015,
+      "gyro_normalized_rmse_percent": 23.889268279679413,
+      "estimated_poles": [
+        1.9026816987144632,
+        0.1417132753105216
+      ],
+      "true_poles": [
+        1.907625927073024,
+        0.07305172487164217,
+        1.845495274672311,
+        0.06599670257822787
+      ],
+      "maximum_angle_deg": 4.041938871038272,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos",
+      "trial": 11,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 0.11439595109691021,
+      "gyro_normalized_rmse_percent": 0.1133264942920847,
+      "estimated_poles": [
+        1.9076580928965146,
+        0.07281232803616933,
+        1.8454431965232185,
+        0.0667311724061254
+      ],
+      "true_poles": [
+        1.907625927073024,
+        0.07305172487164217,
+        1.845495274672311,
+        0.06599670257822787
+      ],
+      "maximum_angle_deg": 4.041938871038272,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 0,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 82.2032340713173,
+      "gyro_normalized_rmse_percent": 3.932513004876828,
+      "estimated_poles": [
+        1.902537001182216,
+        0.03974796730959805
+      ],
+      "true_poles": [
+        1.9035589730164693,
+        0.05748903851772908,
+        1.8252603902774338,
+        0.06450106954266906
+      ],
+      "maximum_angle_deg": 5.199731459390623,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 0,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 76.75663218102135,
+      "gyro_normalized_rmse_percent": 0.38359122017128744,
+      "estimated_poles": [
+        1.9035527388324034,
+        0.057887076597559234,
+        1.8253660653810022,
+        0.06343102659673076
+      ],
+      "true_poles": [
+        1.9035589730164693,
+        0.05748903851772908,
+        1.8252603902774338,
+        0.06450106954266906
+      ],
+      "maximum_angle_deg": 5.199731459390623,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 1,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 50.148965808613866,
+      "gyro_normalized_rmse_percent": 19.484246868821394,
+      "estimated_poles": [
+        1.895395075477703,
+        0.12020056434361552
+      ],
+      "true_poles": [
+        1.8997843731201525,
+        0.07052244086966356,
+        1.838330728456816,
+        0.056552914027233864
+      ],
+      "maximum_angle_deg": 4.596856714120635,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 1,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 76.78362823821769,
+      "gyro_normalized_rmse_percent": 0.26216066594744875,
+      "estimated_poles": [
+        1.899753438959636,
+        0.07064699092874595,
+        1.8383929165937198,
+        0.055617733880030454
+      ],
+      "true_poles": [
+        1.8997843731201525,
+        0.07052244086966356,
+        1.838330728456816,
+        0.056552914027233864
+      ],
+      "maximum_angle_deg": 4.596856714120635,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 2,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 82.69331099632572,
+      "gyro_normalized_rmse_percent": 4.537269976988131,
+      "estimated_poles": [
+        1.8895092181519628,
+        0.03682602220039136
+      ],
+      "true_poles": [
+        1.8888090938225395,
+        0.055320339130305006,
+        1.815462103978401,
+        0.06344036631899322
+      ],
+      "maximum_angle_deg": 4.813251531210797,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 2,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 76.67148212707875,
+      "gyro_normalized_rmse_percent": 0.203502699404925,
+      "estimated_poles": [
+        1.8887504836942246,
+        0.054721770603050536,
+        1.8157255232338185,
+        0.0654528952884719
+      ],
+      "true_poles": [
+        1.8888090938225395,
+        0.055320339130305006,
+        1.815462103978401,
+        0.06344036631899322
+      ],
+      "maximum_angle_deg": 4.813251531210797,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 3,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 66.13246904251024,
+      "gyro_normalized_rmse_percent": 6.23083852784729,
+      "estimated_poles": [
+        1.8851397909136967,
+        0.05901753253213832
+      ],
+      "true_poles": [
+        1.8859813985834593,
+        0.05534530680905395,
+        1.8217533405386268,
+        0.09164884540862062
+      ],
+      "maximum_angle_deg": 4.430511693641179,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 3,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 76.66592609736428,
+      "gyro_normalized_rmse_percent": 0.21047953213401185,
+      "estimated_poles": [
+        1.8859415918410405,
+        0.05447682918338,
+        1.8222144964679825,
+        0.0940518760784334
+      ],
+      "true_poles": [
+        1.8859813985834593,
+        0.05534530680905395,
+        1.8217533405386268,
+        0.09164884540862062
+      ],
+      "maximum_angle_deg": 4.430511693641179,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 4,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 74.66393594926228,
+      "gyro_normalized_rmse_percent": 8.176244600227173,
+      "estimated_poles": [
+        1.9098646975729257,
+        0.0785697191006289
+      ],
+      "true_poles": [
+        1.9128319573792667,
+        0.07400753648256433,
+        1.8351036704144539,
+        0.0738812339132732
+      ],
+      "maximum_angle_deg": 3.4819661035826983,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 4,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 77.06696160019152,
+      "gyro_normalized_rmse_percent": 0.3250121083663781,
+      "estimated_poles": [
+        1.9128081816778977,
+        0.07445351888005587,
+        1.8352307986191392,
+        0.07282440786988705
+      ],
+      "true_poles": [
+        1.9128319573792667,
+        0.07400753648256433,
+        1.8351036704144539,
+        0.0738812339132732
+      ],
+      "maximum_angle_deg": 3.4819661035826983,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 5,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 52.14735108872396,
+      "gyro_normalized_rmse_percent": 19.833773800430627,
+      "estimated_poles": [
+        1.8941231693796972,
+        0.10948273864393965
+      ],
+      "true_poles": [
+        1.8987500575604508,
+        0.0597402812974864,
+        1.8442115058598993,
+        0.0836656892717671
+      ],
+      "maximum_angle_deg": 5.234245376289297,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 5,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 76.82445400744172,
+      "gyro_normalized_rmse_percent": 0.3895345746875339,
+      "estimated_poles": [
+        1.8986507625073281,
+        0.060250683054021315,
+        1.8441241265261674,
+        0.08059674546610282
+      ],
+      "true_poles": [
+        1.8987500575604508,
+        0.0597402812974864,
+        1.8442115058598993,
+        0.0836656892717671
+      ],
+      "maximum_angle_deg": 5.234245376289297,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 6,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 94.80438511470591,
+      "gyro_normalized_rmse_percent": 10.856392968469146,
+      "estimated_poles": [
+        1.9035881507361387,
+        0.03431815547490628
+      ],
+      "true_poles": [
+        1.9045843363942274,
+        0.06806717895417659,
+        1.8182169303685185,
+        0.05993998325039991
+      ],
+      "maximum_angle_deg": 4.561814676507858,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 6,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 76.86925948963848,
+      "gyro_normalized_rmse_percent": 0.31741155182215525,
+      "estimated_poles": [
+        1.9045429438585377,
+        0.06831699279999316,
+        1.8183845446758033,
+        0.059526885319364065
+      ],
+      "true_poles": [
+        1.9045843363942274,
+        0.06806717895417659,
+        1.8182169303685185,
+        0.05993998325039991
+      ],
+      "maximum_angle_deg": 4.561814676507858,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 7,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 66.13871026904215,
+      "gyro_normalized_rmse_percent": 6.685743972320043,
+      "estimated_poles": [
+        1.8911941229191742,
+        0.060909496974352356
+      ],
+      "true_poles": [
+        1.8921892394638786,
+        0.05930071258095511,
+        1.825531880152769,
+        0.05727355896860669
+      ],
+      "maximum_angle_deg": 4.990016200433966,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 7,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 76.76955028340957,
+      "gyro_normalized_rmse_percent": 0.23389416820199999,
+      "estimated_poles": [
+        1.8921006134353051,
+        0.05881563355213591,
+        1.82585039622482,
+        0.05800534125697506
+      ],
+      "true_poles": [
+        1.8921892394638786,
+        0.05930071258095511,
+        1.825531880152769,
+        0.05727355896860669
+      ],
+      "maximum_angle_deg": 4.990016200433966,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 8,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 52.3923910408335,
+      "gyro_normalized_rmse_percent": 20.3603331226353,
+      "estimated_poles": [
+        1.8935188919672628,
+        0.10887950084329442
+      ],
+      "true_poles": [
+        1.8984066611777453,
+        0.057419767525160745,
+        1.8467453379179797,
+        0.08566649944300762
+      ],
+      "maximum_angle_deg": 5.3917627340902765,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 8,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 77.08907386720534,
+      "gyro_normalized_rmse_percent": 0.4969783945732316,
+      "estimated_poles": [
+        1.8982100974090397,
+        0.057961812257950836,
+        1.8467816883204422,
+        0.08044889156279096
+      ],
+      "true_poles": [
+        1.8984066611777453,
+        0.057419767525160745,
+        1.8467453379179797,
+        0.08566649944300762
+      ],
+      "maximum_angle_deg": 5.3917627340902765,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 9,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 43.61212082183086,
+      "gyro_normalized_rmse_percent": 21.915033211315347,
+      "estimated_poles": [
+        1.8862778214720828,
+        0.11017201277788359
+      ],
+      "true_poles": [
+        1.8918053831220583,
+        0.05688233661050544,
+        1.841304679280128,
+        0.05811773444491999
+      ],
+      "maximum_angle_deg": 5.064879020102034,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 9,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 76.73057774896908,
+      "gyro_normalized_rmse_percent": 0.27553460418871245,
+      "estimated_poles": [
+        1.891685030884437,
+        0.056716310812843215,
+        1.8415921307109342,
+        0.05665064867071782
+      ],
+      "true_poles": [
+        1.8918053831220583,
+        0.05688233661050544,
+        1.841304679280128,
+        0.05811773444491999
+      ],
+      "maximum_angle_deg": 5.064879020102034,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 10,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 76.50496851684673,
+      "gyro_normalized_rmse_percent": 3.692933608559053,
+      "estimated_poles": [
+        1.9016573040586773,
+        0.05817789070108542
+      ],
+      "true_poles": [
+        1.9032238412272662,
+        0.06572462078491938,
+        1.8258542002876104,
+        0.0874317216877536
+      ],
+      "maximum_angle_deg": 4.785590932230653,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 10,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 76.89865485370272,
+      "gyro_normalized_rmse_percent": 0.2829648822025072,
+      "estimated_poles": [
+        1.903179902975989,
+        0.06585680852744541,
+        1.8259856978530231,
+        0.08684708808735123
+      ],
+      "true_poles": [
+        1.9032238412272662,
+        0.06572462078491938,
+        1.8258542002876104,
+        0.0874317216877536
+      ],
+      "maximum_angle_deg": 4.785590932230653,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 11,
+      "model_modes": 1,
+      "acc_normalized_rmse_percent": 46.97261891984544,
+      "gyro_normalized_rmse_percent": 18.24788184548211,
+      "estimated_poles": [
+        1.8800573398389722,
+        0.11960523752131239
+      ],
+      "true_poles": [
+        1.8856136495414038,
+        0.07368942610439048,
+        1.8346771805284467,
+        0.07061280648067046
+      ],
+      "maximum_angle_deg": 3.8110977454808674,
+      "at_pole_bounds": 0
+    },
+    {
+      "scenario": "dos_modos_aceleracion_tangencial",
+      "trial": 11,
+      "model_modes": 2,
+      "acc_normalized_rmse_percent": 77.12181074975288,
+      "gyro_normalized_rmse_percent": 0.46696926081459034,
+      "estimated_poles": [
+        1.8854982058611165,
+        0.07191519450767121,
+        1.8355433313826308,
+        0.07081948802262843
+      ],
+      "true_poles": [
+        1.8856136495414038,
+        0.07368942610439048,
+        1.8346771805284467,
+        0.07061280648067046
+      ],
+      "maximum_angle_deg": 3.8110977454808674,
+      "at_pole_bounds": 0
+    }
+  ],
+  "limitations": [
+    "Synthetic experiment; mode coupling, gains, lever arm and noise are assumptions.",
+    "Two-mode generator shares its modal structure with the two-mode inverse model.",
+    "The 3 cm lever arm is illustrative; sensor location and rigid body kinematics are not validated.",
+    "The second mode is not inferred to be a physical liquid mode.",
+    "One fixed frequency and finite transient can yield weak or correlated parameter estimates.",
+    "The comparison does not estimate density or viscosity or establish real device precision."
+  ]
+}

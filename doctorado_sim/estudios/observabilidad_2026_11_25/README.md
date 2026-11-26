@@ -89,6 +89,12 @@ resume el punto de partida a 1,9 Hz y los límites de las comparaciones.
    favorable del modo nominal y la actuación continua acumula más energía
    de mando; la comparación no iguala energía. Con rebotes al 50 %, 45 de
    120 ajustes de pulso llegaron a un límite del optimizador.
+7. **Uno y dos modos en espacio de estados**: una simulación sin
+   realimentación compara modelos de dos y cuatro estados con una entrada
+   fija de 1,9 Hz y señales de acelerómetro y giroscopio simuladas. El
+   [detalle del modelo y sus resultados](ajuste_registros/ESPACIO_ESTADOS_UNO_DOS.md)
+   distingue el error de predicción de señal de la identificación de
+   densidad o viscosidad; no demuestra que existan dos modos reales.
 
 ### Por qué no se comparan directamente los errores de densidad
 
@@ -128,6 +134,7 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python ajuste_registros/cinco_pulsos.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python ajuste_registros/densidad_un_pulso.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python ajuste_registros/viscosidad_un_pulso.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python ajuste_registros/rebotes_control.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python ajuste_registros/espacio_estados_uno_dos.py
 OPENBLAS_NUM_THREADS=1 .venv/bin/python barrido_5000/barrido_frecuencia_filtro.py
 ```
 
